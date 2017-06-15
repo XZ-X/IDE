@@ -1,4 +1,4 @@
-package RMIInterfaces;
+package logic;
 
 import logic.RuntimeStack;
 
