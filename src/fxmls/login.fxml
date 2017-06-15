@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="355.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmls.LoginController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="582.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/welcomePage.png" />
+         </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </ImageView>
+      <Ellipse fx:id="loginColor" fill="#1bc23fa0" layoutX="291.0" layoutY="199.0" radiusX="91.0" radiusY="32.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+         <effect>
+            <GaussianBlur radius="63.0" />
+         </effect>
+      </Ellipse>
+      <Button fx:id="login" defaultButton="true" layoutX="208.0" layoutY="159.0" mnemonicParsing="false" onMouseEntered="#coloredButton" onMouseExited="#uncoloredButton" style="-fx-background-color: transparent;" text="Login" textAlignment="CENTER" textFill="#b5ffb2">
+         <font>
+            <Font size="42.0" />
+         </font>
+      </Button>
+      <Ellipse fx:id="signUpColor" fill="#9c1bc2a1" layoutX="299.0" layoutY="331.0" radiusX="91.0" radiusY="32.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+         <effect>
+            <GaussianBlur radius="63.0" />
+         </effect>
+      </Ellipse>
+      <Button fx:id="signUp" defaultButton="true" layoutX="185.0" layoutY="291.0" mnemonicParsing="false" onMouseEntered="#coloredButton2" onMouseExited="#uncoloredButton2" style="-fx-background-color: transparent;" text="Sign Up" textAlignment="CENTER" textFill="#c8a8ff">
+         <font>
+            <Font size="42.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
