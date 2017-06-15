@@ -1,10 +1,9 @@
-package fxmls;
+package view.fxmls;
 
-import Begin.BFClient;
+import view.Begin.BFClient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 

@@ -1,13 +1,7 @@
-package fxmls;
+package view.fxmls;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.shape.Ellipse;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.

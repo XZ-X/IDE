@@ -1,4 +1,4 @@
-package Begin; /**
+package view.Begin; /**
  * Created by xuxiangzhe on 2017/6/15.
  */
 
