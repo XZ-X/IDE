@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="618.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmls.FrontPageController">
+   <children>
+      <ImageView fitHeight="618.0" fitWidth="615.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/welcomePage.png" />
+         </image>
+         <effect>
+            <GaussianBlur radius="36.75" />
+         </effect>
+      </ImageView>
+      <Pane fx:id="welcomePane" blendMode="DIFFERENCE" prefHeight="618.0" prefWidth="615.0">
+         <children>
+            <Label layoutX="145.0" layoutY="36.0" prefHeight="83.0" prefWidth="325.0" text="The BF IDE" textFill="#fff2f2">
+               <font>
+                  <Font name="Andale Mono" size="51.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
