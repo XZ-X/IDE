@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.Class User
- * compared with diagram: ++saveUsers() ++loadUsers()
+ * compared with diagram: ++storeUsers() ++loadUsers()
  * Unfinished
  */
 public class User implements Serializable{
@@ -36,7 +36,7 @@ public class User implements Serializable{
         password=passwd;
         state=userState;
     }
-    static boolean saveUsers(){
+    static boolean storeUsers(){
         try {
             ObjectOutputStream stream=new ObjectOutputStream(new FileOutputStream(GlobalConstant.USERS));
             for (User usr:users) {

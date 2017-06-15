@@ -8,6 +8,6 @@ import java.net.URL;
  */
 public class GlobalConstant {
     public static final String USERS="userInformation";
-
+    public static final String FILES="fileInformation";
 
 }

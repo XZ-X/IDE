@@ -36,7 +36,7 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
     }
 
     @Override
-    public boolean setPreferrences(int versionNumber, boolean isAutoSave, int autoSaveTime) throws RemoteException {
+    public boolean setPreferences(int versionNumber, boolean isAutoSave, int autoSaveTime) throws RemoteException {
         return false;
     }
 }

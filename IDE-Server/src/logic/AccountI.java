@@ -12,5 +12,5 @@ public interface AccountI extends Remote {
     String logOut() throws RemoteException;
     String forgetPassword()throws RemoteException;
     String resetPassword(String answer,String password)throws RemoteException;
-    boolean setPreferrences(int versionNumber,boolean isAutoSave,int autoSaveTime)throws RemoteException;
+    boolean setPreferences(int versionNumber, boolean isAutoSave, int autoSaveTime)throws RemoteException;
 }
