@@ -6,11 +6,11 @@ package logic;
 public class BEQZ implements Command {
     private RuntimeStack stack;
     private Integer pointer;
-    private int jumpLength;
-    public BEQZ(RuntimeStack stk,Integer p,int length){
+    private Integer jumpLength;
+    public BEQZ(RuntimeStack stk,MyInteger p,MyInteger length){
         stack=stk;
-        pointer=p;
-        jumpLength=length;
+        pointer=p.value;
+        jumpLength=length.value;
     }
 
 

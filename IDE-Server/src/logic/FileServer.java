@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -19,7 +20,7 @@ public class FileServer extends UnicastRemoteObject implements MyFileI {
     }
 
     @Override
-    public MyFile openFile(String filename) throws RemoteException {
+    public File openFile(String filename) throws RemoteException {
         return null;
     }
 
@@ -39,8 +40,8 @@ public class FileServer extends UnicastRemoteObject implements MyFileI {
     }
 
     @Override
-    public MyFile[] checkVersions() throws RemoteException {
-        return new MyFile[0];
+    public File[] checkVersions() throws RemoteException {
+        return new File[0];
     }
 
     @Override

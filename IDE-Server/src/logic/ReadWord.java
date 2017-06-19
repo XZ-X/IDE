@@ -6,9 +6,11 @@ package logic;
 public class ReadWord implements Command {
     private RuntimeStack stack;
     private Integer pointer;
-    public ReadWord(RuntimeStack stk,Integer p){
+    private IO io;
+    public ReadWord(RuntimeStack stk,MyInteger p,IO io){
         stack=stk;
-        pointer=p;
+        pointer=p.value;
+        this.io=io;
     }
 
     @Override

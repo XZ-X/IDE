@@ -6,9 +6,9 @@ package logic;
 public class PAddOne implements Command {
     private RuntimeStack stack;
     private Integer pointer;
-    public PAddOne(RuntimeStack stk,Integer p){
+    public PAddOne(RuntimeStack stk,MyInteger p){
         stack=stk;
-        pointer=p;
+        pointer=p.value;
     }
     @Override
     public void exec() {

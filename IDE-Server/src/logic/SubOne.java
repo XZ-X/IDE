@@ -6,9 +6,9 @@ package logic;
 public class SubOne implements Command {
     private RuntimeStack stack;
     private Integer pointer;
-    public SubOne(RuntimeStack stk,Integer p){
+    public SubOne(RuntimeStack stk,MyInteger p){
         stack=stk;
-        pointer=p;
+        pointer=p.value;
     }
 
     @Override

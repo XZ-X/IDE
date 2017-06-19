@@ -19,7 +19,7 @@ public class RuntimeServer extends UnicastRemoteObject implements RuntimeI {
     }
 
     @Override
-    public RuntimeStack debug() throws RemoteException {
+    public String[] debug() throws RemoteException {
         return null;
     }
 
@@ -29,12 +29,12 @@ public class RuntimeServer extends UnicastRemoteObject implements RuntimeI {
     }
 
     @Override
-    public RuntimeStack debug_back() throws RemoteException {
+    public String[] debug_back() throws RemoteException {
         return null;
     }
 
     @Override
-    public RuntimeStack debug_next() throws RemoteException {
+    public String[] debug_next() throws RemoteException {
         return null;
     }
 }

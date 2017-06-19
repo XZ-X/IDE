@@ -6,11 +6,11 @@ package logic;
 public class BNEZ implements Command {
     private RuntimeStack stack;
     private Integer pointer;
-    private int jumpLength;
-    public BNEZ(RuntimeStack stk,Integer p,int length){
+    private Integer jumpLength;
+    public BNEZ(RuntimeStack stk,MyInteger p,MyInteger length){
         stack=stk;
-        pointer=p;
-        jumpLength=length;
+        pointer=p.value;
+        jumpLength=length.value;
     }
 
     @Override

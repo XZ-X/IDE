@@ -19,12 +19,12 @@ public class User implements Serializable{
     private static ArrayList<User> users=new ArrayList<>();
     private   UserState state;
     public final String name;
+    public IO IOProcessor;
     private String password;
     private Clock clock;
     private Map<String,String> secureQuestions=new HashMap<>();
     private Settings settings=new Settings();
     private ArrayList<MyFile> files=new ArrayList<>();
-
     private User(String nm,String passwd){
         state=UserState.LogIn;
         name=nm;
@@ -36,6 +36,7 @@ public class User implements Serializable{
         password=passwd;
         state=userState;
     }
+
     static boolean storeUsers(){
         try {
             ObjectOutputStream stream=new ObjectOutputStream(new FileOutputStream(GlobalConstant.USERS));
@@ -75,7 +76,8 @@ public class User implements Serializable{
 
     static String signUp(String userName,String password,String secureQuestion,String answer){
         //TODO:
-        return null;
+        System.out.println("I creat a User!");
+        return "Success!";
     }
 
     static User login(String userName,String password) {
