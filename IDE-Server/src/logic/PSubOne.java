@@ -5,10 +5,10 @@ package logic;
  */
 public class PSubOne implements Command {
     private RuntimeStack stack;
-    private Integer pointer;
+    private MyInteger pointer;
     public PSubOne(RuntimeStack stk,MyInteger p){
         stack=stk;
-        pointer=p.value;
+        pointer=p;
     }
 
     @Override

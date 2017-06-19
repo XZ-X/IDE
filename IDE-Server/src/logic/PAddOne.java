@@ -5,10 +5,10 @@ package logic;
  */
 public class PAddOne implements Command {
     private RuntimeStack stack;
-    private Integer pointer;
+    private MyInteger pointer;
     public PAddOne(RuntimeStack stk,MyInteger p){
         stack=stk;
-        pointer=p.value;
+        pointer=p;
     }
     @Override
     public void exec() {

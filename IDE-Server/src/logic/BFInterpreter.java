@@ -34,26 +34,26 @@ public class BFInterpreter implements Interpreter {
                     case '.':commands.add(new PrintWord(stack,index,io));break;
                     case ',':commands.add(new ReadWord(stack,index,io));break;
                     case '[':{
-                        Integer x=0;
+                        MyInteger x=new MyInteger(0);
                         jumpTable.add(0,x);
                         commands.add(new BEQZ(stack,index,x));
                         break;
                     }
                     case ']':{
-
+                        commands.add(new BNEZ(stack,index,jumpTable.get(0)));
+                        jumpTable.remove(0);
+                        break;
                     }
-
-
                 }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return null;
+        return commands;
     }
     private void add(){
-        for(Integer integer:jumpTable){
-            integer+=1;
+        for(MyInteger integer:jumpTable){
+            integer.value+=1;
         }
     }
 
