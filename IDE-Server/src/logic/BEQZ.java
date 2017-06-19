@@ -23,4 +23,8 @@ public class BEQZ implements Command {
     public void undo() {
 
     }
+    @Override
+    public String toString(){
+        return super.toString()+"#####"+jumpLength;
+    }
 }

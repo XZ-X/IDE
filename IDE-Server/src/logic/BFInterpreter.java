@@ -22,10 +22,20 @@ public class BFInterpreter implements Interpreter {
     @Override
     public ArrayList<Command> interpret(File source) {
         try {
+            String temp="";
             char next;
             Scanner sourceScanner=new Scanner(new FileInputStream(source));
-            while(sourceScanner.hasNext()){
-                next=(char)sourceScanner.nextByte();
+            while(temp.length()!=0||sourceScanner.hasNext()){
+                add();
+                if(temp.length()==0) {
+                    temp = sourceScanner.next();
+                }
+                next=temp.charAt(0);
+                if(temp.length()!=1) {
+                    temp = temp.substring(1);
+                }else {
+                    temp="";
+                }
                 switch (next){
                     case '>':commands.add(new PAddOne(stack,index));break;
                     case '<':commands.add(new PSubOne(stack,index));break;
