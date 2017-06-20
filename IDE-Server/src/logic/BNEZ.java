@@ -5,21 +5,25 @@ package logic;
  */
 public class BNEZ implements Command {
     private RuntimeStack stack;
-    private Integer pointer;
+    private MyInteger pointer;
     private MyInteger jumpLength;
-    public BNEZ(RuntimeStack stk,MyInteger p,MyInteger length){
+    private MyInteger PC;
+    public BNEZ(RuntimeStack stk,MyInteger p,MyInteger length,MyInteger PC){
         stack=stk;
-        pointer=p.value;
+        pointer=p;
         jumpLength=length;
+        this.PC=PC;
     }
 
     @Override
     public void exec() {
-
+        if(pointer.value!=0)
+            PC.value+=jumpLength.value;
     }
 
     @Override
     public void undo() {
-
+        if(pointer.value!=0)
+            PC.value-=jumpLength.value;
     }
 }

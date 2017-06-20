@@ -13,11 +13,11 @@ public class PSubOne implements Command {
 
     @Override
     public void exec() {
-
+        pointer.value-=1;
     }
 
     @Override
     public void undo() {
-
+        pointer.value+=1;
     }
 }
