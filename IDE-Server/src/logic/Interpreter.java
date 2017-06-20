@@ -8,4 +8,8 @@ import java.util.ArrayList;
  */
 public interface Interpreter {
     ArrayList<Command> interpret(File source);
+    MyInteger getPC();
+    RuntimeStack getStack();
+    MyInteger getPointer();
+    ArrayList<Command> getCommand();
 }

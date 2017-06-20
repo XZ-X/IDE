@@ -31,4 +31,10 @@ public class RuntimeStack {
         stack.remove(n);
         stack.add(n,a);
     }
+    public void remove(int n){
+        stack.remove(n);
+    }
+    public void clear(){
+        stack=new ArrayList<Integer>();
+    }
 }

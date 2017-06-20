@@ -1,5 +1,7 @@
 package logic;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by xuxiangzhe on 2017/6/15.
  */
@@ -15,11 +17,15 @@ public class ReadWord implements Command {
 
     @Override
     public void exec() {
-
+        try {
+            stack.add(pointer.value,io.getInput());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void undo() {
-
+        stack.remove(pointer.value);
     }
 }
