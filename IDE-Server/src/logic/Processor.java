@@ -44,7 +44,10 @@ public class Processor {
     }
 
     public void debugBack(){
-        //TODO::::::::::::::::
+        if(PC.value!=0){
+            PC.value--;
+            instructions.get(PC.value).undo();
+        }
     }
 
     public void setBreakpoint(int breakpoint) {
