@@ -12,11 +12,13 @@ import java.util.Arrays;
  * Created by xuxiangzhe on 2017/6/15.
  */
 public class CMain {
+    private static AccountI accountServer=null;
+    private static IOProcessor ioProcessor=null;
     public static void main(String[] args) {
         try {
-            AccountI accountServer=(AccountI) Naming.lookup("rmi://localhost:6528/accountServer");
-            System.out.println(accountServer.signUp("1","2","3","4"));
-            IOProcessor ioProcessor=new IOProcessor();
+            accountServer=(AccountI) Naming.lookup("rmi://localhost:6528/accountServer");
+//            System.out.println(accountServer.signUp("1","2","3","4"));
+            ioProcessor=new IOProcessor();
             LocateRegistry.createRegistry(5202);
             Naming.bind("rmi://localhost:5202/ioProcessor",ioProcessor);
             ioProcessor.putIn("fsw");
@@ -31,5 +33,8 @@ public class CMain {
         } catch (AlreadyBoundException e) {
             e.printStackTrace();
         }
+    }
+    public static String signUp(String userName,String password,String secureQuestion,String answer) throws RemoteException {
+        return accountServer.signUp(userName,password,secureQuestion,answer);
     }
 }

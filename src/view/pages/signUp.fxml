@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.SignUpController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="606.0">
+         <children>
+             <TextField fx:id="Username" layoutX="220.0" layoutY="115.0" />
+             <Label fx:id="IDLabel" layoutX="168.0" layoutY="120.0" text="ID:" />
+             <Label fx:id="passwordLabel" layoutX="136.0" layoutY="167.0" text="Password:" />
+             <PasswordField fx:id="passwordText" layoutX="220.0" layoutY="162.0" />
+             <Button fx:id="goButton" onMouseClicked="#go" layoutX="215.0" layoutY="227.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="176.0" text="Go" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

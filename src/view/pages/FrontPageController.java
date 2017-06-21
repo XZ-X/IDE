@@ -1,4 +1,4 @@
-package view.fxmls;
+package view.pages;
 
 import view.Begin.BFClient;
 import javafx.fxml.FXML;

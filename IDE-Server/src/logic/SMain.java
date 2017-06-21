@@ -10,12 +10,13 @@ import java.rmi.registry.LocateRegistry;
 /**
  * Created by xuxiangzhe on 2017/6/15.
  */
-public class Main {
+public class SMain {
     public static void main(String[] args) {
         try {
+            User.loadUsers();
             AccountServer accountServer=new AccountServer();
             LocateRegistry.createRegistry(6528);
-
+            LocateRegistry.createRegistry(8089);
             try {
                 Naming.bind("rmi://localhost:6528/accountServer",accountServer);
 

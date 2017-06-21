@@ -75,8 +75,18 @@ public class User implements Serializable{
     }
 
     static String signUp(String userName,String password,String secureQuestion,String answer){
-        //TODO:
+        for(User usr:users){
+            if(usr.name.equals(userName)){
+                System.out.println("error duplicated user");
+                return "Duplicated user!";
+            }
+        }
+        User user=new User(userName,password);
+        user.state=UserState.Normal;
+        user.secureQuestions.put(secureQuestion,answer);
+        users.add(user);
         System.out.println("I creat a User!");
+        storeUsers();
         return "Success!";
     }
 

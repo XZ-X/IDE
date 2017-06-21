@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class HaveATry {
     public static void main(String[] args) throws IOException {
-
          File file=new File("a.bf");
         try {
             FileWriter writer=new FileWriter(file,false);
