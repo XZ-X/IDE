@@ -5,6 +5,8 @@ import Data.UserState;
 
 import java.io.*;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.Clock;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,16 +27,26 @@ public class User implements Serializable{
     private Map<String,String> secureQuestions=new HashMap<>();
     private Settings settings=new Settings();
     private ArrayList<MyFile> files=new ArrayList<>();
-    private User(String nm,String passwd){
+    private User(String nm,String password){
         state=UserState.LogIn;
         name=nm;
-        password=passwd;
+        this.password =encrypt(password);
         users.add(this);
     }
-    private User(String nm,String passwd,UserState userState){
+    private User(String nm,String password,UserState userState){
         name=nm;
-        password=passwd;
+        this.password =encrypt(password);
         state=userState;
+    }
+    private static String encrypt(String src){
+        try {
+            MessageDigest md5=MessageDigest.getInstance("MD5");
+            md5.update(src.getBytes());
+            return new String(md5.digest());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "wrong!";
     }
 
     static boolean storeUsers(){
@@ -54,7 +66,6 @@ public class User implements Serializable{
     static boolean loadUsers(){
         try {
             ObjectInputStream inputStream=new ObjectInputStream(new FileInputStream(GlobalConstant.USERS));
-            try {
                 while(true){
                     try {
                         users.add((User)inputStream.readObject());
@@ -62,15 +73,13 @@ public class User implements Serializable{
                         e.printStackTrace();
                     }
                 }
-            }catch (OptionalDataException e){
-                if(!e.eof){
-                    e.printStackTrace();
-                }
-            }
-        } catch (IOException e) {
+        } catch (EOFException e){
+
+        }catch (IOException e) {
             e.printStackTrace();
             return false;
         }
+        System.out.println(users.toString());
         return true;
     }
 
