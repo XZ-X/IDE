@@ -1,8 +1,5 @@
 package Data;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 /**
  * Created by xuxiangzhe on 2017/6/15.
  */

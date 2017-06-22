@@ -10,9 +10,9 @@ import java.io.IOException;
 /**
  * Created by xuxiangzhe on 2017/6/15.
  */
-public class FrontPageController {
+public class WelcomePageController {
     @FXML
     void login() throws IOException {
-        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("login.fxml"))));
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("user.fxml"))));
     }
 }

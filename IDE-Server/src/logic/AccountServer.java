@@ -1,5 +1,8 @@
 package logic;
 
+import Data.GlobalConstant;
+import Data.UserState;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -16,6 +19,13 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
     }
     @Override
     public String login(String id, String passwd) throws RemoteException {
+        User temp=User.login(id,passwd);
+        switch (temp.getState()){
+            case LogIn:return GlobalConstant.SIGNUP_SUCCESS;
+            case UnknownUser:return GlobalConstant.LOGIN_FAIL_UNKNOWN;
+            case DuplicateLogIn:return GlobalConstant.LOGIN_FAIL_DUP;
+            case WrongPassword:return GlobalConstant.LOGIN_FAIL_WRONGPW;
+        }
         return null;
     }
 

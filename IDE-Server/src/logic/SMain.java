@@ -16,7 +16,6 @@ public class SMain {
             User.loadUsers();
             AccountServer accountServer=new AccountServer();
             LocateRegistry.createRegistry(6528);
-            LocateRegistry.createRegistry(8089);
             try {
                 Naming.bind("rmi://localhost:6528/accountServer",accountServer);
 

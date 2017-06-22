@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="355.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.LoginController">
+<AnchorPane prefHeight="355.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.UserController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="582.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,7 +25,7 @@
             <GaussianBlur radius="63.0" />
          </effect>
       </Ellipse>
-      <Button fx:id="login" defaultButton="true" layoutX="208.0" layoutY="159.0" mnemonicParsing="false" onMouseEntered="#coloredButton"  onMouseExited="#uncoloredButton" style="-fx-background-color: transparent;" text="Login" textAlignment="CENTER" textFill="#b5ffb2">
+      <Button fx:id="login" defaultButton="true" layoutX="208.0" layoutY="159.0" mnemonicParsing="false" onMouseEntered="#coloredButton"  onMouseExited="#uncoloredButton" onMouseClicked="#logInClicked" style="-fx-background-color: transparent;" text="Login" textAlignment="CENTER" textFill="#b5ffb2">
          <font>
             <Font size="42.0" />
          </font>

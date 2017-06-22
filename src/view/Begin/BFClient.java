@@ -22,7 +22,7 @@ public class BFClient extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         ps=primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("/view/pages/frontPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/pages/welcomePage.fxml"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         CMain.main(null);

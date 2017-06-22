@@ -17,42 +17,74 @@ import java.util.Map;
  * compared with diagram: ++storeUsers() ++loadUsers()
  * Unfinished
  */
-public class User implements Serializable{
-    private static ArrayList<User> users=new ArrayList<>();
-    private   UserState state;
-    public final String name;
+public class User implements Serializable {
+    //All the effective users will appear in this list, which uses loadUser() and storeUser() to edit.
+    private static ArrayList<User> users = new ArrayList<>();
+    //state
+    private UserState state;
+
+    //helper
     public IO IOProcessor;
+    static private Clock clock=Clock.systemUTC();
+    private String time;
+
+    //attribute
+    public final String name;
     private String password;
-    private Clock clock;
-    private Map<String,String> secureQuestions=new HashMap<>();
-    private Settings settings=new Settings();
-    private ArrayList<MyFile> files=new ArrayList<>();
-    private User(String nm,String password){
-        state=UserState.LogIn;
-        name=nm;
-        this.password =encrypt(password);
+    private Map<String, String> secureQuestions = new HashMap<>();
+    private Settings settings = new Settings();
+    private ArrayList<MyFile> files = new ArrayList<>();
+
+    //constructors
+    private User(String nm, String password) {
+        state = UserState.LogIn;
+        name = nm;
+        this.password = encrypt(password);
         users.add(this);
     }
-    private User(String nm,String password,UserState userState){
-        name=nm;
-        this.password =encrypt(password);
-        state=userState;
-    }
-    private static String encrypt(String src){
-        try {
-            MessageDigest md5=MessageDigest.getInstance("MD5");
-            md5.update(src.getBytes());
-            return new String(md5.digest());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "wrong!";
+
+    //This constructor is used to build users when there're some problems in method 'logIn',such as unknownUser.
+    //Users built by this method will NOT be added into the user list since they're merely used to convey error information
+    private User(String nm, String password, UserState userState) {
+        name="wrong!";
+        password="wrong!";
+        state = userState;
     }
 
-    static boolean storeUsers(){
+
+
+    //gets-sets methods
+    public UserState getState() {
+        return state;
+    }
+
+    public Clock getLastLogin() {
+        return clock;
+    }
+
+    public Settings getPreferrence() {
+        return settings;
+    }
+
+    public String[] getQuestions() {
+        return (String[]) secureQuestions.keySet().toArray();
+    }
+
+    public void setPreferrence(boolean isAutoSave, int autoSaveTime, int versionNumber) {
+        settings.autoSaveTime = autoSaveTime;
+        settings.isAutoSave = isAutoSave;
+        settings.versionNumber = versionNumber;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    //methods used to manage users
+    static boolean storeUsers() {
         try {
-            ObjectOutputStream stream=new ObjectOutputStream(new FileOutputStream(GlobalConstant.USERS));
-            for (User usr:users) {
+            ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(GlobalConstant.USERS));
+            for (User usr : users) {
                 stream.writeObject(usr);
             }
 
@@ -63,19 +95,19 @@ public class User implements Serializable{
         return true;
     }
 
-    static boolean loadUsers(){
+    static boolean loadUsers() {
         try {
-            ObjectInputStream inputStream=new ObjectInputStream(new FileInputStream(GlobalConstant.USERS));
-                while(true){
-                    try {
-                        users.add((User)inputStream.readObject());
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(GlobalConstant.USERS));
+            while (true) {
+                try {
+                    users.add((User) inputStream.readObject());
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
-        } catch (EOFException e){
+            }
+        } catch (EOFException e) {
 
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
@@ -83,62 +115,83 @@ public class User implements Serializable{
         return true;
     }
 
-    static String signUp(String userName,String password,String secureQuestion,String answer){
-        for(User usr:users){
-            if(usr.name.equals(userName)){
+    static String signUp(String userName, String password, String secureQuestion, String answer) {
+        for (User usr : users) {
+            if (usr.name.equals(userName)) {
                 System.out.println("error duplicated user");
                 return "Duplicated user!";
             }
         }
-        User user=new User(userName,password);
-        user.state=UserState.Normal;
-        user.secureQuestions.put(secureQuestion,answer);
+        User user = new User(userName, password);
+        user.state = UserState.Normal;
+        user.secureQuestions.put(secureQuestion, answer);
         users.add(user);
         System.out.println("I creat a User!");
         storeUsers();
-        return "Success!";
+        return GlobalConstant.SIGNUP_SUCCESS;
     }
 
-    static User login(String userName,String password) {
+    static User login(String userName, String password) {
+        User user = null;
+        for (User person : users) {
+            if (person.name.equals(userName)) {
+                user = person;
+                break;
+            }
+        }
+        if (user == null) {
+            return new User(null,null,UserState.UnknownUser);
+        }else if(!user.password.equals(encrypt(password))){
+            return new User(null,null,UserState.WrongPassword);
+        }
+        //Avoid duplicated logging in
+        if(user.getState()==UserState.LogIn){
+            return new User(null,null,UserState.DuplicateLogIn);
+        }else {
+            user.state=UserState.LogIn;
+            user.time=clock.toString();
+            return user;
+        }
+    }
+
+    public void logOut() {
+        state = UserState.Normal;
+        //TODO:
+    }
+
+    public String changePassword(String answer, String newPasswd) {
         //TODO:
         return null;
     }
 
-    public UserState getState(){
-        return state;
-    }
-    public Clock getLastLogin(){
-        return clock;
-    }
-    public Settings getPreferrence(){
-        return settings;
-    }
-    public String[] getQuestions(){
-        return (String[])secureQuestions.keySet().toArray();
-    }
-    public void setPreferrence(boolean isAutoSave,int autoSaveTime,int versionNumber){
-        settings.autoSaveTime=autoSaveTime;
-        settings.isAutoSave=isAutoSave;
-        settings.versionNumber=versionNumber;
-    }
-    public void logOut(){
-        state=UserState.Normal;
-        //TODO:
-    }
 
-    public String changePassword(String answer,String newPasswd){
-        //TODO:
-        return null;
-    }
-    public ArrayList<MyFile> watchFile(){
+
+    //user's functions
+    public ArrayList<MyFile> watchFile() {
         return files;
     }
-    public void addFile(MyFile file){
+
+    public void addFile(MyFile file) {
         files.add(file);
     }
-    public void deleteFile(String filename){
-        for(MyFile file:files){
+
+    public void deleteFile(String filename) {
+        for (MyFile file : files) {
             //TODO:
         }
+    }
+
+
+
+    //utilities
+    private static String encrypt(String src) {
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(src.getBytes());
+            return new String(md5.digest());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "wrong!";
     }
 }

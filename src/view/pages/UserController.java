@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by xuxiangzhe on 2017/6/15.
  */
-public class LoginController {
+public class UserController {
     @FXML
     Ellipse loginColor;
     @FXML
@@ -35,11 +35,14 @@ public class LoginController {
     }
 
     @FXML
-    void signUpClicked(){
-        try {
-            BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/pages/signUp.fxml"))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void signUpClicked() throws IOException {
+
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/pages/signUp.fxml"))));
+
+    }
+
+    @FXML
+    void logInClicked() throws IOException {
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("signIn.fxml"))));
     }
 }
