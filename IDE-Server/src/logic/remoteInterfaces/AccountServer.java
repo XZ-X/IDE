@@ -31,8 +31,14 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
         switch (temp.getState()){
             case LogIn:{
                 currentUser=temp;
-                createOtherRemotes();
-                return GlobalConstant.SIGNUP_SUCCESS;
+                try {
+                    createOtherRemotes();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                    //1. this sentence will not throw an exception 2. there's only one 'return' sentence in this block
+                    return GlobalConstant.SIGNUP_SUCCESS;
+                }
             }
             case UnknownUser:return GlobalConstant.LOGIN_FAIL_UNKNOWN;
             case DuplicateLogIn:return GlobalConstant.LOGIN_FAIL_DUP;
@@ -43,10 +49,11 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
     }
     //create other remotes for user who logs in successfully
     private void createOtherRemotes() throws RemoteException {
+        ClientID++;
         FileServer fileServer=new FileServer(currentUser);
         RuntimeServer runtimeServer=new RuntimeServer(currentUser);
         port=GlobalConstant.INITIAL_PORT+ClientID;
-        ClientID++;
+
 
         try {
             Naming.bind("rmi://localhost:"+port+"/fileServer",fileServer);
