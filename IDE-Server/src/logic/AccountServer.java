@@ -1,26 +1,28 @@
 package logic;
 
 import Data.GlobalConstant;
-import logic.remoteIneterfaces.AccountI;
-import logic.remoteIneterfaces.IO;
+import logic.remoteInterfaces.AccountI;
+import logic.remoteInterfaces.IO;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.
  */
 public class AccountServer extends UnicastRemoteObject implements AccountI {
-    public IO ioProcessor;
+    public ArrayList<IO> ioProcessors;
+    private static int IOUniqueNumber =0;
+    private static int ClientID=0;
     public AccountServer()throws RemoteException{
-
     }
     @Override
-    public String login(String id, String passwd) throws RemoteException {
-        User temp=User.login(id,passwd);
+    public String login(String id, String password) throws RemoteException {
+        User temp=User.login(id,password);
         switch (temp.getState()){
             case LogIn:return GlobalConstant.SIGNUP_SUCCESS;
             case UnknownUser:return GlobalConstant.LOGIN_FAIL_UNKNOWN;
@@ -31,8 +33,12 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
     }
 
     @Override
-    public String signUp(String id, String passwd, String secureQuestion, String answer) throws RemoteException {
-        String temp=User.signUp(id,passwd,secureQuestion,answer);
+    public String signUp(String id, String password, String secureQuestion, String answer) throws RemoteException {
+        String temp=User.signUp(id,password,secureQuestion,answer);
+        //allocate unique fileServer and RuntimeServer
+        if(temp.equals(GlobalConstant.SIGNUP_SUCCESS)){
+            int port=5913+ClientID;
+        }
         return temp;
     }
 
@@ -59,20 +65,17 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
     @Override
     public void startIO() throws RemoteException {
         try {
-            ioProcessor = (IO) Naming.lookup("rmi://localhost:5202/ioProcessor");
+            //to allocate unique IO processor to different user
+            int temp=5202+ IOUniqueNumber;
+            IOUniqueNumber++;
+            ioProcessors.add ((IO)Naming.lookup("rmi://localhost:"+temp+"/ioProcessor"));
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         System.out.println("here");
-        System.out.println(ioProcessor.getInput());
-        ioProcessor.outPut('x');
-        ioProcessor.outPut('x');
-        ioProcessor.outPut('z');
-//        ioProcessor.output('x');
-//        ioProcessor.output('x');
-//        ioProcessor.output('z');
+        System.out.println(ioProcessors.get(IOUniqueNumber-1).getInput());
     }
 
     @Override
@@ -83,6 +86,11 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
     @Override
     public int getFileServer() throws RemoteException {
         return 0;
+    }
+
+    @Override
+    public int getIOUniqueNumber() throws RemoteException {
+        return IOUniqueNumber;
     }
 
 

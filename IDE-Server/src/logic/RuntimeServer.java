@@ -1,7 +1,7 @@
 package logic;
 
 import Data.MyFile;
-import logic.remoteIneterfaces.RuntimeI;
+import logic.remoteInterfaces.RuntimeI;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

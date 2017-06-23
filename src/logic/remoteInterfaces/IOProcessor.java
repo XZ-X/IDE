@@ -1,4 +1,4 @@
-package logic;
+package logic.remoteInterfaces;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -11,7 +11,7 @@ public class IOProcessor extends UnicastRemoteObject implements IO {
     private char[] input;
     private char[] output;
 
-    protected IOProcessor() throws RemoteException {
+    public IOProcessor() throws RemoteException {
     }
 
     public void putIn(String input){

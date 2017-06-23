@@ -3,7 +3,7 @@ package logic;
 
 import Data.MyInteger;
 import logic.commands.*;
-import logic.remoteIneterfaces.IO;
+import logic.remoteInterfaces.IO;
 
 import java.io.*;
 import java.util.ArrayList;

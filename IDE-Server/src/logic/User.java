@@ -3,7 +3,7 @@ package logic;
 import Data.GlobalConstant;
 import Data.MyFile;
 import Data.UserState;
-import logic.remoteIneterfaces.IO;
+import logic.remoteInterfaces.IO;
 
 import java.io.*;
 import java.security.MessageDigest;
@@ -82,7 +82,7 @@ public class User implements Serializable {
     }
 
     //methods used to manage users
-    static boolean storeUsers() {
+    public static boolean storeUsers() {
         try {
             ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(GlobalConstant.USERS));
             for (User usr : users) {
@@ -96,7 +96,7 @@ public class User implements Serializable {
         return true;
     }
 
-    static boolean loadUsers() {
+    public static boolean loadUsers() {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(GlobalConstant.USERS));
             while (true) {
@@ -116,7 +116,7 @@ public class User implements Serializable {
         return true;
     }
 
-    static String signUp(String userName, String password, String secureQuestion, String answer) {
+    public static String signUp(String userName, String password, String secureQuestion, String answer) {
         for (User usr : users) {
             if (usr.name.equals(userName)) {
                 System.out.println("error duplicated user");
@@ -132,7 +132,7 @@ public class User implements Serializable {
         return GlobalConstant.SIGNUP_SUCCESS;
     }
 
-    static User login(String userName, String password) {
+    public static User login(String userName, String password) {
         User user = null;
         for (User person : users) {
             if (person.name.equals(userName)) {

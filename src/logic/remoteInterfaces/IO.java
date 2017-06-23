@@ -1,4 +1,4 @@
-package logic.remoteIneterfaces;
+package logic.remoteInterfaces;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

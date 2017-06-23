@@ -1,4 +1,4 @@
-package logic.remoteIneterfaces;
+package logic.remoteInterfaces;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -16,4 +16,5 @@ public interface AccountI extends Remote {
     void startIO()throws RemoteException;
     int getRuntimeServer()throws RemoteException;
     int getFileServer() throws RemoteException;
+    int getIOUniqueNumber()throws RemoteException;
 }

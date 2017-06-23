@@ -1,6 +1,6 @@
 package logic.commands;
 
-import logic.remoteIneterfaces.IO;
+import logic.remoteInterfaces.IO;
 import Data.MyInteger;
 import logic.RuntimeStack;
 

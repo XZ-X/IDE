@@ -1,6 +1,4 @@
-package logic.remoteIneterfaces;
-
-import logic.RuntimeStack;
+package logic.remoteInterfaces;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
