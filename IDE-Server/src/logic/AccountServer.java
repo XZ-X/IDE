@@ -1,7 +1,8 @@
 package logic;
 
 import Data.GlobalConstant;
-import Data.UserState;
+import logic.remoteIneterfaces.AccountI;
+import logic.remoteIneterfaces.IO;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -31,7 +32,8 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
 
     @Override
     public String signUp(String id, String passwd, String secureQuestion, String answer) throws RemoteException {
-        return User.signUp(id,passwd,secureQuestion,answer);
+        String temp=User.signUp(id,passwd,secureQuestion,answer);
+        return temp;
     }
 
     @Override
@@ -72,4 +74,16 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
 //        ioProcessor.output('x');
 //        ioProcessor.output('z');
     }
+
+    @Override
+    public int getRuntimeServer() throws RemoteException {
+        return 0;
+    }
+
+    @Override
+    public int getFileServer() throws RemoteException {
+        return 0;
+    }
+
+
 }

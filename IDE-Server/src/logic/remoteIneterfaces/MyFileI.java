@@ -1,6 +1,4 @@
-package logic;
-
-import logic.MyFile;
+package logic.remoteIneterfaces;
 
 import java.io.File;
 import java.rmi.Remote;

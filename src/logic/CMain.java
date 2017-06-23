@@ -16,6 +16,15 @@ public class CMain {
     private static IOProcessor ioProcessor=null;
     public static void main(String[] args) {
         RemoteController.connect();
+        try {
+            accountServer=(AccountI) Naming.lookup("rmi://localhost:6528/accountServer");
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
 }

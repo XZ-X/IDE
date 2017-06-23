@@ -13,12 +13,10 @@ import java.rmi.registry.LocateRegistry;
 public class SMain {
     public static void main(String[] args) {
         try {
-            User.loadUsers();
             AccountServer accountServer=new AccountServer();
             LocateRegistry.createRegistry(6528);
             try {
                 Naming.bind("rmi://localhost:6528/accountServer",accountServer);
-
             } catch (AlreadyBoundException e) {
                 e.printStackTrace();
             } catch (MalformedURLException e) {
@@ -27,5 +25,6 @@ public class SMain {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+//        User.loadUsers();
     }
 }

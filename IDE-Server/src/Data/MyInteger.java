@@ -1,4 +1,4 @@
-package logic;
+package Data;
 
 /**
  * Created by xuxiangzhe on 2017/6/19.

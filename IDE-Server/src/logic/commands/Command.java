@@ -1,4 +1,4 @@
-package logic;
+package logic.commands;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.

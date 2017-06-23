@@ -1,5 +1,8 @@
 package logic;
 
+import Data.MyInteger;
+import logic.commands.Command;
+
 import java.io.File;
 import java.util.ArrayList;
 

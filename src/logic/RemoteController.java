@@ -10,22 +10,20 @@ public class RemoteController {
     private static AccountI accountServer;
     private static IOProcessor ioProcessor;
     public static void connect(){
-        try {
-            accountServer=(AccountI) Naming.lookup("rmi://localhost:6528/accountServer");
-            ioProcessor=new IOProcessor();
-            LocateRegistry.createRegistry(5202);
-            Naming.bind("rmi://localhost:5202/ioProcessor",ioProcessor);
-            ioProcessor.putIn("fsw");
-            accountServer.startIO();
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (AlreadyBoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+
+//            ioProcessor=new IOProcessor();
+//            LocateRegistry.createRegistry(5202);
+//            Naming.bind("rmi://localhost:5202/ioProcessor",ioProcessor);
+//            ioProcessor.putIn("fsw");
+//            accountServer.startIO();
+//        } catch (NotBoundException e) {
+//            e.printStackTrace();
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
 //            System.out.println(accountServer.signUp("1","2","3","4"));
 
     }

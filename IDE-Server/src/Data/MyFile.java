@@ -1,4 +1,6 @@
-package logic;
+package Data;
+
+import logic.User;
 
 import java.io.File;
 import java.io.Serializable;

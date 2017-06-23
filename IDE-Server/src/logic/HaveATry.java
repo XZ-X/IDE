@@ -1,5 +1,7 @@
 package logic;
 
+import logic.commands.Command;
+
 import java.io.*;
 import java.util.ArrayList;
 

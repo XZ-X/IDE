@@ -1,4 +1,4 @@
-package logic;
+package logic.remoteIneterfaces;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -14,4 +14,6 @@ public interface AccountI extends Remote {
     String resetPassword(String answer, String password)throws RemoteException;
     boolean setPreferences(int versionNumber, boolean isAutoSave, int autoSaveTime)throws RemoteException;
     void startIO()throws RemoteException;
+    int getRuntimeServer()throws RemoteException;
+    int getFileServer() throws RemoteException;
 }
