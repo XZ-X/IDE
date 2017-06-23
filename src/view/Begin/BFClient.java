@@ -10,8 +10,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import logic.CMain;
+import logic.RemoteController;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 public class BFClient extends Application {
     public static Stage ps;
@@ -25,7 +27,14 @@ public class BFClient extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/view/pages/welcomePage.fxml"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-        primaryStage.setOnCloseRequest(event -> System.exit(0));
+        primaryStage.setOnCloseRequest(event ->{
+            try {
+                RemoteController.getAccountServer().logOut(RemoteController.getUserName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.exit(0);
+        });
         CMain.main(null);
     }
 

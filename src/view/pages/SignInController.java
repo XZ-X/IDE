@@ -38,11 +38,21 @@ public class SignInController {
             BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("signUp.fxml"))));
         }else {
             String result= RemoteController.login(userName.getText(),password.getText());
-            switch (result){
-                case GlobalConstant.LOGIN_FAIL_UNKNOWN:button.setText(signUp);break;
-                case GlobalConstant.LOGIN_FAIL_DUP:button.setText("You've logged in");break;
-                case GlobalConstant.LOGIN_FAIL_WRONGPW:password.clear();button.setText("Wrong password!");break;
-                case GlobalConstant.LOGIN_SUCCESSFUL:button.setText("Success!");break;
+            switch (result) {
+                case GlobalConstant.LOGIN_FAIL_UNKNOWN:
+                    button.setText(signUp);
+                    break;
+                case GlobalConstant.LOGIN_FAIL_DUP:
+                    button.setText("You've logged in");
+                    break;
+                case GlobalConstant.LOGIN_FAIL_WRONGPW:
+                    password.clear();
+                    button.setText("Wrong password!");
+                    break;
+                case GlobalConstant.LOGIN_SUCCESSFUL:
+                    button.setText("Success!");
+                    BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("createFile.fxml"))));
+                    break;
             }
         }
     }

@@ -9,9 +9,7 @@ import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Clock;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class User implements Serializable,Runnable {
     //All the effective users will appear in this list, which uses loadUser() and storeUser() to edit.
-    private static ArrayList<User> users = new ArrayList<>();
+    private static Set<User> users = new HashSet<>();
     //state
     private UserState state;
 
@@ -66,7 +64,7 @@ public class User implements Serializable,Runnable {
         return clock;
     }
 
-    public Settings getPreferrence() {
+    public Settings getPreference() {
         return settings;
     }
 
@@ -74,7 +72,7 @@ public class User implements Serializable,Runnable {
         return (String[]) secureQuestions.keySet().toArray();
     }
 
-    public void setPreferrence(boolean isAutoSave, int autoSaveTime, int versionNumber) {
+    public void setPreference(boolean isAutoSave, int autoSaveTime, int versionNumber) {
         settings.autoSaveTime = autoSaveTime;
         settings.isAutoSave = isAutoSave;
         settings.versionNumber = versionNumber;
@@ -84,13 +82,22 @@ public class User implements Serializable,Runnable {
         return time;
     }
 
-    public User getUser(String userName){
+    public static User getUser(String userName){
         for(User user:users){
             if (user.name.equals(userName)){
                 return user;
             }
         }
         return new User(UserState.UnknownUser);
+    }
+
+    public MyFile getFile(String fileName){
+        for(MyFile file:files){
+            if(file.getName().equals(fileName)){
+                return file;
+            }
+        }
+        return null;
     }
 
     //methods used to manage users

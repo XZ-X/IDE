@@ -1,10 +1,12 @@
 package logic.remoteInterfaces;
 
+import Data.Language;
 import Data.MyFile;
 import logic.User;
 import logic.remoteInterfaces.MyFileI;
 
 import java.io.File;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -19,13 +21,24 @@ public class FileServer extends UnicastRemoteObject implements MyFileI {
     }
 
     @Override
-    public boolean creatFile(String language, String filename) throws RemoteException {
-        return false;
+    public boolean createFile(Language language, String filename) throws RemoteException {
+        try {
+            usr.addFile(new MyFile(language,filename,usr));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     @Override
     public File openFile(String filename) throws RemoteException {
-        return null;
+        MyFile file=usr.getFile(filename);
+        File ret=null;
+        if(file!=null){
+            ret=file.open();
+            currentFile=file;
+        }
+        return ret;
     }
 
     @Override
@@ -34,7 +47,12 @@ public class FileServer extends UnicastRemoteObject implements MyFileI {
     }
 
     @Override
-    public String saveFile(String filename) throws RemoteException {
+    public String saveFile(String contents) throws RemoteException {
+        try {
+            currentFile.save(contents);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

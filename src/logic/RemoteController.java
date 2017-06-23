@@ -18,7 +18,7 @@ public class RemoteController {
     private static MyFileI fileServer;
     private static RuntimeI runtimeServer;
     private static int uniqueNumber;
-
+    private static String userName;
     //gets
     public static AccountI getAccountServer() {
         return accountServer;
@@ -36,6 +36,9 @@ public class RemoteController {
         return runtimeServer;
     }
 
+    public static String getUserName() {
+        return userName;
+    }
 
     //connect to server
     public static void connect(){
@@ -65,6 +68,7 @@ public class RemoteController {
     public static String login(String id,String password) throws RemoteException {
         String ret=accountServer.login(id,password);
         if(ret.equals(GlobalConstant.LOGIN_SUCCESSFUL)){
+            userName=id;
             int port=accountServer.getFileServer();
             try {
                 fileServer=(MyFileI)Naming.lookup("rmi://localhost:"+port+"/fileServer");

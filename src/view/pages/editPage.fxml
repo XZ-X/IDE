@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.EditPageController">
+   <children>
+      <MenuBar prefHeight="20.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="save" mnemonicParsing="false" onAction="#onSaveClicked" text="Save" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Control">
+            <items>
+              <MenuItem fx:id="back" mnemonicParsing="false" text="Back" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TextField fx:id="content" layoutY="29.0" prefHeight="384.0" prefWidth="600.0" />
+   </children>
+</AnchorPane>

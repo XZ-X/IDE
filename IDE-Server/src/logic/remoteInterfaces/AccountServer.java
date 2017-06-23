@@ -1,6 +1,7 @@
 package logic.remoteInterfaces;
 
 import Data.GlobalConstant;
+import Data.UserState;
 import logic.User;
 import logic.remoteInterfaces.AccountI;
 import logic.remoteInterfaces.IO;
@@ -64,7 +65,9 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
     }
 
     @Override
-    public String logOut() throws RemoteException {
+    public String logOut(String userName) throws RemoteException {
+        User toLogOut=User.getUser(userName);
+        toLogOut.logOut();
         return null;
     }
 
