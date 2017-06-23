@@ -1,6 +1,7 @@
-package logic;
+package logic.remoteInterfaces;
 
 import Data.MyFile;
+import logic.User;
 import logic.remoteInterfaces.RuntimeI;
 
 import java.rmi.RemoteException;
@@ -12,10 +13,14 @@ import java.rmi.server.UnicastRemoteObject;
 public class RuntimeServer extends UnicastRemoteObject implements RuntimeI {
     private MyFile currentFile;
     private User usr;
-    public RuntimeServer(User user,MyFile file)throws RemoteException{
+    public RuntimeServer(User user)throws RemoteException{
         usr=user;
-        currentFile=file;
     }
+
+    public void setCurrentFile(MyFile currentFile) {
+        this.currentFile = currentFile;
+    }
+
     @Override
     public void run() throws RemoteException {
 

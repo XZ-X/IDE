@@ -12,13 +12,14 @@ import java.time.Clock;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.Class User
  * compared with diagram: ++storeUsers() ++loadUsers()
  * Unfinished
  */
-public class User implements Serializable {
+public class User implements Serializable,Runnable {
     //All the effective users will appear in this list, which uses loadUser() and storeUser() to edit.
     private static ArrayList<User> users = new ArrayList<>();
     //state
@@ -46,13 +47,15 @@ public class User implements Serializable {
 
     //This constructor is used to build users when there're some problems in method 'logIn',such as unknownUser.
     //Users built by this method will NOT be added into the user list since they're merely used to convey error information
-    private User(String nm, String password, UserState userState) {
+    private User(UserState userState) {
         name="wrong!";
         password="wrong!";
         state = userState;
     }
-
-
+    //This constructor is used to build a user aiming at use the auto-store method.
+    public User(){
+        name="";
+    }
 
     //gets-sets methods
     public UserState getState() {
@@ -79,6 +82,15 @@ public class User implements Serializable {
 
     public String getTime() {
         return time;
+    }
+
+    public User getUser(String userName){
+        for(User user:users){
+            if (user.name.equals(userName)){
+                return user;
+            }
+        }
+        return new User(UserState.UnknownUser);
     }
 
     //methods used to manage users
@@ -141,13 +153,13 @@ public class User implements Serializable {
             }
         }
         if (user == null) {
-            return new User(null,null,UserState.UnknownUser);
+            return new User(UserState.UnknownUser);
         }else if(!user.password.equals(encrypt(password))){
-            return new User(null,null,UserState.WrongPassword);
+            return new User(UserState.WrongPassword);
         }
         //Avoid duplicated logging in
         if(user.getState()==UserState.LogIn){
-            return new User(null,null,UserState.DuplicateLogIn);
+            return new User(UserState.DuplicateLogIn);
         }else {
             user.state=UserState.LogIn;
             user.time=clock.toString();
@@ -194,5 +206,15 @@ public class User implements Serializable {
             e.printStackTrace();
         }
         return "wrong!";
+    }
+    //auto-save
+    @Override
+    public void run() {
+        storeUsers();
+        try {
+            TimeUnit.MINUTES.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

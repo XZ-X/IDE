@@ -37,7 +37,7 @@ public class SignInController {
         if(button.getText().equals(signUp)){
             BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("signUp.fxml"))));
         }else {
-            String result= RemoteController.getAccountServer().login(userName.getText(),password.getText());
+            String result= RemoteController.login(userName.getText(),password.getText());
             switch (result){
                 case GlobalConstant.LOGIN_FAIL_UNKNOWN:button.setText(signUp);break;
                 case GlobalConstant.LOGIN_FAIL_DUP:button.setText("You've logged in");break;

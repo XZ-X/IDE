@@ -1,6 +1,7 @@
-package logic;
+package logic.remoteInterfaces;
 
 import Data.MyFile;
+import logic.User;
 import logic.remoteInterfaces.MyFileI;
 
 import java.io.File;

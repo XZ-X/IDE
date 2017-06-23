@@ -1,5 +1,8 @@
 package logic;
 
+import Data.UserState;
+import logic.remoteInterfaces.AccountServer;
+
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
@@ -24,6 +27,8 @@ public class SMain {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-//        User.loadUsers();
+        User.loadUsers();
+        Thread storeUsers=new Thread(new User());
+        storeUsers.run();
     }
 }

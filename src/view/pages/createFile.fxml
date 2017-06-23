@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.CreateFileController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <MenuBar prefHeight="15.0" prefWidth="600.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Unspecified Menu">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Unspecified Menu">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+            <TextField fx:id="fileName" layoutX="157.0" layoutY="83.0" prefHeight="27.0" prefWidth="287.0" />
+            <Button fx:id="BFButton" layoutX="217.0" layoutY="139.0" mnemonicParsing="false" onMouseClicked="#createBFFile" prefHeight="43.0" prefWidth="167.0" text="Create BF File" />
+            <Button fx:id="OOKButton" layoutX="217.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#createOOKFile" prefHeight="43.0" prefWidth="167.0" text="Create OOK File" />
+            <Label layoutX="77.0" layoutY="88.0" text="File name:" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

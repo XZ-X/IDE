@@ -10,6 +10,10 @@ public class GlobalConstant {
     //file paths
     public static final String USERS="userInformation";
     public static final String FILES="fileInformation";
+
+    //initial port number
+    public static final int INITIAL_PORT=5202;
+
     //sign up messages
     public static final String SIGNUP_SUCCESS="Success!";
 
