@@ -20,13 +20,13 @@ public class BNEZ implements Command {
 
     @Override
     public void exec() {
-        if(pointer.value!=0)
+        if(stack.get(pointer.value)!=0)
             PC.value-=jumpLength.value;
     }
 
     @Override
     public void undo() {
-        if(pointer.value!=0)
+        if(stack.get(pointer.value)!=0)
             PC.value+=jumpLength.value;
     }
 }

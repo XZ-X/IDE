@@ -8,4 +8,8 @@ public class MyInteger  {
     public MyInteger(int a){
         value=a;
     }
+    @Override
+    public String toString(){
+        return value.toString();
+    }
 }

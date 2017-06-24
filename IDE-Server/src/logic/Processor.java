@@ -29,8 +29,9 @@ public class Processor {
 
     public void exec(){
         initial();
-        for (Command cmd:instructions) {
-            cmd.exec();
+        while (PC.value<=instructions.size()-1){
+            instructions.get(PC.value).exec();
+            PC.value++;
         }
     }
 

@@ -32,7 +32,6 @@ public class BFInterpreter implements Interpreter {
             char next;
             Scanner sourceScanner=new Scanner(new FileInputStream(source));
             while(temp.length()!=0||sourceScanner.hasNext()){
-                add();
                 if(temp.length()==0) {
                     temp = sourceScanner.next();
                 }
@@ -42,24 +41,45 @@ public class BFInterpreter implements Interpreter {
                 }else {
                     temp="";
                 }
-                switch (next){
-                    case '>':commands.add(new PAddOne(stack, pointer));break;
-                    case '<':commands.add(new PSubOne(stack, pointer));break;
-                    case '+':commands.add(new AddOne(stack, pointer));break;
-                    case '-':commands.add(new SubOne(stack, pointer));break;
-                    case '.':commands.add(new PrintWord(stack, pointer,io));break;
-                    case ',':commands.add(new ReadWord(stack, pointer,io));break;
-                    case '[':{
-                        MyInteger x=new MyInteger(0);
-                        jumpTable.add(0,x);
-                        commands.add(new BEQZ(stack, pointer,x,PC));
+                switch (next) {
+                    case '>':
+                        add();
+                        commands.add(new PAddOne(stack, pointer));
+                        break;
+                    case '<':
+                        add();
+                        commands.add(new PSubOne(stack, pointer));
+                        break;
+                    case '+':
+                        add();
+                        commands.add(new AddOne(stack, pointer));
+                        break;
+                    case '-':
+                        add();
+                        commands.add(new SubOne(stack, pointer));
+                        break;
+                    case '.':
+                        add();
+                        commands.add(new PrintWord(stack, pointer, io));
+                        break;
+                    case ',':
+                        add();
+                        commands.add(new ReadWord(stack, pointer, io));
+                        break;
+                    case '[': {
+                        add();
+                        MyInteger x = new MyInteger(0);
+                        jumpTable.add(0, x);
+                        commands.add(new BEQZ(stack, pointer, x, PC));
                         break;
                     }
-                    case ']':{
-                        commands.add(new BNEZ(stack, pointer,jumpTable.get(0),PC));
+                    case ']': {
+                        add();
+                        commands.add(new BNEZ(stack, pointer, jumpTable.get(0), PC));
                         jumpTable.remove(0);
                         break;
                     }
+                    default:
                 }
             }
         } catch (FileNotFoundException e) {

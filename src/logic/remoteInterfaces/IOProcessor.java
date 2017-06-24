@@ -42,7 +42,7 @@ public class IOProcessor extends UnicastRemoteObject implements IO {
             input = new String(input).substring(1).toCharArray();
             return c;
         }else {
-            return (char)-1;
+            return (char)0;
         }
     }
 
