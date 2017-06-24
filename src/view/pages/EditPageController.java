@@ -21,11 +21,13 @@ import java.util.ResourceBundle;
 public class EditPageController implements Initializable {
     public static String fileName;
     @FXML
-    TextField content;
+    TextArea content,input;
     @FXML
     MenuItem save,back,run;
     @FXML
     Label filename;
+    @FXML
+    Button runButton;
 
 
     @FXML
@@ -37,6 +39,7 @@ public class EditPageController implements Initializable {
         onSaveClicked();
         ExecuteController.fileName=fileName;
         ExecuteController.toExec=content.getText();
+        RemoteController.getIoProcessor().putIn(input.getText());
         RemoteController.getRuntimeServer().setCurrentFile(fileName);
         RemoteController.getRuntimeServer().run();
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("execute.fxml"))));

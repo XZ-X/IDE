@@ -28,7 +28,11 @@ public class RuntimeStack {
         stack.add(a);
     }
     public void add(int n,int a){
-        stack.add(n,a);
+        if(stack.size()<=n){
+            stack.add(n,a);
+        }else {
+            stack.set(n,a);
+        }
     }
     public void replace(int n,int a){
         stack.remove(n);
@@ -39,5 +43,10 @@ public class RuntimeStack {
     }
     public void clear(){
         stack=new ArrayList<Integer>();
+    }
+
+    @Override
+    public String toString(){
+        return stack.toString();
     }
 }

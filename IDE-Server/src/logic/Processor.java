@@ -33,6 +33,7 @@ public class Processor {
             instructions.get(PC.value).exec();
             PC.value++;
         }
+        System.out.println("here");
     }
 
     public void debugExec(){
