@@ -11,6 +11,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
@@ -53,7 +54,7 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
         FileServer fileServer=new FileServer(currentUser);
         RuntimeServer runtimeServer=new RuntimeServer(currentUser);
         port=GlobalConstant.INITIAL_PORT+ClientID;
-
+        LocateRegistry.createRegistry(port);
 
         try {
             Naming.bind("rmi://localhost:"+port+"/fileServer",fileServer);
@@ -97,7 +98,7 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
     public void startIO() throws RemoteException {
         try {
             //to allocate unique IO processor to different user
-            int temp=5202+ IOUniqueNumber;
+            int temp=8126+ IOUniqueNumber;
             IOUniqueNumber++;
             ioProcessors.add ((IO)Naming.lookup("rmi://localhost:"+temp+"/ioProcessor"));
 

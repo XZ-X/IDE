@@ -120,7 +120,9 @@ public class User implements Serializable,Runnable {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(GlobalConstant.USERS));
             while (true) {
                 try {
-                    users.add((User) inputStream.readObject());
+                    User x=(User) inputStream.readObject();
+                    x.state=UserState.Normal;
+                    users.add(x);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }

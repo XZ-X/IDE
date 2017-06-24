@@ -10,13 +10,8 @@ import javafx.scene.control.TextField;
 import logic.RemoteController;
 import view.Begin.BFClient;
 
-import javax.naming.Context;
-import javax.naming.NamingException;
-import javax.naming.spi.InitialContextFactory;
 import java.io.IOException;
 import java.net.URL;
-import java.rmi.RemoteException;
-import java.util.Hashtable;
 import java.util.ResourceBundle;
 
 /**
@@ -32,7 +27,7 @@ public class CreateFileController implements Initializable {
     void createBFFile() throws IOException {
         boolean isCreate=RemoteController.getFileServer().createFile(Language.BF,fileName.getText());
         if(isCreate){
-            EditPageController.fileName=fileName.getText();
+            EditPageController.filename =fileName.getText();
             BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("editPage.fxml"))));
         }
     }

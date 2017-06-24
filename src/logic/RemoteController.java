@@ -47,7 +47,7 @@ public class RemoteController {
             //to allocate different IO processors to different users
             uniqueNumber=accountServer.getIOUniqueNumber();
             ioProcessor=new IOProcessor();
-            int temp=5202+uniqueNumber;
+            int temp=8126+uniqueNumber;
             LocateRegistry.createRegistry(temp);
             Naming.bind("rmi://localhost:"+temp+"/ioProcessor",ioProcessor);
             ioProcessor.putIn("fsw");

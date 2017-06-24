@@ -18,7 +18,7 @@ public class SMain {
             AccountServer accountServer=new AccountServer();
             LocateRegistry.createRegistry(6528);
             try {
-                Naming.bind("rmi://127.0.0.1:6528/accountServer",accountServer);
+                Naming.bind("rmi://localhost:6528/accountServer",accountServer);
             } catch (AlreadyBoundException e) {
                 e.printStackTrace();
             } catch (MalformedURLException e) {
