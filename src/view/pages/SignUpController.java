@@ -4,10 +4,8 @@ import Data.GlobalConstant;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import logic.CMain;
-import logic.RemoteController;
+import logic.remoteInterfaces.RemoteController;
 
 import java.rmi.RemoteException;
 

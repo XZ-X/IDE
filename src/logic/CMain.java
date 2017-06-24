@@ -2,6 +2,7 @@ package logic;
 
 import logic.remoteInterfaces.AccountI;
 import logic.remoteInterfaces.IOProcessor;
+import logic.remoteInterfaces.RemoteController;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.

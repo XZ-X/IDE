@@ -1,4 +1,4 @@
-package logic;
+package logic.remoteInterfaces;
 
 import Data.GlobalConstant;
 import logic.remoteInterfaces.AccountI;
@@ -50,7 +50,6 @@ public class RemoteController {
             int temp=8126+uniqueNumber;
             LocateRegistry.createRegistry(temp);
             Naming.bind("rmi://localhost:"+temp+"/ioProcessor",ioProcessor);
-            ioProcessor.putIn("fsw");
             accountServer.startIO();
 
         } catch (NotBoundException e) {

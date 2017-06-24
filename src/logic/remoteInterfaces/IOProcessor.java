@@ -37,7 +37,7 @@ public class IOProcessor extends UnicastRemoteObject implements IO {
     //Methods prepared for server
     @Override
     public char getInput() throws RemoteException {
-        if(input.length>0) {
+        if(input!=null&&input.length>0) {
             char c = input[0];
             input = new String(input).substring(1).toCharArray();
             return c;

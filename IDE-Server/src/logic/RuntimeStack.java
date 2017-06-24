@@ -15,6 +15,9 @@ public class RuntimeStack {
     }
 
     public int get(int n){
+        while(stack.size()-1<n){
+            stack.add(0);
+        }
         return stack.get(n);
     }
 

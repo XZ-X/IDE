@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import logic.RemoteController;
+import logic.remoteInterfaces.RemoteController;
 import myTools.FileTools;
 import view.Begin.BFClient;
 
@@ -35,6 +35,7 @@ public class EditPageController implements Initializable {
     @FXML
     void onRunClicked() throws IOException {
         onSaveClicked();
+        ExecuteController.fileName=fileName;
         ExecuteController.toExec=content.getText();
         RemoteController.getRuntimeServer().setCurrentFile(fileName);
         RemoteController.getRuntimeServer().run();

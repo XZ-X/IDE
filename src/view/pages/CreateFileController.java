@@ -7,7 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import logic.RemoteController;
+import logic.remoteInterfaces.RemoteController;
 import view.Begin.BFClient;
 
 import java.io.IOException;

@@ -10,10 +10,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import logic.CMain;
-import logic.RemoteController;
+import logic.remoteInterfaces.RemoteController;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 
 public class BFClient extends Application {
     public static Stage ps;
