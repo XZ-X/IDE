@@ -36,6 +36,8 @@ public class EditPageController implements Initializable {
     void onRunClicked() throws IOException {
         onSaveClicked();
         ExecuteController.toExec=content.getText();
+        RemoteController.getRuntimeServer().setCurrentFile(fileName);
+        RemoteController.getRuntimeServer().run();
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("execute.fxml"))));
     }
 

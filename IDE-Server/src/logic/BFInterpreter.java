@@ -1,6 +1,7 @@
 package logic;
 
 
+import Data.MyFile;
 import Data.MyInteger;
 import logic.commands.*;
 import logic.remoteInterfaces.IO;
@@ -20,8 +21,9 @@ public class BFInterpreter implements Interpreter {
     //to produce the jump command
     private ArrayList<MyInteger> jumpTable=new ArrayList<>();
     private IO io;
-    public BFInterpreter(IO io){
+    public BFInterpreter(IO io, MyFile file){
         this.io=io;
+        interpret(file.open());
     }
     @Override
     public ArrayList<Command> interpret(File source) {

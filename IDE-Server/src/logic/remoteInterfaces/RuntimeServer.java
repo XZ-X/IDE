@@ -1,6 +1,8 @@
 package logic.remoteInterfaces;
 
 import Data.MyFile;
+import logic.BFInterpreter;
+import logic.Processor;
 import logic.User;
 import logic.remoteInterfaces.RuntimeI;
 
@@ -9,11 +11,13 @@ import java.rmi.server.UnicastRemoteObject;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.
+ * This class will exec user's code.
  */
 public class RuntimeServer extends UnicastRemoteObject implements RuntimeI {
     private MyFile currentFile;
     private User usr;
     private IO io;
+    private Processor processor;
     public RuntimeServer(User user,IO io)throws RemoteException{
         usr=user;
         this.io=io;
@@ -27,7 +31,12 @@ public class RuntimeServer extends UnicastRemoteObject implements RuntimeI {
     public void run() throws RemoteException {
         switch (currentFile.getType()){
             case BF:
+                processor=new Processor(new BFInterpreter(io,currentFile));
+                break;
+            case OOK:
+                //TODO:ook Interpreter
         }
+        processor.exec();
     }
 
     @Override
