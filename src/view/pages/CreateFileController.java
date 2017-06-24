@@ -27,7 +27,7 @@ public class CreateFileController implements Initializable {
     void createBFFile() throws IOException {
         boolean isCreate=RemoteController.getFileServer().createFile(Language.BF,fileName.getText());
         if(isCreate){
-            EditPageController.filename =fileName.getText();
+            EditPageController.fileName =fileName.getText();
             BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("editPage.fxml"))));
         }
     }

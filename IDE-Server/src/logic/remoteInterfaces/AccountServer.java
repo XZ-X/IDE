@@ -17,9 +17,10 @@ import java.util.ArrayList;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.
+ * This class will help users to login and get their own IOProcessors, RuntimeServers, etc.
  */
 public class AccountServer extends UnicastRemoteObject implements AccountI {
-    public static ArrayList<IO> ioProcessors=new ArrayList<>();
+    private static ArrayList<IO> ioProcessors=new ArrayList<>();
     private static int IOUniqueNumber =0;
     private static int ClientID=0;
     private static User currentUser;
@@ -27,19 +28,14 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
     public AccountServer()throws RemoteException{
     }
     @Override
-    public String login(String id, String password) throws RemoteException {
+    synchronized public String login(String id, String password) throws RemoteException {
         User temp=User.login(id,password);
         switch (temp.getState()){
-            case LogIn:{
-                currentUser=temp;
-                try {
-                    createOtherRemotes();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }finally {
-                    //1. this sentence will not throw an exception 2. there's only one 'return' sentence in this block
-                    return GlobalConstant.SIGNUP_SUCCESS;
-                }
+            case LogIn: {
+                currentUser = temp;
+                createOtherRemotes();
+                return GlobalConstant.SIGNUP_SUCCESS;
+
             }
             case UnknownUser:return GlobalConstant.LOGIN_FAIL_UNKNOWN;
             case DuplicateLogIn:return GlobalConstant.LOGIN_FAIL_DUP;
@@ -52,24 +48,23 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
     private void createOtherRemotes() throws RemoteException {
         ClientID++;
         FileServer fileServer=new FileServer(currentUser);
-        RuntimeServer runtimeServer=new RuntimeServer(currentUser);
+        RuntimeServer runtimeServer=new RuntimeServer(currentUser,ioProcessors.get(ioProcessors.size()-1));
         port=GlobalConstant.INITIAL_PORT+ClientID;
         LocateRegistry.createRegistry(port);
 
         try {
             Naming.bind("rmi://localhost:"+port+"/fileServer",fileServer);
             Naming.bind("rmi://localhost:"+port+"/runtimeServer",runtimeServer);
-        } catch (AlreadyBoundException e) {
-            e.printStackTrace();
         } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }catch (AlreadyBoundException e) {
             e.printStackTrace();
         }
 
     }
     @Override
     public String signUp(String id, String password, String secureQuestion, String answer) throws RemoteException {
-        String temp=User.signUp(id,password,secureQuestion,answer);
-        return temp;
+        return User.signUp(id,password,secureQuestion,answer);
     }
 
     @Override

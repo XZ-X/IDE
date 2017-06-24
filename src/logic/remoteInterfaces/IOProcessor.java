@@ -13,7 +13,7 @@ public class IOProcessor extends UnicastRemoteObject implements IO {
 
     public IOProcessor() throws RemoteException {
     }
-
+    //local methods
     public void putIn(String input){
         if(this.input!=null) {
             this.input = (new String(this.input) + input).toCharArray();
@@ -21,6 +21,20 @@ public class IOProcessor extends UnicastRemoteObject implements IO {
             this.input=input.toCharArray();
         }
     }
+    public char[] getOutput(){
+        if(output!=null) {
+            return output;
+        }else {
+            return new char[]{(char)0};
+        }
+    }
+    public char[] clearOutput(){
+        char[] ret=getOutput();
+        output=new char[]{(char)0};
+        return ret;
+    }
+
+    //Methods prepared for server
     @Override
     public char getInput() throws RemoteException {
         if(input.length>0) {
@@ -41,12 +55,6 @@ public class IOProcessor extends UnicastRemoteObject implements IO {
         }
         return true;
     }
-    public char[] putOut(){
-        if(output!=null) {
-            return output;
-        }else {
-            return new char[]{(char)0};
-        }
-    }
+
 
 }

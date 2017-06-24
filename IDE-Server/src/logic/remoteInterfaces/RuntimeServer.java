@@ -13,17 +13,21 @@ import java.rmi.server.UnicastRemoteObject;
 public class RuntimeServer extends UnicastRemoteObject implements RuntimeI {
     private MyFile currentFile;
     private User usr;
-    public RuntimeServer(User user)throws RemoteException{
+    private IO io;
+    public RuntimeServer(User user,IO io)throws RemoteException{
         usr=user;
+        this.io=io;
     }
 
-    public void setCurrentFile(MyFile currentFile) {
-        this.currentFile = currentFile;
+    public void setCurrentFile(String filename) {
+        currentFile=usr.getFile(filename);
     }
 
     @Override
     public void run() throws RemoteException {
-
+        switch (currentFile.getType()){
+            case BF:
+        }
     }
 
     @Override

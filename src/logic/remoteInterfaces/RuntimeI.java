@@ -13,4 +13,5 @@ public interface RuntimeI extends Remote {
     String[] debug_next()throws RemoteException;
     String[] debug_back()throws RemoteException;
     void debug_breakpoint(int location)throws RemoteException;
+    void setCurrentFile(String filename)throws RemoteException;
 }

@@ -17,7 +17,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Run">
             <items>
-              <MenuItem fx:id="run" mnemonicParsing="false" text="Run" />
+              <MenuItem fx:id="run" mnemonicParsing="false" onAction="#onRunClicked" text="Run" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Control">
