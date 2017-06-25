@@ -10,8 +10,10 @@ import java.rmi.RemoteException;
 public interface RuntimeI extends Remote {
     void run()throws RemoteException;
     String[] debug()throws RemoteException;
-    String[] debug_next()throws RemoteException;
-    String[] debug_back()throws RemoteException;
-    void debug_breakpoint(int location)throws RemoteException;
+    String[] debugNext()throws RemoteException;
+    String[] debugBack()throws RemoteException;
+    void debugSetBreakpoint(int location)throws RemoteException;
     void setCurrentFile(String filename)throws RemoteException;
+    void debugRemoveBreakpoint(int breakpoint)throws RemoteException;
+    void terminate()throws RemoteException;
 }

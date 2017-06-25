@@ -16,6 +16,8 @@
       </ScrollPane>
       <TextArea fx:id="inputArea" layoutX="78.0" layoutY="272.0" prefHeight="100.0" prefWidth="206.0" promptText="Input area" />
       <TextArea fx:id="outputArea" layoutX="317.0" layoutY="272.0" prefHeight="100.0" prefWidth="206.0" promptText="Output area" />
-      <Button fx:id="OKButton" layoutX="163.0" layoutY="236.0" mnemonicParsing="false" onAction="#refreshInput" text="OK" />
+      <Button fx:id="runButton" layoutX="83.0" layoutY="237.0" mnemonicParsing="false" onAction="#refreshInput" prefHeight="27.0" prefWidth="47.0" text="Run" />
+      <Button fx:id="stopButton" layoutX="163.0" layoutY="237.0" mnemonicParsing="false" onAction="#terminate" text="Stop" />
+      <Button fx:id="freshButton" layoutX="394.0" layoutY="237.0" mnemonicParsing="false" text="Fresh" onMouseClicked="#refreshOutput" />
    </children>
 </AnchorPane>

@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import logic.remoteInterfaces.RemoteController;
 import myTools.FileTools;
+import myTools.RunTools;
 import view.Begin.BFClient;
 
 import java.io.File;
@@ -37,11 +38,10 @@ public class EditPageController implements Initializable {
     @FXML
     void onRunClicked() throws IOException {
         onSaveClicked();
+        Thread thread=new Thread(new RunTools(fileName,input.getText()));
+        thread.start();
         ExecuteController.fileName=fileName;
         ExecuteController.toExec=content.getText();
-        RemoteController.getIoProcessor().putIn(input.getText());
-        RemoteController.getRuntimeServer().setCurrentFile(fileName);
-        RemoteController.getRuntimeServer().run();
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("execute.fxml"))));
     }
 
@@ -55,4 +55,5 @@ public class EditPageController implements Initializable {
             e.printStackTrace();
         }
     }
+
 }

@@ -21,17 +21,20 @@ public class RuntimeServer extends UnicastRemoteObject implements RuntimeI {
     public RuntimeServer(User user,IO io)throws RemoteException{
         usr=user;
         this.io=io;
+        processor=new Processor();
     }
 
     public void setCurrentFile(String filename) {
         currentFile=usr.getFile(filename);
     }
 
+
+
     @Override
     public void run() throws RemoteException {
         switch (currentFile.getType()){
             case BF:
-                processor=new Processor(new BFInterpreter(io,currentFile));
+                processor.setInterpreter(new BFInterpreter(io,currentFile));
                 break;
             case OOK:
                 //TODO:ook Interpreter
@@ -45,17 +48,27 @@ public class RuntimeServer extends UnicastRemoteObject implements RuntimeI {
     }
 
     @Override
-    public void debug_breakpoint(int location) throws RemoteException {
+    public void debugSetBreakpoint(int location) throws RemoteException {
 
     }
 
     @Override
-    public String[] debug_back() throws RemoteException {
+    public void debugRemoveBreakpoint(int breakpoint) throws RemoteException {
+
+    }
+
+    @Override
+    public void terminate() throws RemoteException {
+        processor.stop();
+    }
+
+    @Override
+    public String[] debugBack() throws RemoteException {
         return null;
     }
 
     @Override
-    public String[] debug_next() throws RemoteException {
+    public String[] debugNext() throws RemoteException {
         return null;
     }
 }
