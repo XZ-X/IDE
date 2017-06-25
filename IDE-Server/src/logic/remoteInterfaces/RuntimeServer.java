@@ -44,17 +44,18 @@ public class RuntimeServer extends UnicastRemoteObject implements RuntimeI {
 
     @Override
     public String[] debug() throws RemoteException {
-        return null;
+
+        return processor.debugExec();
     }
 
     @Override
     public void debugSetBreakpoint(int location) throws RemoteException {
-
+        processor.setBreakpoint(location);
     }
 
     @Override
     public void debugRemoveBreakpoint(int breakpoint) throws RemoteException {
-
+        processor.removeBreakpoint(breakpoint);
     }
 
     @Override

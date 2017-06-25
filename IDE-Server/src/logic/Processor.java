@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Processor implements Runnable{
     private ArrayList<Command> instructions;
-    private Set<Integer> breakpoints=new HashSet<>();
+    private LinkedHashSet<Integer> breakpoints=new LinkedHashSet<>();
     private MyInteger pointer,PC;
     private RuntimeStack stack;
     //control of concurrency
@@ -57,23 +57,27 @@ public class Processor implements Runnable{
     public void stop(){
         isRun=false;
     }
-    public void debugExec(){
+    public String[] debugExec(){
         initial();
-        while (!breakpoints.contains(PC.value)){
+        while (!breakpoints.contains(PC.value)&&PC.value<instructions.size()){
             instructions.get(PC.value).exec();
             PC.value++;
         }
+        //if the processor has finished this programme, PC should be marked, otherwise it will cause OutOfBound in client.
+        return (((PC.value==instructions.size())?"finish":PC.value)+","+pointer.value+","+stack.toString()).replaceAll("[\\[\\]]","").split(",");
     }
-    public void debugNext(){
+    public  String[] debugNext(){
         instructions.get(PC.value).exec();
         PC.value++;
+        return (PC.value+","+pointer.value+","+stack.toString()).replaceAll("[\\[\\]]","").split(",");
     }
 
-    public void debugBack(){
+    public  String[] debugBack(){
         if(PC.value!=0){
             PC.value--;
             instructions.get(PC.value).undo();
         }
+        return (PC.value+","+pointer.value+","+stack.toString()).replaceAll("[\\[\\]]","").split(",");
     }
 
     public void setBreakpoint(int breakpoint) {
@@ -81,7 +85,9 @@ public class Processor implements Runnable{
     }
 
     public void removeBreakpoint(int breakpoint){
-        breakpoints.remove(breakpoint);
+        if(breakpoints.contains(breakpoint)) {
+            breakpoints.remove(breakpoint);
+        }
     }
 
     public RuntimeStack getStack() {
