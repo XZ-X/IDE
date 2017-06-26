@@ -9,8 +9,8 @@ public class RuntimeStack {
     private ArrayList<Integer> stack=new ArrayList<>();
 
     public int pop(){
-        int tmp=stack.get(stack.size());
-        stack.remove(stack.size());
+        int tmp=stack.get(stack.size()-1);
+        stack.remove(stack.size()-1);
         return tmp;
     }
 
@@ -22,9 +22,9 @@ public class RuntimeStack {
     }
 
     public int get(){
-        return stack.get(stack.size());
+        return stack.get(stack.size()-1);
     }
-    public void add(int a){
+    public void push(int a){
         stack.add(a);
     }
     public void add(int n,int a){
@@ -34,15 +34,19 @@ public class RuntimeStack {
             stack.set(n,a);
         }
     }
-    public void replace(int n,int a){
-        stack.remove(n);
+    public Integer replace(int n,int a){
+        while(stack.size()-1<n){
+            stack.add(0);
+        }
+        int temp=stack.remove(n);
         stack.add(n,a);
+        return temp;
     }
-    public void remove(int n){
-        stack.remove(n);
+    public Integer remove(int n){
+        return stack.remove(n);
     }
     public void clear(){
-        stack=new ArrayList<Integer>();
+        stack.clear();
     }
 
     @Override

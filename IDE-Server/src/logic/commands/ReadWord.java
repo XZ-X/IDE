@@ -8,11 +8,13 @@ import java.rmi.RemoteException;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.
+ * Read a word to the stack that the pointer point to.
  */
 public class ReadWord implements Command {
     private RuntimeStack stack;
     private MyInteger pointer;
     private IO io;
+    private int delete;
     public ReadWord(RuntimeStack stk,MyInteger p,IO io){
         stack=stk;
         pointer=p;
@@ -22,7 +24,7 @@ public class ReadWord implements Command {
     @Override
     public void exec() {
         try {
-            stack.add(pointer.value,io.getInput());
+            delete=stack.replace(pointer.value,io.getInput());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -30,6 +32,6 @@ public class ReadWord implements Command {
 
     @Override
     public void undo() {
-        stack.remove(pointer.value);
+        stack.replace(pointer.value,delete);
     }
 }

@@ -65,11 +65,16 @@ public class RuntimeServer extends UnicastRemoteObject implements RuntimeI {
 
     @Override
     public String[] debugBack() throws RemoteException {
-        return null;
+        return processor.debugBack();
+    }
+
+    @Override
+    public String[] debugContinue() throws RemoteException {
+        return processor.debugContinue();
     }
 
     @Override
     public String[] debugNext() throws RemoteException {
-        return null;
+        return processor.debugNext();
     }
 }

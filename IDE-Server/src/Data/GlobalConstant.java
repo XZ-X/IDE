@@ -28,4 +28,5 @@ public class GlobalConstant {
     public static final int DEBUG_TIME_OUT=10;
     public static final String DEBUG_TIME_OUT_MESSAGE="TimeOut!";
     public static final String DEBUG_WRONG_MESSAGE="Wrong...";
+    public static final String DEBUG_FINISH="finish";
 }

@@ -33,6 +33,14 @@ public class IOProcessor extends UnicastRemoteObject implements IO {
         output=new char[]{(char)0};
         return ret;
     }
+    public char[] clearInput(){
+        char[] ret=input;
+        input=null;
+        return ret;
+    }
+    public char[] getAllInput(){
+        return (input.length==0)?new char[]{0}:input;
+    }
 
     //Methods prepared for server
     @Override
