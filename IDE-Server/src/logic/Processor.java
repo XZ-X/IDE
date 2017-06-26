@@ -1,15 +1,16 @@
 package logic;
 
+import Data.GlobalConstant;
 import Data.MyInteger;
 import logic.commands.Command;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.
  */
-public class Processor implements Runnable{
+public class Processor implements Runnable,Callable<String[]>{
     private ArrayList<Command> instructions;
     private LinkedHashSet<Integer> breakpoints=new LinkedHashSet<>();
     private MyInteger pointer,PC;
@@ -27,21 +28,33 @@ public class Processor implements Runnable{
 
 
     private void initial(){
+        stop();
         pointer.value=0;
         PC.value=0;
         stack.clear();
-        stop();
     }
     @Override
-    synchronized public void run(){
-        if(isRun) {
+    synchronized public void run() {
+        if (isRun) {
+
             while (PC.value <= instructions.size() - 1) {
                 instructions.get(PC.value).exec();
                 PC.value++;
-
-//            System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
             }
         }
+    }
+
+
+    @Override
+    public String[] call() throws Exception {
+        if(isRun) {
+            while (!breakpoints.contains(PC.value) && PC.value < instructions.size()) {
+                instructions.get(PC.value).exec();
+                PC.value++;
+            }
+        }
+        //if the processor has finished this programme, PC should be marked, otherwise it will cause OutOfBound in client.
+        return (((PC.value==instructions.size())?"finish":PC.value)+","+pointer.value+","+stack.toString()).replaceAll("[\\[\\]]","").split(",");
     }
 
     public void exec(){
@@ -59,13 +72,33 @@ public class Processor implements Runnable{
     }
     public String[] debugExec(){
         initial();
-        while (!breakpoints.contains(PC.value)&&PC.value<instructions.size()){
-            instructions.get(PC.value).exec();
-            PC.value++;
+        FutureTask<String[]> debugTask=new FutureTask<>(this);
+        if(thread== null||thread.getState()==Thread.State.TERMINATED){
+            isRun=true;
+            thread=new Thread(debugTask);
+            thread.start();
+            try {
+                return debugTask.get(GlobalConstant.DEBUG_TIME_OUT, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                return new String[]{GlobalConstant.DEBUG_WRONG_MESSAGE};
+            } catch (ExecutionException e) {
+                return new String[]{GlobalConstant.DEBUG_WRONG_MESSAGE};
+            } catch (TimeoutException e) {
+                return new String[]{GlobalConstant.DEBUG_TIME_OUT_MESSAGE};
+            }
+        }else {
+            return debugExec();
         }
-        //if the processor has finished this programme, PC should be marked, otherwise it will cause OutOfBound in client.
-        return (((PC.value==instructions.size())?"finish":PC.value)+","+pointer.value+","+stack.toString()).replaceAll("[\\[\\]]","").split(",");
     }
+
+//    public String[] debugExec(){
+//        initial();
+//        while (!breakpoints.contains(PC.value) && PC.value < instructions.size()) {
+//            instructions.get(PC.value).exec();
+//            PC.value++;
+//        }
+//        return (((PC.value==instructions.size())?"finish":PC.value)+","+pointer.value+","+stack.toString()).replaceAll("[\\[\\]]","").split(",");
+//    }
     public  String[] debugNext(){
         instructions.get(PC.value).exec();
         PC.value++;
@@ -101,6 +134,7 @@ public class Processor implements Runnable{
     public MyInteger getPointer() {
         return pointer;
     }
+
 
 
 }

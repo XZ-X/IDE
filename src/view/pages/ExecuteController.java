@@ -1,8 +1,8 @@
 package view.pages;
 
+import Data.GlobalConstant;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -19,33 +19,33 @@ import java.util.ResourceBundle;
 /**
  * Created by xuxiangzhe on 2017/6/24.
  */
-public class ExecuteController implements Initializable{
+public class ExecuteController implements Initializable {
     static String toExec;
     static String fileName;
-    private Map<Button,Integer> contentsMap =new HashMap<>();
-    private Map<Label,Integer> stackMap=new HashMap<>();
-    private LinkedList<Integer> breakpoints=new LinkedList<>();
+    private Map<Button, Integer> contentsMap = new HashMap<>();
+    private Map<Label, Integer> stackMap = new HashMap<>();
+    private LinkedList<Integer> breakpoints = new LinkedList<>();
 
     @FXML
-    FlowPane contentPane,stackPane;
+    FlowPane contentPane, stackPane;
     @FXML
-    TextArea inputArea,outputArea;
+    TextArea inputArea, outputArea;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         contentPane.getChildren().clear();
         Button temp;
-        int cnt=0;
-        for(char c:toExec.toCharArray()){
-            temp=new Button(""+c);
+        int cnt = 0;
+        for (char c : toExec.toCharArray()) {
+            temp = new Button("" + c);
             temp.setStyle("-fx-background-color: whitesmoke");
-            contentsMap.put(temp,cnt++);
+            contentsMap.put(temp, cnt++);
             temp.setOnMouseClicked(event -> {
-                Button btn=(Button)event.getSource();
-                if(!breakpoints.contains(contentsMap.get(btn))) {
+                Button btn = (Button) event.getSource();
+                if (!breakpoints.contains(contentsMap.get(btn))) {
                     btn.setStyle("-fx-background-color: deepskyblue");
                     breakpoints.add(contentsMap.get(btn));
-                }else {
+                } else {
                     btn.setStyle("-fx-background-color: whitesmoke");
                     breakpoints.remove(contentsMap.get(btn));
                     cancelBreakpoint(contentsMap.get(btn));
@@ -55,14 +55,15 @@ public class ExecuteController implements Initializable{
         }
         appendRefreshOutput();
     }
+
     @FXML
-    void refreshOutput(){
+    void refreshOutput() {
         appendRefreshOutput();
         RemoteController.getIoProcessor().clearOutput();
     }
 
     @FXML
-    void refreshInput() throws RemoteException {
+    void exec() throws RemoteException {
         RemoteController.getIoProcessor().putIn(inputArea.getText());
         RemoteController.getRuntimeServer().run();
         refreshOutput();
@@ -72,40 +73,54 @@ public class ExecuteController implements Initializable{
     void terminate() throws RemoteException {
         RemoteController.getRuntimeServer().terminate();
     }
+
     @FXML
     void onDebugClicked() throws RemoteException {
         clear();
-        for(int i:breakpoints){
+        for (int i : breakpoints) {
             RemoteController.getRuntimeServer().debugSetBreakpoint(i);
         }
+        RemoteController.getRuntimeServer().setCurrentFile(fileName);
+        RemoteController.getIoProcessor().putIn(inputArea.getText());
         String[] results=RemoteController.getRuntimeServer().debug();
-        if(!results[0].equals("finish")) {
-            int PC = Integer.parseInt(results[0]);
-            Button currentInstruction = getKey(contentsMap, PC);
-            currentInstruction.setStyle("-fx-background-color: firebrick");
+        switch (results[0]) {
+            case GlobalConstant.DEBUG_TIME_OUT_MESSAGE:
+                stackPane.getChildren().add(new Label("Time Out! You might write a foolish endless loop!\n Luckily, I've killed it for you:)"));
+                break;
+            case GlobalConstant.DEBUG_WRONG_MESSAGE:
+                stackPane.getChildren().add(new Label("Opp!Your programme has run into some faults, please try again!"));
+                break;
+            default:
+                //normal case
+                if (!results[0].equals("finish")) {
+                    int PC = Integer.parseInt(results[0]);
+                    Button currentInstruction = getKey(contentsMap, PC);
+                    currentInstruction.setStyle("-fx-background-color: firebrick;");
+                }
+                Label temp;
+                for (int i = 2; i < results.length; i++) {
+                    temp = new Label(results[i]);
+                    temp.setStyle("-fx-border-color: chocolate");
+                    stackPane.getChildren().add(temp);
+                    stackMap.put(temp, i - 2);
+                }
+                int pointer = Integer.parseInt(results[1]);
+                Label currentStack = getKey(stackMap, pointer);
+                currentStack.setStyle("-fx-background-color: aquamarine");
         }
-        Label temp;
-        for (int i = 2; i < results.length; i++) {
-            temp = new Label(results[i]);
-            stackPane.getChildren().add(temp);
-            stackMap.put(temp, i - 2);
-        }
-        int pointer=Integer.parseInt(results[1]);
-        Label currentStack=getKey(stackMap,pointer);
-        currentStack.setStyle("-fx-background-color: aquamarine");
     }
 
     //utilities
-    private <K> K getKey(Map<K,Integer> map,int value){
-        for (Map.Entry<K,Integer> entry: map.entrySet()){
-            if(value==entry.getValue()){
+    private <K> K getKey(Map<K, Integer> map, int value) {
+        for (Map.Entry<K, Integer> entry : map.entrySet()) {
+            if (value == entry.getValue()) {
                 return entry.getKey();
             }
         }
         return null;
     }
 
-    private void cancelBreakpoint(int a)  {
+    private void cancelBreakpoint(int a) {
         try {
             RemoteController.getRuntimeServer().debugRemoveBreakpoint(a);
         } catch (RemoteException e) {
@@ -114,12 +129,11 @@ public class ExecuteController implements Initializable{
     }
 
 
-
-    private void appendRefreshOutput(){
+    private void appendRefreshOutput() {
         outputArea.setText(new String(RemoteController.getIoProcessor().getOutput()));
     }
 
-    private void clear(){
+    private void clear() {
         stackMap.clear();
         stackPane.getChildren().clear();
     }

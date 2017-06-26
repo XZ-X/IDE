@@ -16,7 +16,7 @@
       </ScrollPane>
       <TextArea fx:id="inputArea" layoutX="51.0" layoutY="286.0" prefHeight="100.0" prefWidth="222.0" promptText="Input area" />
       <TextArea fx:id="outputArea" layoutX="302.0" layoutY="286.0" prefHeight="100.0" prefWidth="222.0" promptText="Output area" />
-      <Button fx:id="runButton" layoutX="50.0" layoutY="251.0" mnemonicParsing="false" onAction="#refreshInput" prefHeight="27.0" prefWidth="59.0" text="Run" />
+      <Button fx:id="runButton" layoutX="50.0" layoutY="251.0" mnemonicParsing="false" onAction="#exec" prefHeight="27.0" prefWidth="59.0" text="Run" />
       <Button fx:id="stopButton" layoutX="213.0" layoutY="251.0" mnemonicParsing="false" onAction="#terminate" prefHeight="27.0" prefWidth="59.0" text="Stop" />
       <Button fx:id="freshButton" layoutX="387.0" layoutY="251.0" mnemonicParsing="false" onMouseClicked="#refreshOutput" text="Fresh" />
       <Button fx:id="debugButton" layoutX="132.0" layoutY="220.0" mnemonicParsing="false" onAction="#onDebugClicked" prefHeight="27.0" prefWidth="59.0" text="Debug" />
