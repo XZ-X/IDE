@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="494.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.VersionControlController">
+   <children>
+      <ScrollPane prefViewportHeight="492.0" prefViewportWidth="237.0">
+         <content>
+            <VBox fx:id="versionList" prefWidth="237.0" />
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="395.0" prefViewportHeight="234.0" prefViewportWidth="316.0">
+         <content>
+            <FlowPane fx:id="version1" layoutX="294.0" prefWidth="316.0" />
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="395.0" layoutY="258.0" prefViewportHeight="234.0" prefViewportWidth="316.0">
+         <content>
+            <FlowPane fx:id="version2" layoutX="294.0" layoutY="258.0" prefWidth="316.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

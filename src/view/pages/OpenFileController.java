@@ -38,8 +38,9 @@ public class OpenFileController implements Initializable{
     }
 
     @FXML
-    void onVCClicked(){
-
+    void onVCClicked() throws IOException {
+        VersionControlController.versionMap=RemoteController.getFileServer().checkVersions(selectedFile.getName().split(GlobalConstant.FILE_NAME_SEPERATOR)[0]);
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("versionControl.fxml"))));
     }
 
 

@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
  * Created by xuxiangzhe on 2017/6/23.
  */
 public class EditPageController implements Initializable {
-    public static String fileName;
+    static String fileName;
     @FXML
     TextArea content,input;
     @FXML
