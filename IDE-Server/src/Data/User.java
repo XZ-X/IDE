@@ -29,9 +29,9 @@ public class User implements Serializable,Runnable {
     //attribute
     public final String name;
     private String password;
-    private Map<String, String> secureQuestions = new HashMap<>();
-    private Settings settings = new Settings();
-    private ArrayList<MyFile> files = new ArrayList<>();
+    private Map<String, String> secureQuestions ;
+    private Settings settings ;
+    private ArrayList<MyFile> files;
 
     //constructors
     private User(String nm, String password) {
@@ -39,6 +39,10 @@ public class User implements Serializable,Runnable {
         name = nm;
         this.password = encrypt(password);
         users.add(this);
+        files=new ArrayList<>();
+        System.out.println("here!!!!");
+        secureQuestions= new HashMap<>();
+        settings=new Settings();
     }
 
     //This constructor is used to build users when there're some problems in method 'logIn',such as unknownUser.
@@ -218,11 +222,13 @@ public class User implements Serializable,Runnable {
     //auto-save
     @Override
     public void run() {
-        storeUsers();
-        try {
-            TimeUnit.MINUTES.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (true) {
+            storeUsers();
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

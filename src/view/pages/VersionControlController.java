@@ -56,19 +56,20 @@ public class VersionControlController implements Initializable{
                         fileListR.get(toCompare.remove(0)).setStyle(COMMON_STYLE);
                     }
                     toCompare.add(fileList.get(source));
-                    fileCounter.add(1);
+                    fileCounter.setValue(fileCounter.get()+1);
                 }else {
-                    fileCounter.add(-1);
+                    fileCounter.setValue(fileCounter.get()-1);
                     toCompare.remove(fileList.get(source));
                     source.setStyle(COMMON_STYLE);
                 }
             });
             fileList.put(temp,tempFile);
             fileListR.put(tempFile,temp);
+            versionList.getChildren().add(temp);
         }
     }
 
-    void onVersionControlClicked(){
+    private void onVersionControlClicked(){
         String aFile= FileTools.convertF2S(toCompare.get(0));
         String bFile=FileTools.convertF2S(toCompare.get(1));
         String smallFile,bigFile;

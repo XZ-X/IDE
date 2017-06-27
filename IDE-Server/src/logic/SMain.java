@@ -29,6 +29,6 @@ public class SMain {
         }
         User.loadUsers();
         Thread storeUsers=new Thread(new User());
-        storeUsers.run();
+        storeUsers.start();
     }
 }

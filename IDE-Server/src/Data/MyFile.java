@@ -12,7 +12,7 @@ import java.util.*;
  * --invalidAutoSave
  */
 public class MyFile implements Serializable {
-    private LinkedHashMap<File,String> history=new LinkedHashMap<>();
+    private LinkedHashMap<File,String> history;
     private String name;
     private Language type;
     private final User owner;
@@ -21,6 +21,7 @@ public class MyFile implements Serializable {
     private Clock clock=Clock.systemUTC();
 
     public MyFile(Language type,String name,User usr) throws IOException {
+        history=new LinkedHashMap<>();
         this.type=type;
         this.name=name;
         this.owner=usr;
@@ -41,18 +42,13 @@ public class MyFile implements Serializable {
                 break;
         }
         versionCnt++;
+        getLast().createNewFile();
 
-    }
-    public MyFile(Language type,String name,User usr,File file){
-        this.type=type;
-        this.name=name;
-        this.owner=usr;
-        history.put(file,clock.instant().toString());
-        versionCnt++;
     }
     public Map<File,String> getHistory(){
         return history;
     }
+
     public String getName(){return name;}
 
     public File open(){
@@ -68,7 +64,7 @@ public class MyFile implements Serializable {
     }
 
     public void save(String contents) throws IOException {
-        if(FileTools.isDifferent(contents,open())) {
+        if(!FileTools.isDifferent(contents,open())) {
             switch (type) {
                 case OOK:
                     history.put(new File(GlobalConstant.USER_FILES + name
