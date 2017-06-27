@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.OpenFileController">
+   <children>
+      <ScrollPane layoutY="-4.0" prefHeight="406.0" prefViewportHeight="200.0" prefViewportWidth="428.0" prefWidth="289.0">
+         <content>
+            <VBox fx:id="fileList" layoutX="7.0" layoutY="7.0" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="openButton" layoutX="368.0" layoutY="81.0" mnemonicParsing="false" onAction="#onOpenClicked" prefHeight="45.0" prefWidth="140.0" text="Open" />
+      <Button fx:id="vcButton" layoutX="368.0" layoutY="199.0" mnemonicParsing="false" onAction="#onVCClicked" prefHeight="45.0" prefWidth="140.0" text="Version Control" />
+   </children>
+</AnchorPane>

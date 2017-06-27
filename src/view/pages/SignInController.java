@@ -50,7 +50,7 @@ public class SignInController {
                     break;
                 case GlobalConstant.LOGIN_SUCCESSFUL:
                     button.setText("Success!");
-                    BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("createFile.fxml"))));
+                    BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml"))));
                     break;
             }
         }

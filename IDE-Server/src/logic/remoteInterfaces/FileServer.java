@@ -2,13 +2,14 @@ package logic.remoteInterfaces;
 
 import Data.Language;
 import Data.MyFile;
-import logic.User;
-import logic.remoteInterfaces.MyFileI;
+import Data.User;
 
 import java.io.File;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.
@@ -28,6 +29,17 @@ public class FileServer extends UnicastRemoteObject implements MyFileI {
             e.printStackTrace();
         }
         return true;
+    }
+
+    @Override
+    public File[] lookupFile() throws RemoteException {
+        ArrayList<MyFile> files=usr.getFile();
+        File[] ret=new File[files.size()];
+        int cnt=0;
+        for(MyFile file:files){
+            ret[cnt++]=file.open();
+        }
+        return ret;
     }
 
     @Override
@@ -62,9 +74,10 @@ public class FileServer extends UnicastRemoteObject implements MyFileI {
     }
 
     @Override
-    public File[] checkVersions() throws RemoteException {
-        return new File[0];
+    public Map<File, String> checkVersions(String fileName) throws RemoteException {
+        return usr.getFile(fileName).getHistory();
     }
+
 
     @Override
     public boolean recovery() throws RemoteException {

@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import logic.remoteInterfaces.RemoteController;
-import myTools.FileTools;
+import clientUtilities.FileTools;
 import view.Begin.BFClient;
 
 import java.io.File;

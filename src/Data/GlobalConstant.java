@@ -1,5 +1,8 @@
 package Data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by xuxiangzhe on 2017/6/15.
  */
@@ -8,6 +11,9 @@ public class GlobalConstant {
     public static final String USERS="userInformation";
     public static final String FILES="fileInformation";
     public static final String USER_FILES="IDE-Server/src/logic/files/";
+
+    //file information
+    public static final String FILE_NAME_SEPERATOR="###";
 
     //initial port number
     public static final int INITIAL_PORT=5202;
@@ -26,4 +32,5 @@ public class GlobalConstant {
     public static final String DEBUG_TIME_OUT_MESSAGE="TimeOut!";
     public static final String DEBUG_WRONG_MESSAGE="Wrong...";
     public static final String DEBUG_FINISH="finish";
+    public static final ArrayList<Character> bfKeyWords= new ArrayList<>(Arrays.asList(',','.','<','>','[',']','+','-'));
 }

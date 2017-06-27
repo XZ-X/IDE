@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.CreateFileController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.HomePageController">
    <children>
       <Pane prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -43,7 +43,7 @@
             <Button fx:id="BFButton" layoutX="217.0" layoutY="139.0" mnemonicParsing="false" onMouseClicked="#createBFFile" prefHeight="43.0" prefWidth="167.0" text="Create BF File" />
             <Button fx:id="OOKButton" layoutX="217.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#createOOKFile" prefHeight="43.0" prefWidth="167.0" text="Create OOK File" />
             <Label layoutX="77.0" layoutY="88.0" text="File name:" />
-            <Button fx:id="openButton" layoutX="217.0" layoutY="272.0" mnemonicParsing="false" onMouseClicked="#createOOKFile" prefHeight="43.0" prefWidth="167.0" text="Open File" />
+            <Button fx:id="openButton" layoutX="217.0" layoutY="272.0" mnemonicParsing="false" onAction="#onOpenClicked" onMouseClicked="#createOOKFile" prefHeight="43.0" prefWidth="167.0" text="Open File" />
          </children>
       </Pane>
    </children>

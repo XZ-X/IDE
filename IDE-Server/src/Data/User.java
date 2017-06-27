@@ -1,8 +1,6 @@
-package logic;
+package Data;
 
-import Data.GlobalConstant;
-import Data.MyFile;
-import Data.UserState;
+import logic.Settings;
 import logic.remoteInterfaces.IO;
 
 import java.io.*;
@@ -60,8 +58,8 @@ public class User implements Serializable,Runnable {
         return state;
     }
 
-    public Clock getLastLogin() {
-        return clock;
+    public String getLastLogin() {
+        return time;
     }
 
     public Settings getPreference() {
@@ -91,14 +89,6 @@ public class User implements Serializable,Runnable {
         return new User(UserState.UnknownUser);
     }
 
-    public MyFile getFile(String fileName){
-        for(MyFile file:files){
-            if(file.getName().equals(fileName)){
-                return file;
-            }
-        }
-        return null;
-    }
 
     //methods used to manage users
     public static boolean storeUsers() {
@@ -189,8 +179,17 @@ public class User implements Serializable,Runnable {
 
 
     //user's functions
-    public ArrayList<MyFile> watchFile() {
+    public ArrayList<MyFile> getFile() {
         return files;
+    }
+
+    public MyFile getFile(String fileName){
+        for(MyFile file:files){
+            if(file.getName().equals(fileName)){
+                return file;
+            }
+        }
+        return null;
     }
 
     public void addFile(MyFile file) {

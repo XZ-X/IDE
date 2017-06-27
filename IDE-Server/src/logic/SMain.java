@@ -1,6 +1,6 @@
 package logic;
 
-import Data.UserState;
+import Data.User;
 import logic.remoteInterfaces.AccountServer;
 
 import java.net.MalformedURLException;

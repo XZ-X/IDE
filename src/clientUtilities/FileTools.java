@@ -1,4 +1,4 @@
-package myTools;
+package clientUtilities;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,4 +21,5 @@ public class FileTools {
         }
         return new String(buffer);
     }
+
 }

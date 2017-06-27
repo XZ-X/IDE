@@ -1,10 +1,7 @@
 package logic.remoteInterfaces;
 
 import Data.GlobalConstant;
-import Data.UserState;
-import logic.User;
-import logic.remoteInterfaces.AccountI;
-import logic.remoteInterfaces.IO;
+import Data.User;
 
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;

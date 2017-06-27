@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import logic.remoteInterfaces.RemoteController;
 
 import java.net.URL;
@@ -29,7 +30,9 @@ public class ExecuteController implements Initializable {
     private LinkedList<Integer> breakpoints = new LinkedList<>();
 
     @FXML
-    FlowPane contentPane, stackPane;
+    FlowPane contentPane;
+    @FXML
+    HBox stackPane;
     @FXML
     TextArea inputArea, outputArea;
 

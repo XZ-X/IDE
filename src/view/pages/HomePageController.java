@@ -17,9 +17,9 @@ import java.util.ResourceBundle;
 /**
  * Created by xuxiangzhe on 2017/6/23.
  */
-public class CreateFileController implements Initializable {
+public class HomePageController implements Initializable {
     @FXML
-    Button BFButton,OOKButton;
+    Button BFButton,OOKButton,openButton;
     @FXML
     TextField fileName;
 
@@ -35,6 +35,11 @@ public class CreateFileController implements Initializable {
     @FXML
     void createOOKFile(){
 
+    }
+
+    @FXML
+    void onOpenClicked() throws IOException {
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("openFile.fxml"))));
     }
 
     @Override
