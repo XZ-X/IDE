@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Created by xuxiangzhe on 2017/6/27.
  */
 public class FileTools {
-    private static String convertF2S(File file){
+    public static String convertF2S(File file){
         StringBuffer buffer=new StringBuffer();
         try {
             Scanner scanner=new Scanner(new FileInputStream(file));

@@ -33,4 +33,7 @@ public class GlobalConstant {
     public static final String DEBUG_WRONG_MESSAGE="Wrong...";
     public static final String DEBUG_FINISH="finish";
     public static final ArrayList<Character> bfKeyWords= new ArrayList<>(Arrays.asList(',','.','<','>','[',']','+','-'));
+
+    //syntax check expressions
+    public static final String OOK_SYNTAX="([Oo]{2}[kK]([?!.])[Oo]{2}[kK]([?!.]))";
 }
