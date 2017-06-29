@@ -20,6 +20,9 @@ public class User implements Serializable,Runnable {
     private static Set<User> users = new HashSet<>();
     //state
     private UserState state;
+    //for concurrency
+    private boolean isRun=true;
+    private transient Thread thread=new Thread(this);
 
     //helper
     public IO IOProcessor;
@@ -203,10 +206,22 @@ public class User implements Serializable,Runnable {
         files.add(file);
     }
 
-    public void deleteFile(String filename) {
-        for (MyFile file : files) {
-            //TODO:
+    public void deleteFile(String filename) throws InterruptedException {
+        MyFile toDelete=null;
+        isRun=false;
+        if(thread.getState()== Thread.State.TERMINATED) {
+            for (MyFile file : files) {
+                if (file.getName().equals(filename)) {
+                    toDelete=file;
+                }
+            }
+            if(toDelete!=null) {
+                files.remove(toDelete);
+                toDelete.delete();
+            }
         }
+        isRun=true;
+        restart();
     }
 
 
@@ -225,13 +240,20 @@ public class User implements Serializable,Runnable {
     //auto-save
     @Override
     public void run() {
-        while (true) {
+        while (isRun) {
             storeUsers();
             try {
                 TimeUnit.SECONDS.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void restart(){
+        if(thread.getState()== Thread.State.TERMINATED) {
+            thread = new Thread(this);
+            thread.start();
         }
     }
 }

@@ -30,6 +30,7 @@ public class SignUpController {
             String message = RemoteController.getAccountServer().signUp(username.getText(), passwordText.getText(), questionText.getText(), answerText.getText());
             if (message.equals(GlobalConstant.SUCCESS)) {
                 goButton.setText(message);
+                RemoteController.login(username.getText(),passwordText.getText());
                 BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml"))));
             } else {
                 goButton.setText(message);

@@ -94,7 +94,11 @@ public class MyFile implements Serializable {
             }
         }
     }
-
+    public void delete(){
+        for(File file:history.keySet()){
+            file.delete();
+        }
+    }
     private void validAutoSave(){
         if(owner.getPreference().isAutoSave){
             //TODO:

@@ -55,6 +55,11 @@ public class FileServer extends UnicastRemoteObject implements MyFileI {
 
     @Override
     public boolean deleteFile(String filename) throws RemoteException {
+        try {
+            usr.deleteFile(filename);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

@@ -6,7 +6,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.OpenFileController">
    <children>
       <ScrollPane layoutY="-4.0" prefHeight="406.0" prefViewportHeight="200.0" prefViewportWidth="428.0" prefWidth="289.0">
@@ -15,6 +14,7 @@
          </content>
       </ScrollPane>
       <Button fx:id="openButton" layoutX="368.0" layoutY="81.0" mnemonicParsing="false" onAction="#onOpenClicked" prefHeight="45.0" prefWidth="140.0" text="Open" />
-      <Button fx:id="vcButton" layoutX="368.0" layoutY="199.0" mnemonicParsing="false" onAction="#onVCClicked" prefHeight="45.0" prefWidth="140.0" text="Version Control" />
+      <Button fx:id="vcButton" layoutX="368.0" layoutY="179.0" mnemonicParsing="false" onAction="#onVCClicked" prefHeight="45.0" prefWidth="140.0" text="Version Control" />
+      <Button fx:id="deleteButton" layoutX="368.0" layoutY="272.0" mnemonicParsing="false" onAction="#onDeleteClicked" prefHeight="45.0" prefWidth="140.0" text="Delete" />
    </children>
 </AnchorPane>

@@ -28,7 +28,5 @@ public class SMain {
             e.printStackTrace();
         }
         User.loadUsers();
-        Thread storeUsers=new Thread(new User());
-        storeUsers.start();
     }
 }

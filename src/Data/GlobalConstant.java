@@ -25,7 +25,6 @@ public class GlobalConstant {
     public static final String LOGIN_FAIL_UNKNOWN="Unknown user!";
     public static final String LOGIN_FAIL_DUP="Duplicated log in!";
     public static final String LOGIN_FAIL_WRONGPW="Wrong password!";
-    public static final String LOGIN_SUCCESSFUL="Success!";
 
     //debug
     public static final int DEBUG_TIME_OUT=10;

@@ -47,7 +47,7 @@ public class SignInController {
                     password.clear();
                     startButton.setText("Wrong password!");
                     break;
-                case GlobalConstant.LOGIN_SUCCESSFUL:
+                case GlobalConstant.SUCCESS:
                     startButton.setText("Success!");
                     BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml"))));
                     break;

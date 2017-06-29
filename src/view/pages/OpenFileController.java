@@ -5,8 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import logic.remoteInterfaces.RemoteController;
 import view.Begin.BFClient;
@@ -25,7 +24,7 @@ import java.util.ResourceBundle;
  */
 public class OpenFileController implements Initializable{
     @FXML
-    Button vcButton,openButton;
+    Button vcButton,openButton,deleteButton;
     @FXML
     VBox fileList;
     private Map<Label,File> fileListMap=new LinkedHashMap<>();
@@ -43,9 +42,29 @@ public class OpenFileController implements Initializable{
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("versionControl.fxml"))));
     }
 
+    @FXML
+    void onDeleteClicked(){
+        Alert confirm=new Alert(Alert.AlertType.NONE,"Think twice before you code!"
+                ,new ButtonType("Delete anyway", ButtonBar.ButtonData.OK_DONE)
+                ,new ButtonType("Let me think....", ButtonBar.ButtonData.CANCEL_CLOSE));
+        confirm.showAndWait().ifPresent(buttonType -> {
+            switch (buttonType.getButtonData()){
+                case OK_DONE:
+                    try {
+                        RemoteController.getFileServer().deleteFile(selectedFile.getName().split(GlobalConstant.FILE_NAME_SEPARATOR)[0]);
+                        initialize(null,null);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        });
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        fileList.getChildren().clear();
+        fileListMap.clear();
         try {
             File[] files= RemoteController.getFileServer().lookupFile();
             for(File file : files){

@@ -66,7 +66,7 @@ public class RemoteController {
     //login **this means an unique fileServer and an unique runtimeServer will be allocated to this user**
     public static String login(String id,String password) throws RemoteException {
         String ret=accountServer.login(id,password);
-        if(ret.equals(GlobalConstant.LOGIN_SUCCESSFUL)){
+        if(ret.equals(GlobalConstant.SUCCESS)){
             userName=id;
             int port=accountServer.getFileServer();
             try {
