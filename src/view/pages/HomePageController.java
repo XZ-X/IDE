@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import logic.remoteInterfaces.RemoteController;
 import view.Begin.BFClient;
@@ -23,6 +24,8 @@ public class HomePageController implements Initializable {
     Button BFButton,OOKButton,openButton;
     @FXML
     TextField fileName;
+    @FXML
+    Label welcomeLabel;
 
     @FXML
     void createBFFile() throws IOException {
@@ -51,6 +54,8 @@ public class HomePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        welcomeLabel.setText("Welcome"+RemoteController.getUserName());
     }
+
+
 }

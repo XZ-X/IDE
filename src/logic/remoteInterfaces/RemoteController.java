@@ -10,14 +10,13 @@ import java.net.MalformedURLException;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 /**
- * Created by xuxiangzhe on 2017/6/22.
+ * This class gives more supports to the client-server model.
  */
 public class RemoteController {
     private static AccountI accountServer;
     private static IOProcessor ioProcessor;
     private static MyFileI fileServer;
     private static RuntimeI runtimeServer;
-    private static int uniqueNumber;
     private static String userName;
     //gets
     public static AccountI getAccountServer() {
@@ -45,9 +44,9 @@ public class RemoteController {
         try {
             accountServer=(AccountI) Naming.lookup("rmi://localhost:6528/accountServer");
             //to allocate different IO processors to different users
-            uniqueNumber=accountServer.getIOUniqueNumber();
+            int uniqueNumber = accountServer.getIOUniqueNumber();
             ioProcessor=new IOProcessor();
-            int temp=8126+uniqueNumber;
+            int temp=8126+ uniqueNumber;
             LocateRegistry.createRegistry(temp);
             Naming.bind("rmi://localhost:"+temp+"/ioProcessor",ioProcessor);
             accountServer.startIO();

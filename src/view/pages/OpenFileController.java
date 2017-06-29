@@ -19,9 +19,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 
-/**
- * Created by xuxiangzhe on 2017/6/26.
- */
+
 public class OpenFileController implements Initializable{
     @FXML
     Button vcButton,openButton,deleteButton;
@@ -44,7 +42,7 @@ public class OpenFileController implements Initializable{
 
     @FXML
     void onDeleteClicked(){
-        Alert confirm=new Alert(Alert.AlertType.NONE,"Think twice before you code!"
+        Alert confirm=new Alert(Alert.AlertType.NONE,"Think twice before you delete!"
                 ,new ButtonType("Delete anyway", ButtonBar.ButtonData.OK_DONE)
                 ,new ButtonType("Let me think....", ButtonBar.ButtonData.CANCEL_CLOSE));
         confirm.showAndWait().ifPresent(buttonType -> {

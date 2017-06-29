@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -10,40 +13,31 @@
    <children>
       <Pane prefHeight="400.0" prefWidth="600.0">
          <children>
-            <MenuBar prefHeight="15.0" prefWidth="600.0">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-                  <Menu mnemonicParsing="false" text="Unspecified Menu">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Unspecified Menu">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                  </Menu>
-              </menus>
-            </MenuBar>
-            <TextField fx:id="fileName" layoutX="157.0" layoutY="83.0" prefHeight="27.0" prefWidth="287.0" />
-            <Button fx:id="BFButton" layoutX="217.0" layoutY="139.0" mnemonicParsing="false" onMouseClicked="#createBFFile" prefHeight="43.0" prefWidth="167.0" text="Create BF File" />
-            <Button fx:id="OOKButton" layoutX="217.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#createOOKFile" prefHeight="43.0" prefWidth="167.0" text="Create OOK File" />
-            <Label layoutX="77.0" layoutY="88.0" text="File name:" />
-            <Button fx:id="openButton" layoutX="217.0" layoutY="272.0" mnemonicParsing="false" onAction="#onOpenClicked" onMouseClicked="#createOOKFile" prefHeight="43.0" prefWidth="167.0" text="Open File" />
+            <TextField fx:id="fileName" layoutX="100.0" layoutY="154.0" prefHeight="27.0" prefWidth="200.0" promptText="File name:" />
+            <Button fx:id="BFButton" layoutX="346.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#createBFFile" prefHeight="60.0" prefWidth="200.0" text="Create BF File">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="56.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resource/brainfuck.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="OOKButton" layoutX="345.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#createOOKFile" prefHeight="66.0" prefWidth="200.0" text="Create OOK File">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resource/ookLogo.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Label fx:id="welcomeLabel" layoutX="31.0" layoutY="28.0" prefHeight="60.0" prefWidth="306.0" />
+            <Button fx:id="openButton" layoutX="100.0" layoutY="326.0" mnemonicParsing="false" onAction="#onOpenClicked" onMouseClicked="#createOOKFile" prefHeight="37.0" prefWidth="167.0" text="Open Existing File" />
          </children>
       </Pane>
    </children>

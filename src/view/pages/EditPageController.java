@@ -31,6 +31,10 @@ public class EditPageController implements Initializable {
     @FXML
     Button runButton;
 
+    @FXML
+    void goHome() throws IOException {
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml"))));
+    }
 
     @FXML
     void onSaveClicked() throws RemoteException {
