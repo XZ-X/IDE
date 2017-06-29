@@ -36,8 +36,8 @@ public class OOKInterpreter implements Interpreter {
         StringBuffer command=new StringBuffer();
         while(matcher.find()){
             command.setLength(0);
-            command.append(matcher.group(1));
             command.append(matcher.group(2));
+            command.append(matcher.group(3));
 
             switch (new String(command)){
                 case ".?":

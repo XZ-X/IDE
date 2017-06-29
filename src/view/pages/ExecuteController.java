@@ -1,6 +1,7 @@
 package view.pages;
 
 import Data.GlobalConstant;
+import Data.Language;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,6 +17,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by xuxiangzhe on 2017/6/24.
@@ -25,6 +28,7 @@ import java.util.ResourceBundle;
 public class ExecuteController implements Initializable {
     static String toExec;
     static String fileName;
+    static Language language;
     private Map<Button, Integer> contentsMap = new HashMap<>();
     private Map<Label, Integer> stackMap = new HashMap<>();
     private LinkedList<Integer> breakpoints = new LinkedList<>();
@@ -39,25 +43,7 @@ public class ExecuteController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         contentPane.getChildren().clear();
-        Button temp;
-        int cnt = 0;
-        for (char c : toExec.toCharArray()) {
-            temp = new Button("" + c);
-            temp.setStyle("-fx-background-color: whitesmoke");
-            contentsMap.put(temp, cnt++);
-            temp.setOnMouseClicked(event -> {
-                Button btn = (Button) event.getSource();
-                if (!breakpoints.contains(contentsMap.get(btn))) {
-                    btn.setStyle("-fx-background-color: deepskyblue");
-                    breakpoints.add(contentsMap.get(btn));
-                } else {
-                    btn.setStyle("-fx-background-color: whitesmoke");
-                    breakpoints.remove(contentsMap.get(btn));
-                    cancelBreakpoint(contentsMap.get(btn));
-                }
-            });
-            contentPane.getChildren().add(temp);
-        }
+        fillTheContents();
         appendRefreshOutput();
     }
 
@@ -192,5 +178,48 @@ public class ExecuteController implements Initializable {
             }
         }
 
+    }
+
+    private void fillTheContents(){
+        Button temp;
+        int cnt = 0;
+        if(language==Language.BF) {
+            for (char c : toExec.toCharArray()) {
+                temp = new Button("" + c);
+                temp.setStyle("-fx-background-color: whitesmoke");
+                contentsMap.put(temp, cnt++);
+                temp.setOnMouseClicked(event -> {
+                    Button btn = (Button) event.getSource();
+                    if (!breakpoints.contains(contentsMap.get(btn))) {
+                        btn.setStyle("-fx-background-color: deepskyblue");
+                        breakpoints.add(contentsMap.get(btn));
+                    } else {
+                        btn.setStyle("-fx-background-color: whitesmoke");
+                        breakpoints.remove(contentsMap.get(btn));
+                        cancelBreakpoint(contentsMap.get(btn));
+                    }
+                });
+                contentPane.getChildren().add(temp);
+            }
+        }else if(language==Language.OOK){
+            Matcher matcher=Pattern.compile(GlobalConstant.OOK_SYNTAX).matcher(toExec);
+            while(matcher.find()){
+                temp = new Button(matcher.group());
+                temp.setStyle("-fx-background-color: whitesmoke");
+                contentsMap.put(temp, cnt++);
+                temp.setOnMouseClicked(event -> {
+                    Button btn = (Button) event.getSource();
+                    if (!breakpoints.contains(contentsMap.get(btn))) {
+                        btn.setStyle("-fx-background-color: deepskyblue");
+                        breakpoints.add(contentsMap.get(btn));
+                    } else {
+                        btn.setStyle("-fx-background-color: whitesmoke");
+                        breakpoints.remove(contentsMap.get(btn));
+                        cancelBreakpoint(contentsMap.get(btn));
+                    }
+                });
+                contentPane.getChildren().add(temp);
+            }
+        }
     }
 }

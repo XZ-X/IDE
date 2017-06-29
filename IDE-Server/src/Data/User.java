@@ -23,7 +23,7 @@ public class User implements Serializable,Runnable {
 
     //helper
     public IO IOProcessor;
-    static private Clock clock=Clock.systemUTC();
+    static private Clock clock=Clock.systemDefaultZone();
     private String time;
 
     //attribute

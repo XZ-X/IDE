@@ -2,6 +2,7 @@ package logic.remoteInterfaces;
 
 import Data.MyFile;
 import logic.BFInterpreter;
+import logic.OOKInterpreter;
 import logic.Processor;
 import Data.User;
 
@@ -36,7 +37,7 @@ public class RuntimeServer extends UnicastRemoteObject implements RuntimeI {
                 processor.setInterpreter(new BFInterpreter(io,currentFile));
                 break;
             case OOK:
-                //TODO:ook Interpreter
+                processor.setInterpreter(new OOKInterpreter(io,currentFile));
         }
         processor.exec();
     }

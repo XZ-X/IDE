@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -10,11 +11,18 @@
    <children>
       <Pane prefHeight="400.0" prefWidth="606.0">
          <children>
-             <TextField fx:id="Username" layoutX="220.0" layoutY="115.0" />
-             <Label fx:id="IDLabel" layoutX="168.0" layoutY="120.0" text="ID:" />
-             <Label fx:id="passwordLabel" layoutX="136.0" layoutY="167.0" text="Password:" />
-             <PasswordField fx:id="passwordText" layoutX="220.0" layoutY="162.0" />
-             <Button fx:id="goButton" onMouseClicked="#go" layoutX="215.0" layoutY="227.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="176.0" text="Go" />
+             <TextField fx:id="username" layoutX="220.0" layoutY="115.0" onKeyReleased="#checkUsername" promptText="ID" />
+             <PasswordField fx:id="passwordText" layoutX="220.0" layoutY="162.0" onKeyReleased="#checkPassword" promptText="Password" />
+             <Button fx:id="goButton" layoutX="76.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#onGoClicked" prefHeight="27.0" prefWidth="455.0" text="Go" />
+            <ImageView fitHeight="74.0" fitWidth="259.0" layoutX="174.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/未标题-1.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="usernameCheckLabel" layoutX="410.0" layoutY="115.0" prefHeight="27.0" prefWidth="138.0" textFill="RED" />
+            <Label fx:id="passwordCheckLabel" alignment="TOP_LEFT" layoutX="410.0" layoutY="162.0" prefHeight="82.0" prefWidth="138.0" textFill="RED" />
+            <TextField fx:id="questionText" layoutX="76.0" layoutY="258.0" prefHeight="27.0" prefWidth="455.0" promptText="Input your security question here" />
+            <TextField fx:id="answerText" layoutX="76.0" layoutY="295.0" prefHeight="27.0" prefWidth="455.0" promptText="Answer goes here" />
          </children>
       </Pane>
    </children>

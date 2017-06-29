@@ -17,7 +17,7 @@ import java.util.*;
 public class VersionControlController implements Initializable{
     private static final String COMMON_STYLE="-fx-alignment: center;-fx-border-color: #ff1000;";
     private static final String SELECTED_STYLE="-fx-alignment: center;-fx-border-color:aqua;";
-    private static final String UNCHANGED_STYLE="-fx-alignment: center;-fx-background-color:deepskyblue;";
+    private static final String CHANGED_STYLE ="-fx-alignment: center;-fx-background-color:deepskyblue;";
     @FXML
     VBox versionList;
     @FXML
@@ -45,7 +45,7 @@ public class VersionControlController implements Initializable{
             //make a label with proper style and text
             File tempFile=entry.getKey();
             String editTime=entry.getValue();
-            Label temp=new Label(tempFile.getName().split(GlobalConstant.FILE_NAME_SEPERATOR)[0]+"\n" +editTime);
+            Label temp=new Label(tempFile.getName().split(GlobalConstant.FILE_NAME_SEPARATOR)[0]+"\n" +editTime);
             temp.setStyle(COMMON_STYLE);
             temp.setOnMouseClicked(event -> {
                 Label source=(Label)event.getSource();
@@ -70,6 +70,8 @@ public class VersionControlController implements Initializable{
     }
 
     private void onVersionControlClicked(){
+        version1.getChildren().clear();
+        version2.getChildren().clear();
         String aFile= FileTools.convertF2S(toCompare.get(0));
         String bFile=FileTools.convertF2S(toCompare.get(1));
         String smallFile,bigFile;
@@ -111,9 +113,9 @@ public class VersionControlController implements Initializable{
        for(int i=0;i<maxLength;i++){
            if(i>=indexL&&i<indexL+length){
                temp=new Label(LChars[i]+"");
-               temp.setStyle(UNCHANGED_STYLE);
            }else {
                temp=new Label(LChars[i]+"");
+               temp.setStyle(CHANGED_STYLE);
            }
            LLabel.add(temp);
 
@@ -122,9 +124,9 @@ public class VersionControlController implements Initializable{
        for(int i=0;i<minLength;i++){
            if(i>=indexS&&i<indexS+length){
                temp=new Label(SChars[i]+"");
-               temp.setStyle(UNCHANGED_STYLE);
            }else {
                temp=new Label(SChars[i]+"");
+               temp.setStyle(CHANGED_STYLE);
            }
            SLabel.add(temp);
        }

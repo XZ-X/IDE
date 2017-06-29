@@ -18,7 +18,7 @@ public class MyFile implements Serializable {
     private final User owner;
     private Thread saveThread;
     private int versionCnt=0;
-    private Clock clock=Clock.systemUTC();
+    private Clock clock=Clock.systemDefaultZone();
 
     public MyFile(Language type,String name,User usr) throws IOException {
         history=new LinkedHashMap<>();
@@ -28,16 +28,16 @@ public class MyFile implements Serializable {
         switch (type) {
             case BF:
                 history.put(new File(GlobalConstant.USER_FILES + name
-                        + GlobalConstant.FILE_NAME_SEPERATOR
+                        + GlobalConstant.FILE_NAME_SEPARATOR
                         + owner.name
-                        + GlobalConstant.FILE_NAME_SEPERATOR
+                        + GlobalConstant.FILE_NAME_SEPARATOR
                         + versionCnt + ".bf"),clock.instant().toString());
                 break;
             case OOK:
                 history.put(new File(GlobalConstant.USER_FILES + name
-                        + GlobalConstant.FILE_NAME_SEPERATOR
+                        + GlobalConstant.FILE_NAME_SEPARATOR
                         + owner.name
-                        + GlobalConstant.FILE_NAME_SEPERATOR
+                        + GlobalConstant.FILE_NAME_SEPARATOR
                         + versionCnt + ".ook"),clock.instant().toString());
                 break;
         }
@@ -68,16 +68,16 @@ public class MyFile implements Serializable {
             switch (type) {
                 case OOK:
                     history.put(new File(GlobalConstant.USER_FILES + name
-                            + GlobalConstant.FILE_NAME_SEPERATOR
+                            + GlobalConstant.FILE_NAME_SEPARATOR
                             + owner.name
-                            + GlobalConstant.FILE_NAME_SEPERATOR
+                            + GlobalConstant.FILE_NAME_SEPARATOR
                             + versionCnt + ".ook"),clock.instant().toString());
                     break;
                 case BF:
                     history.put(new File(GlobalConstant.USER_FILES + name
-                            + GlobalConstant.FILE_NAME_SEPERATOR
+                            + GlobalConstant.FILE_NAME_SEPARATOR
                             + owner.name
-                            + GlobalConstant.FILE_NAME_SEPERATOR
+                            + GlobalConstant.FILE_NAME_SEPARATOR
                             + versionCnt + ".bf"),clock.instant().toString());
                     break;
             }

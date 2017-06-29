@@ -12,6 +12,7 @@ import view.Begin.BFClient;
 
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
 /**
@@ -28,13 +29,19 @@ public class HomePageController implements Initializable {
         boolean isCreate=RemoteController.getFileServer().createFile(Language.BF,fileName.getText());
         if(isCreate){
             EditPageController.fileName =fileName.getText();
+            EditPageController.language=Language.BF;
             BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("editPage.fxml"))));
         }
     }
 
     @FXML
-    void createOOKFile(){
-
+    void createOOKFile() throws IOException {
+        boolean isCreate=RemoteController.getFileServer().createFile(Language.OOK,fileName.getText());
+        if(isCreate){
+            EditPageController.fileName =fileName.getText();
+            EditPageController.language=Language.OOK;
+            BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("editPage.fxml"))));
+        }
     }
 
     @FXML

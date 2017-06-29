@@ -1,5 +1,6 @@
 package view.pages;
 
+import Data.Language;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +20,7 @@ import java.util.ResourceBundle;
  * Created by xuxiangzhe on 2017/6/23.
  */
 public class EditPageController implements Initializable {
+    static Language language;
     static String fileName;
     @FXML
     TextArea content,input;
@@ -44,6 +46,7 @@ public class EditPageController implements Initializable {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+        ExecuteController.language=language;
         ExecuteController.fileName = fileName;
         ExecuteController.toExec = content.getText();
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("execute.fxml"))));

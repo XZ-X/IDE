@@ -33,13 +33,13 @@ public class OpenFileController implements Initializable{
 
     @FXML
     void onOpenClicked() throws IOException {
-        EditPageController.fileName=selectedFile.getName().split(GlobalConstant.FILE_NAME_SEPERATOR)[0];
+        EditPageController.fileName=selectedFile.getName().split(GlobalConstant.FILE_NAME_SEPARATOR)[0];
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("editPage.fxml"))));
     }
 
     @FXML
     void onVCClicked() throws IOException {
-        VersionControlController.versionMap=RemoteController.getFileServer().checkVersions(selectedFile.getName().split(GlobalConstant.FILE_NAME_SEPERATOR)[0]);
+        VersionControlController.versionMap=RemoteController.getFileServer().checkVersions(selectedFile.getName().split(GlobalConstant.FILE_NAME_SEPARATOR)[0]);
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("versionControl.fxml"))));
     }
 
@@ -49,7 +49,7 @@ public class OpenFileController implements Initializable{
         try {
             File[] files= RemoteController.getFileServer().lookupFile();
             for(File file : files){
-                String name=file.getName().split(GlobalConstant.FILE_NAME_SEPERATOR)[0];
+                String name=file.getName().split(GlobalConstant.FILE_NAME_SEPARATOR)[0];
                 Label temp=new Label(name);
                 temp.setStyle("-fx-alignment: center;");
                 temp.setOnMouseClicked(event -> selectedFile=fileListMap.get(event.getSource()));
