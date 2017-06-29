@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="494.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.VersionControlController">
    <children>
-      <ScrollPane prefViewportHeight="492.0" prefViewportWidth="237.0">
+      <ScrollPane layoutY="40.0" prefHeight="454.0" prefViewportHeight="492.0" prefViewportWidth="237.0" prefWidth="270.0" stylesheets="@../resource/listButtons.css">
          <content>
-            <VBox fx:id="versionList" prefWidth="237.0" />
+            <VBox fx:id="versionList" stylesheets="@../resource/listButtons.css" />
          </content>
       </ScrollPane>
-      <ScrollPane layoutX="395.0" prefViewportHeight="234.0" prefViewportWidth="316.0">
+      <ScrollPane layoutX="280.0" prefHeight="236.0" prefViewportHeight="234.0" prefViewportWidth="316.0" prefWidth="433.0">
          <content>
             <FlowPane fx:id="version1" layoutX="294.0" prefWidth="316.0" />
          </content>
       </ScrollPane>
-      <ScrollPane layoutX="395.0" layoutY="258.0" prefViewportHeight="234.0" prefViewportWidth="316.0">
+      <ScrollPane layoutX="280.0" layoutY="244.0" prefHeight="250.0" prefViewportHeight="234.0" prefViewportWidth="316.0" prefWidth="433.0">
          <content>
             <FlowPane fx:id="version2" layoutX="294.0" layoutY="258.0" prefWidth="316.0" />
          </content>
       </ScrollPane>
+      <Button fx:id="home" mnemonicParsing="false" prefHeight="40.0" prefWidth="137.0" stylesheets="@../resource/Configure.css" text="Home">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="134.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="137.0" stylesheets="@../resource/Configure.css" text="Select">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

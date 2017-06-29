@@ -1,0 +1,30 @@
+.toggle-button{
+    -fx-background-color: #d8d6da;
+    -fx-font-size: 20px;
+    -fx-padding: 10px;
+    -fx-alignment: center-left;
+    -fx-pref-width: 270px;
+}
+.toggle-button:hover{
+    -fx-background-color: #c9c7cb;
+}
+
+.toggle-button:selected{
+    -fx-background-color: #000;
+    -fx-text-fill: #00cccc;
+}
+
+.button{
+    -fx-background-color: #d8d6da;
+    -fx-font-size: 20px;
+    -fx-padding: 10px;
+    -fx-alignment: center-left;
+    -fx-pref-width: 289px;
+}
+.button:hover{
+    -fx-background-color: #c9c7cb;
+}
+.button:focused{
+    -fx-background-color: #000;
+    -fx-text-fill: #00cccc;
+}

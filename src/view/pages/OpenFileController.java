@@ -25,8 +25,9 @@ public class OpenFileController implements Initializable{
     Button vcButton,openButton,deleteButton;
     @FXML
     VBox fileList;
-    private Map<Label,File> fileListMap=new LinkedHashMap<>();
+    private Map<Button,File> fileListMap=new LinkedHashMap<>();
     private File selectedFile;
+    private final String DEFAULT="-fx-background-color: #d8d6da ;",SELECTED="-fx-background-color: lightslategrey;";
 
     @FXML
     void onOpenClicked() throws IOException {
@@ -65,11 +66,19 @@ public class OpenFileController implements Initializable{
         fileListMap.clear();
         try {
             File[] files= RemoteController.getFileServer().lookupFile();
+            selectedFile=files[0];
             for(File file : files){
                 String name=file.getName().split(GlobalConstant.FILE_NAME_SEPARATOR)[0];
-                Label temp=new Label(name);
-                temp.setStyle("-fx-alignment: center;");
-                temp.setOnMouseClicked(event -> selectedFile=fileListMap.get(event.getSource()));
+                Button temp=new Button(name);
+                temp.setOnMouseClicked(event -> {
+//                    if(selectedFile==fileListMap.get(event.getSource())){
+//                        temp.setStyle(temp.getStyle().replace(SELECTED,"")+DEFAULT);
+//                    }else {
+//                        temp.setStyle(temp.getStyle().replace(DEFAULT,"")+SELECTED);
+//                    }
+                    selectedFile=fileListMap.get(event.getSource());
+
+                });
                 fileList.getChildren().add(temp);
                 fileListMap.put(temp,file);
             }

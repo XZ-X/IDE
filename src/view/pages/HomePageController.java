@@ -54,8 +54,8 @@ public class HomePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        welcomeLabel.setText("Welcome"+RemoteController.getUserName());
-    }
 
+        welcomeLabel.setText("Welcome\n"+RemoteController.getUserName());
+    }
 
 }

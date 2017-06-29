@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import java.net.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.OpenFileController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../resource/Configure.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.OpenFileController">
    <children>
-      <ScrollPane layoutY="-4.0" prefHeight="406.0" prefViewportHeight="200.0" prefViewportWidth="428.0" prefWidth="289.0">
+      <ScrollPane hbarPolicy="NEVER" prefHeight="402.0" prefViewportHeight="200.0" prefViewportWidth="428.0" prefWidth="289.0">
          <content>
-            <VBox fx:id="fileList" layoutX="7.0" layoutY="7.0" />
+            <VBox fx:id="fileList" layoutX="7.0" layoutY="7.0" stylesheets="@../resource/listButtons.css" />
          </content>
       </ScrollPane>
-      <Button fx:id="openButton" layoutX="368.0" layoutY="81.0" mnemonicParsing="false" onAction="#onOpenClicked" prefHeight="45.0" prefWidth="140.0" text="Open" />
-      <Button fx:id="vcButton" layoutX="368.0" layoutY="179.0" mnemonicParsing="false" onAction="#onVCClicked" prefHeight="45.0" prefWidth="140.0" text="Version Control" />
-      <Button fx:id="deleteButton" layoutX="368.0" layoutY="272.0" mnemonicParsing="false" onAction="#onDeleteClicked" prefHeight="45.0" prefWidth="140.0" text="Delete" />
+      <Button fx:id="openButton" alignment="CENTER" layoutX="348.0" layoutY="95.0" mnemonicParsing="false" onAction="#onOpenClicked" prefHeight="46.0" prefWidth="184.0" text="Open">
+         <font>
+            <Font size="21.0" />
+         </font></Button>
+      <Button fx:id="vcButton" layoutX="348.0" layoutY="179.0" mnemonicParsing="false" onAction="#onVCClicked" prefHeight="45.0" prefWidth="184.0" stylesheets="@../resource/Configure.css" text="Version Control">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button fx:id="deleteButton" layoutX="348.0" layoutY="258.0" mnemonicParsing="false" onAction="#onDeleteClicked" prefHeight="45.0" prefWidth="184.0" stylesheets="@../resource/Configure.css" text="Delete">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
    </children>
 </AnchorPane>

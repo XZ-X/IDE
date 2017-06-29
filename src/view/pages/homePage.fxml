@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.effect.*?>
@@ -9,35 +10,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.HomePageController">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" stylesheets="@../resource/Configure.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.HomePageController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="600.0">
+      <Pane prefHeight="400.0" prefWidth="600.0" stylesheets="@../resource/Configure.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="fileName" layoutX="100.0" layoutY="154.0" prefHeight="27.0" prefWidth="200.0" promptText="File name:" />
-            <Button fx:id="BFButton" layoutX="346.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#createBFFile" prefHeight="60.0" prefWidth="200.0" text="Create BF File">
+            <TextField fx:id="fileName" layoutX="100.0" layoutY="127.0" prefHeight="27.0" prefWidth="200.0" promptText="File name:" />
+            <Button fx:id="BFButton" layoutX="204.0" layoutY="167.0" mnemonicParsing="false" onMouseClicked="#createBFFile" prefHeight="60.0" prefWidth="96.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <ImageView fitHeight="56.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="47.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resource/brainfuck.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="OOKButton" layoutX="345.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#createOOKFile" prefHeight="66.0" prefWidth="200.0" text="Create OOK File">
+            <Button fx:id="OOKButton" layoutX="100.0" layoutY="167.0" mnemonicParsing="false" onMouseClicked="#createOOKFile" prefHeight="60.0" prefWidth="96.0" stylesheets="@../resource/Configure.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <ImageView fitHeight="56.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="26.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resource/ookLogo.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Label fx:id="welcomeLabel" layoutX="31.0" layoutY="28.0" prefHeight="60.0" prefWidth="306.0" />
-            <Button fx:id="openButton" layoutX="100.0" layoutY="326.0" mnemonicParsing="false" onAction="#onOpenClicked" onMouseClicked="#createOOKFile" prefHeight="37.0" prefWidth="167.0" text="Open Existing File" />
+            <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="104.0" layoutY="18.0" prefHeight="96.0" prefWidth="200.0" textAlignment="CENTER">
+               <font>
+                  <Font name="Comic Sans MS" size="25.0" />
+               </font></Label>
+            <Button fx:id="openButton" layoutX="100.0" layoutY="241.0" mnemonicParsing="false" onAction="#onOpenClicked" onMouseClicked="#createOOKFile" prefHeight="37.0" prefWidth="200.0" text="Open Existing File" />
+            <Button layoutX="233.0" layoutY="297.0" mnemonicParsing="false" text="Log Out" />
          </children>
       </Pane>
    </children>

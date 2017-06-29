@@ -5,12 +5,18 @@ import clientUtilities.FileTools;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import view.Begin.BFClient;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -22,9 +28,11 @@ public class VersionControlController implements Initializable{
     VBox versionList;
     @FXML
     FlowPane version1,version2;
+    @FXML
+    Button home;
     //a couple of maps contains file-UI & UI-file
-    private Map<Label,File> fileList=new HashMap<>();
-    private Map<File,Label> fileListR=new HashMap<>();
+    private Map<ToggleButton,File> fileList=new HashMap<>();
+    private Map<File,ToggleButton> fileListR=new HashMap<>();
 
     //a map of file-time
     static Map<File,String> versionMap;
@@ -34,6 +42,13 @@ public class VersionControlController implements Initializable{
     private IntegerProperty fileCounter=new SimpleIntegerProperty(0);
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        home.setOnAction(event -> {
+            try {
+                BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml"))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         fileCounter.addListener((observable, oldValue, newValue) -> {
             if(newValue.intValue()>=2){
                 onVersionControlClicked();
@@ -45,22 +60,21 @@ public class VersionControlController implements Initializable{
             //make a label with proper style and text
             File tempFile=entry.getKey();
             String editTime=entry.getValue();
-            Label temp=new Label(tempFile.getName().split(GlobalConstant.FILE_NAME_SEPARATOR)[0]+"\n" +editTime);
-            temp.setStyle(COMMON_STYLE);
+            ToggleButton temp=new ToggleButton(tempFile.getName().split(GlobalConstant.FILE_NAME_SEPARATOR)[0]+"\n" +editTime);
+//            temp.setStyle(COMMON_STYLE);
             temp.setOnMouseClicked(event -> {
-                Label source=(Label)event.getSource();
+                ToggleButton source=(ToggleButton) event.getSource();
                 if(!toCompare.contains(fileList.get(source))) {
-                    source.setStyle(SELECTED_STYLE);
+//                    source.setStyle(SELECTED_STYLE);
                     if(toCompare.size()==2) {
                         //automatically delete the first selected file if the file number is larger than 2.
-                        fileListR.get(toCompare.remove(0)).setStyle(COMMON_STYLE);
+                        fileListR.get(toCompare.remove(0)).setSelected(false);
                     }
                     toCompare.add(fileList.get(source));
                     fileCounter.setValue(fileCounter.get()+1);
                 }else {
                     fileCounter.setValue(fileCounter.get()-1);
                     toCompare.remove(fileList.get(source));
-                    source.setStyle(COMMON_STYLE);
                 }
             });
             fileList.put(temp,tempFile);

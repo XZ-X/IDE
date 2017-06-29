@@ -3,21 +3,27 @@ package view.pages;
 import Data.GlobalConstant;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import logic.remoteInterfaces.RemoteController;
 import view.Begin.BFClient;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Created by xuxiangzhe on 2017/6/22.
  */
-public class SignInController {
+public class SignInController implements Initializable {
     private String signUp="Unknown User! Sign up now!";
     private String normal="Start Coding";
+    @FXML
+    AnchorPane panel;
     @FXML
     Button startButton;
     @FXML
@@ -57,5 +63,10 @@ public class SignInController {
     @FXML
     void aboutPassword() throws IOException {
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("authorizationPage.fxml"))));
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        panel.getStylesheets().add("view/resource/Configure.css");
     }
 }
