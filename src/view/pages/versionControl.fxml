@@ -29,7 +29,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="134.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="137.0" stylesheets="@../resource/Configure.css" text="Select">
+      <Button fx:id="selectButton" layoutX="134.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="137.0" stylesheets="@../resource/Configure.css" text="Select">
          <font>
             <Font size="20.0" />
          </font>

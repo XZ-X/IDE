@@ -1,5 +1,6 @@
 package logic.remoteInterfaces;
 
+import Data.GlobalConstant;
 import Data.Language;
 import Data.MyFile;
 import Data.User;
@@ -85,7 +86,10 @@ public class FileServer extends UnicastRemoteObject implements MyFileI {
 
 
     @Override
-    public boolean recovery() throws RemoteException {
+    public boolean recovery(String rawFilename) throws RemoteException {
+        rawFilename=rawFilename.split("\\.")[0];
+        String[] fileInformation=rawFilename.split(GlobalConstant.FILE_NAME_SEPARATOR);
+        usr.getFile(fileInformation[0]).setVersionTo(fileInformation[fileInformation.length-1]);
         return false;
     }
 }

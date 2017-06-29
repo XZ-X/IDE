@@ -99,6 +99,23 @@ public class MyFile implements Serializable {
             file.delete();
         }
     }
+
+    public void setVersionTo(String versionName){
+        LinkedHashMap<File,String> newHistory=new LinkedHashMap<>();
+        ArrayList<Map.Entry<File,String>> oldHistory=new ArrayList<>(history.entrySet());
+        oldHistory.sort(Comparator.comparing(Map.Entry::getKey));
+        for(Map.Entry<File,String> entry:oldHistory){
+
+            String[] name=entry.getKey().getName().split("\\.")[0].split(GlobalConstant.FILE_NAME_SEPARATOR);
+            if(Integer.parseInt(name[name.length-1])<=Integer.parseInt(versionName)+1){
+                newHistory.put(entry.getKey(),entry.getValue());
+            }else {
+                entry.getKey().delete();
+            }
+        }
+        history=newHistory;
+
+    }
     private void validAutoSave(){
         if(owner.getPreference().isAutoSave){
             //TODO:

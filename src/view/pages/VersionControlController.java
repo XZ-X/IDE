@@ -13,23 +13,25 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import logic.remoteInterfaces.RemoteController;
 import view.Begin.BFClient;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.*;
 
 public class VersionControlController implements Initializable{
-    private static final String COMMON_STYLE="-fx-alignment: center;-fx-border-color: #ff1000;";
-    private static final String SELECTED_STYLE="-fx-alignment: center;-fx-border-color:aqua;";
+//    private static final String COMMON_STYLE="-fx-alignment: center;-fx-border-color: #ff1000;";
+//    private static final String SELECTED_STYLE="-fx-alignment: center;-fx-border-color:aqua;";
     private static final String CHANGED_STYLE ="-fx-alignment: center;-fx-background-color:deepskyblue;";
     @FXML
     VBox versionList;
     @FXML
     FlowPane version1,version2;
     @FXML
-    Button home;
+    Button home,selectButton;
     //a couple of maps contains file-UI & UI-file
     private Map<ToggleButton,File> fileList=new HashMap<>();
     private Map<File,ToggleButton> fileListR=new HashMap<>();
@@ -49,11 +51,16 @@ public class VersionControlController implements Initializable{
                 e.printStackTrace();
             }
         });
+        selectButton.setOnAction(event -> onSelectedClicked());
         fileCounter.addListener((observable, oldValue, newValue) -> {
             if(newValue.intValue()>=2){
                 onVersionControlClicked();
             }
         });
+
+        fileListR.clear();
+        fileList.clear();
+        versionList.getChildren().clear();
         ArrayList<Map.Entry<File,String>> entries=new ArrayList<>(versionMap.entrySet());
         entries.sort(Comparator.comparing(Map.Entry::getValue));
         for(Map.Entry<File,String> entry:entries){
@@ -82,7 +89,7 @@ public class VersionControlController implements Initializable{
             versionList.getChildren().add(temp);
         }
     }
-
+    //the specific details of version control
     private void onVersionControlClicked(){
         version1.getChildren().clear();
         version2.getChildren().clear();
@@ -155,4 +162,19 @@ public class VersionControlController implements Initializable{
 
     }
 
+    private void onSelectedClicked() {
+        if(fileListR.size()!=0) {
+            ArrayList<File> files = new ArrayList<>(fileListR.keySet());
+            files.sort(Comparator.comparing(File::getName));
+            File toKeep=files.get(0);
+            try {
+                RemoteController.getFileServer().recovery(toKeep.getName());
+                versionMap=RemoteController.getFileServer().checkVersions(toKeep.getName().split(GlobalConstant.FILE_NAME_SEPARATOR)[0]);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        initialize(null,null);
+
+    }
 }

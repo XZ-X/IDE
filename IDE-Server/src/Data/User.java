@@ -241,6 +241,7 @@ public class User implements Serializable,Runnable {
     @Override
     public void run() {
         while (isRun) {
+            System.out.println("here");
             storeUsers();
             try {
                 TimeUnit.SECONDS.sleep(10);
