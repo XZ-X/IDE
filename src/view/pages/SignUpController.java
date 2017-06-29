@@ -9,7 +9,6 @@ import logic.remoteInterfaces.RemoteController;
 import view.Begin.BFClient;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,7 +28,7 @@ public class SignUpController {
     private void go() throws IOException, InterruptedException {
         if(isUsernameValid &&isPasswordValid) {
             String message = RemoteController.getAccountServer().signUp(username.getText(), passwordText.getText(), questionText.getText(), answerText.getText());
-            if (message.equals(GlobalConstant.SIGNUP_SUCCESS)) {
+            if (message.equals(GlobalConstant.SUCCESS)) {
                 goButton.setText(message);
                 BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml"))));
             } else {

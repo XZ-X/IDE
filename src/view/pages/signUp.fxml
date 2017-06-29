@@ -12,17 +12,22 @@
       <Pane prefHeight="400.0" prefWidth="606.0">
          <children>
              <TextField fx:id="username" layoutX="220.0" layoutY="115.0" onKeyReleased="#checkUsername" promptText="ID" />
-             <PasswordField fx:id="passwordText" layoutX="220.0" layoutY="162.0" onKeyReleased="#checkPassword" promptText="Password" />
+             <PasswordField fx:id="passwordText" layoutX="220.0" layoutY="160.0" onKeyReleased="#checkPassword" promptText="Password" />
              <Button fx:id="goButton" layoutX="76.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#onGoClicked" prefHeight="27.0" prefWidth="455.0" text="Go" />
             <ImageView fitHeight="74.0" fitWidth="259.0" layoutX="174.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resource/未标题-1.png" />
                </image>
             </ImageView>
-            <Label fx:id="usernameCheckLabel" layoutX="410.0" layoutY="115.0" prefHeight="27.0" prefWidth="138.0" textFill="RED" />
-            <Label fx:id="passwordCheckLabel" alignment="TOP_LEFT" layoutX="410.0" layoutY="162.0" prefHeight="82.0" prefWidth="138.0" textFill="RED" />
+            <Label fx:id="usernameCheckLabel" layoutX="433.0" layoutY="115.0" prefHeight="27.0" prefWidth="138.0" textFill="RED" />
+            <Label fx:id="passwordCheckLabel" alignment="TOP_LEFT" layoutX="433.0" layoutY="159.0" prefHeight="82.0" prefWidth="138.0" textFill="RED" />
             <TextField fx:id="questionText" layoutX="76.0" layoutY="258.0" prefHeight="27.0" prefWidth="455.0" promptText="Input your security question here" />
             <TextField fx:id="answerText" layoutX="76.0" layoutY="295.0" prefHeight="27.0" prefWidth="455.0" promptText="Answer goes here" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="76.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/brainFuckLogo.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

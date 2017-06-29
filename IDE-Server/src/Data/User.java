@@ -70,8 +70,8 @@ public class User implements Serializable,Runnable {
         return settings;
     }
 
-    public String[] getQuestions() {
-        return (String[]) secureQuestions.keySet().toArray();
+    public String getQuestions() {
+        return new ArrayList<>(secureQuestions.keySet()).get(0);
     }
 
     public void setPreference(boolean isAutoSave, int autoSaveTime, int versionNumber) {
@@ -140,11 +140,11 @@ public class User implements Serializable,Runnable {
         }
         User user = new User(userName, password);
         user.state = UserState.Normal;
-        user.secureQuestions.put(secureQuestion, answer);
+        user.secureQuestions.put(secureQuestion, encrypt(answer));
         users.add(user);
-        System.out.println("I creat a User!");
+        System.out.println("I create a User!");
         storeUsers();
-        return GlobalConstant.SIGNUP_SUCCESS;
+        return GlobalConstant.SUCCESS;
     }
 
     public static User login(String userName, String password) {
@@ -176,8 +176,11 @@ public class User implements Serializable,Runnable {
     }
 
     public String changePassword(String answer, String newPasswd) {
-        //TODO:
-        return null;
+        if(secureQuestions.containsValue(encrypt(answer))){
+            password=encrypt(newPasswd);
+            return GlobalConstant.SUCCESS;
+        }
+        return GlobalConstant.LOGIN_FAIL_WRONGPW;
     }
 
 

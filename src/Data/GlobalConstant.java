@@ -19,7 +19,7 @@ public class GlobalConstant {
     public static final int INITIAL_PORT=5202;
 
     //sign up messages
-    public static final String SIGNUP_SUCCESS="Success!";
+    public static final String SUCCESS ="Success!";
 
     //sign in messages
     public static final String LOGIN_FAIL_UNKNOWN="Unknown user!";

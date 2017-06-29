@@ -2,6 +2,7 @@ package logic.remoteInterfaces;
 
 import Data.GlobalConstant;
 import Data.User;
+import Data.UserState;
 
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
@@ -31,7 +32,7 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
             case LogIn: {
                 currentUser = temp;
                 createOtherRemotes();
-                return GlobalConstant.SIGNUP_SUCCESS;
+                return GlobalConstant.SUCCESS;
 
             }
             case UnknownUser:return GlobalConstant.LOGIN_FAIL_UNKNOWN;
@@ -72,13 +73,17 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
     }
 
     @Override
-    public String resetPassword(String answer, String password) throws RemoteException {
-        return null;
+    public String resetPassword(String username,String answer, String password) throws RemoteException {
+        return User.getUser(username).changePassword(answer,password);
     }
 
     @Override
-    public String forgetPassword() throws RemoteException {
-        return null;
+    public String forgetPassword(String username) throws RemoteException {
+        User user=User.getUser(username);
+        if(user.getState()!= UserState.UnknownUser){
+            return user.getQuestions();
+        }
+        return GlobalConstant.LOGIN_FAIL_UNKNOWN;
     }
 
     @Override
