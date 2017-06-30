@@ -14,6 +14,8 @@ import java.util.Map;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.
+ * Except for the file functions, the file server has another function -- get the last log in time of this user since the last login time must
+ * be specified by user.
  */
 public class FileServer extends UnicastRemoteObject implements MyFileI {
     private User usr;
@@ -32,6 +34,7 @@ public class FileServer extends UnicastRemoteObject implements MyFileI {
         return true;
     }
 
+    //get all the files owns by this user
     @Override
     public File[] lookupFile() throws RemoteException {
         ArrayList<MyFile> files=usr.getFile();

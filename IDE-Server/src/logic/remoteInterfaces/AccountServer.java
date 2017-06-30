@@ -16,6 +16,10 @@ import java.util.ArrayList;
 /**
  * Created by xuxiangzhe on 2017/6/15.
  * This class will help users to login and get their own IOProcessors, RuntimeServers, etc.
+ * All the users will share an accountServer so that a synchronized  keyword is added in the method
+ * which will login the user and produce the other remote server to the user.
+ *
+ *
  */
 public class AccountServer extends UnicastRemoteObject implements AccountI {
     private static ArrayList<IO> ioProcessors=new ArrayList<>();
@@ -86,11 +90,8 @@ public class AccountServer extends UnicastRemoteObject implements AccountI {
         return GlobalConstant.LOGIN_FAIL_UNKNOWN;
     }
 
-    @Override
-    public boolean setPreferences(int versionNumber, boolean isAutoSave, int autoSaveTime) throws RemoteException {
-        return false;
-    }
 
+    //must be called immediately after the user logging in!
     @Override
     public void startIO() throws RemoteException {
         try {
