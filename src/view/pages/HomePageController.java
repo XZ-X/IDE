@@ -29,23 +29,33 @@ public class HomePageController implements Initializable {
     @FXML
     Label welcomeLabel,fileLabel,timeLabel;
 
+    private boolean isValid=false;
+
     @FXML
     void createBFFile() throws IOException {
-        boolean isCreate=RemoteController.getFileServer().createFile(Language.BF,fileName.getText());
-        if(isCreate){
-            EditPageController.fileName =fileName.getText();
-            EditPageController.language=Language.BF;
-            BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("editPage.fxml"))));
+        if(fileName.getText().length()>=0&&isValid) {
+            boolean isCreate = RemoteController.getFileServer().createFile(Language.BF, fileName.getText());
+            if (isCreate) {
+                EditPageController.fileName = fileName.getText();
+                EditPageController.language = Language.BF;
+                BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("editPage.fxml"))));
+            }
+        }else {
+            fileLabel.setText("INVALID");
         }
     }
 
     @FXML
     void createOOKFile() throws IOException {
-        boolean isCreate=RemoteController.getFileServer().createFile(Language.OOK,fileName.getText());
-        if(isCreate){
-            EditPageController.fileName =fileName.getText();
-            EditPageController.language=Language.OOK;
-            BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("editPage.fxml"))));
+        if(fileName.getText().length()>=0&&isValid) {
+            boolean isCreate = RemoteController.getFileServer().createFile(Language.OOK, fileName.getText());
+            if (isCreate) {
+                EditPageController.fileName = fileName.getText();
+                EditPageController.language = Language.OOK;
+                BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("editPage.fxml"))));
+            }
+        }else {
+            fileLabel.setText("INVALID");
         }
     }
 
@@ -76,6 +86,7 @@ public class HomePageController implements Initializable {
             fileLabel.setText("INVALID FILENAME!");
         }else {
             fileLabel.setText("");
+            isValid=true;
         }
     }
 

@@ -1,6 +1,8 @@
 package Data;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -114,7 +116,8 @@ public class User implements Serializable,Runnable {
                 }
             }
         } catch (EOFException e) {
-
+            //in fact, this is the normal case and is the only normal way to jump out of the dead-loop above.
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -157,7 +160,6 @@ public class User implements Serializable,Runnable {
             return new User(UserState.DuplicateLogIn);
         }else {
             user.state=UserState.LogIn;
-//            user.time=clock.instant().toString();
             return user;
         }
     }
@@ -228,8 +230,9 @@ public class User implements Serializable,Runnable {
         }
         return "wrong!";
     }
-    //auto-save
+
     @Override
+    //auto-save
     public void run() {
         while (isRun) {
             System.out.println("here");
@@ -241,7 +244,7 @@ public class User implements Serializable,Runnable {
             }
         }
     }
-
+    //restart the save thread.
     private void restart(){
         if(thread==null||thread.getState()== Thread.State.TERMINATED) {
             thread = new Thread(this);
