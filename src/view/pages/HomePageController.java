@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by xuxiangzhe on 2017/6/23.
@@ -25,7 +27,7 @@ public class HomePageController implements Initializable {
     @FXML
     TextField fileName;
     @FXML
-    Label welcomeLabel;
+    Label welcomeLabel,fileLabel;
 
     @FXML
     void createBFFile() throws IOException {
@@ -52,9 +54,23 @@ public class HomePageController implements Initializable {
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("openFile.fxml"))));
     }
 
+    @FXML
+    void logOut() throws IOException {
+        RemoteController.getAccountServer().logOut(RemoteController.getUserName());
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("welcomePage.fxml"))));
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         welcomeLabel.setText("Welcome\n"+RemoteController.getUserName());
+    }
+    @FXML
+    void checkFileName(){
+        Matcher matcher= Pattern.compile("[^0-9a-zA-Z_]").matcher(fileName.getText());
+        if(matcher.find()){
+            fileLabel.setText("INVALID FILENAME!");
+        }else {
+            fileLabel.setText("");
+        }
     }
 
 }

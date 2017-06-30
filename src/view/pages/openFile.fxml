@@ -15,17 +15,22 @@
             <VBox fx:id="fileList" layoutX="7.0" layoutY="7.0" stylesheets="@../resource/listButtons.css" />
          </content>
       </ScrollPane>
-      <Button fx:id="openButton" alignment="CENTER" layoutX="348.0" layoutY="95.0" mnemonicParsing="false" onAction="#onOpenClicked" prefHeight="46.0" prefWidth="184.0" text="Open">
+      <Button fx:id="openButton" alignment="CENTER" layoutX="356.0" layoutY="98.0" mnemonicParsing="false" onAction="#onOpenClicked" prefHeight="16.0" prefWidth="184.0" text="Open">
          <font>
-            <Font size="21.0" />
+            <Font size="18.0" />
          </font></Button>
-      <Button fx:id="vcButton" layoutX="348.0" layoutY="179.0" mnemonicParsing="false" onAction="#onVCClicked" prefHeight="45.0" prefWidth="184.0" stylesheets="@../resource/Configure.css" text="Version Control">
+      <Button fx:id="vcButton" layoutX="356.0" layoutY="152.0" mnemonicParsing="false" onAction="#onVCClicked" prefHeight="16.0" prefWidth="184.0" stylesheets="@../resource/Configure.css" text="Version Control">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font></Button>
-      <Button fx:id="deleteButton" layoutX="348.0" layoutY="258.0" mnemonicParsing="false" onAction="#onDeleteClicked" prefHeight="45.0" prefWidth="184.0" stylesheets="@../resource/Configure.css" text="Delete">
+      <Button fx:id="deleteButton" cancelButton="true" layoutX="356.0" layoutY="267.0" mnemonicParsing="false" onAction="#onDeleteClicked" prefHeight="16.0" prefWidth="184.0" stylesheets="@../resource/Configure.css" text="Delete" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font></Button>
+      <Button fx:id="deleteButton1" layoutX="356.0" layoutY="210.0" mnemonicParsing="false" onAction="#goHome" prefHeight="16.0" prefWidth="184.0" stylesheets="@../resource/Configure.css" text="Home">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

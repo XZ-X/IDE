@@ -14,7 +14,7 @@
    <children>
       <Pane prefHeight="400.0" prefWidth="600.0" stylesheets="@../resource/Configure.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="fileName" layoutX="100.0" layoutY="127.0" prefHeight="27.0" prefWidth="200.0" promptText="File name:" />
+            <TextField fx:id="fileName" layoutX="100.0" layoutY="127.0" onKeyReleased="#checkFileName" prefHeight="27.0" prefWidth="200.0" promptText="File name:" />
             <Button fx:id="BFButton" layoutX="204.0" layoutY="167.0" mnemonicParsing="false" onMouseClicked="#createBFFile" prefHeight="60.0" prefWidth="96.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -42,7 +42,8 @@
                   <Font name="Comic Sans MS" size="25.0" />
                </font></Label>
             <Button fx:id="openButton" layoutX="100.0" layoutY="241.0" mnemonicParsing="false" onAction="#onOpenClicked" onMouseClicked="#createOOKFile" prefHeight="37.0" prefWidth="200.0" text="Open Existing File" />
-            <Button layoutX="233.0" layoutY="297.0" mnemonicParsing="false" text="Log Out" />
+            <Button layoutX="233.0" layoutY="297.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+            <Label fx:id="fileLabel" layoutX="304.0" layoutY="127.0" prefHeight="27.0" prefWidth="67.0" textFill="RED" />
          </children>
       </Pane>
    </children>

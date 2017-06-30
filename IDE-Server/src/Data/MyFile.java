@@ -56,9 +56,14 @@ public class MyFile implements Serializable {
 
     public void rename(String name) {
         this.name = name;
-        for (File file : history.keySet()) {
-            System.out.println(file.getName());
-            File temp = new File(GlobalConstant.USER_FILES + name + GlobalConstant.FILE_NAME_SEPARATOR + file.getName().substring(file.getName().indexOf(GlobalConstant.FILE_NAME_SEPARATOR)));
+        ArrayList<File> files=new ArrayList<>(history.keySet());
+        for (File file : files) {
+            String oriName=file.getName();
+            //new file's name: the new name + origin name with the first part and first "separator" deleted.
+            String filename=GlobalConstant.USER_FILES + name + GlobalConstant.FILE_NAME_SEPARATOR ;
+            int substringIndex=oriName.indexOf(GlobalConstant.FILE_NAME_SEPARATOR)+GlobalConstant.FILE_NAME_SEPARATOR.length();
+            filename+=oriName.substring(substringIndex);
+            File temp = new File(filename);
             String ori = FileTools.convertF2S(file);
 
             try {
@@ -69,7 +74,7 @@ public class MyFile implements Serializable {
                 writer.write(ori);
                 writer.flush();
                 writer.close();
-                file.delete();
+                while (!file.delete());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -100,15 +105,16 @@ public class MyFile implements Serializable {
                     break;
             }
             File toSave = getLast();
-            toSave.createNewFile();
-            try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(toSave));
-                versionCnt++;
-                writer.write(contents);
-                writer.flush();
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (toSave.createNewFile()) {
+                try {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(toSave));
+                    versionCnt++;
+                    writer.write(contents);
+                    writer.flush();
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

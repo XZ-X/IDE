@@ -26,6 +26,7 @@ public class BFClient extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/view/pages/welcomePage.fxml"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(event ->{
             try {
                 RemoteController.getAccountServer().logOut(RemoteController.getUserName());

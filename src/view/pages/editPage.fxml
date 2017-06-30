@@ -15,6 +15,8 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="save" mnemonicParsing="false" onAction="#onSaveClicked" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open..." />
+                  <MenuItem mnemonicParsing="false" onAction="#goHome" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Run">
@@ -22,14 +24,6 @@
               <MenuItem fx:id="run" mnemonicParsing="false" onAction="#onRunClicked" text="Run" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Control">
-              <items>
-                <MenuItem fx:id="back" mnemonicParsing="false" onAction="#goHome" text="Home">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="H" control="UP" meta="UP" shift="ANY" shortcut="UP" />
-                     </accelerator></MenuItem>
-              </items>
-            </Menu>
         </menus>
       </MenuBar>
       <Label fx:id="filename" alignment="CENTER" onMouseClicked="#onLabelClicked" prefHeight="23.0" prefWidth="600.0" text="Label" textAlignment="CENTER" />

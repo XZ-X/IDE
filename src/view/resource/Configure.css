@@ -4,3 +4,9 @@
 .button:hover{
     -fx-background-color: #c9c7cb;
 }
+.button:default{
+    -fx-background-color: #46d485;
+}
+.button:cancel{
+    -fx-background-color: rgba(255, 0, 0, 0.64);
+}

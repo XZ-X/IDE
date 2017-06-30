@@ -3,14 +3,18 @@ package view.pages;
 import Data.GlobalConstant;
 import Data.Language;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import logic.remoteInterfaces.RemoteController;
+import view.Begin.BFClient;
 
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -221,5 +225,18 @@ public class ExecuteController implements Initializable {
                 contentPane.getChildren().add(temp);
             }
         }
+    }
+    @FXML
+    void goHome() throws IOException {
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml"))));
+    }
+    @FXML
+    void openFile() throws IOException {
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("openFile.fxml"))));
+    }
+    @FXML
+    void goBackToEdit() throws IOException {
+        EditPageController.fileName=fileName;
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("editPage.fxml"))));
     }
 }

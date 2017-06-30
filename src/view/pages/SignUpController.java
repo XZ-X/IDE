@@ -60,7 +60,7 @@ public class SignUpController {
         isPasswordValid=false;
         passwordCheckLabel.setText("");
         String password=passwordText.getText();
-        if(password.length()<3){//TODO:to debug, modify later
+        if(password.length()<8){
             passwordCheckLabel.setText("Too short!");
         }else if(password.length()>16){
             passwordCheckLabel.setText("Too long!");
@@ -79,6 +79,10 @@ public class SignUpController {
     }
 
 
+    @FXML
+    void cancel() throws IOException {
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("welcomePage.fxml"))));
+    }
 
 
     @FXML

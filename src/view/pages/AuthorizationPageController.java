@@ -83,5 +83,9 @@ public class AuthorizationPageController {
         clearButton();
         isValid=false;
     }
+    @FXML
+    void goBack() throws IOException {
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("welcomePage.fxml"))));
+    }
 
 }

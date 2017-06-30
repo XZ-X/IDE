@@ -22,7 +22,7 @@ public class User implements Serializable,Runnable {
     private UserState state;
     //for concurrency
     private boolean isRun=true;
-    private transient Thread thread=new Thread(this);//TODO:transient
+    private transient Thread thread=new Thread(this);//***this thread is transient which means that it will be null after reading from a file.
 
     //helper
     public IO IOProcessor;

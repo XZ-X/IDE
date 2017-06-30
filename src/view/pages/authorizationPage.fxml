@@ -6,14 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="427.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.AuthorizationPageController">
+<AnchorPane prefHeight="473.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.AuthorizationPageController">
    <children>
       <TextField fx:id="IDText" layoutX="35.0" layoutY="34.0" onKeyReleased="#changeUser" prefHeight="27.0" prefWidth="265.0" promptText="Your ID here" />
-      <Button fx:id="getQuestionButton" layoutX="35.0" layoutY="73.0" mnemonicParsing="false" onAction="#setGetQuestionButtonClicked" prefHeight="27.0" prefWidth="265.0" text="Get your security question" />
+      <Button fx:id="getQuestionButton" layoutX="35.0" layoutY="73.0" mnemonicParsing="false" onAction="#setGetQuestionButtonClicked" prefHeight="27.0" prefWidth="265.0" stylesheets="@../resource/Configure.css" text="Get your security question" />
       <TextField fx:id="answer" layoutX="35.0" layoutY="223.0" onAction="#clearButton" prefHeight="27.0" prefWidth="265.0" promptText="Your answer here" />
-      <Button fx:id="OKButton" layoutX="35.0" layoutY="364.0" mnemonicParsing="false" onAction="#onOKClicked" prefHeight="27.0" prefWidth="265.0" text="OK" />
+      <Button fx:id="OKButton" defaultButton="true" layoutX="35.0" layoutY="364.0" mnemonicParsing="false" onAction="#onOKClicked" prefHeight="27.0" prefWidth="265.0" stylesheets="@../resource/Configure.css" text="OK" />
       <TextArea fx:id="questionText" editable="false" layoutX="35.0" layoutY="114.0" prefHeight="85.0" prefWidth="265.0" />
       <PasswordField fx:id="newPassword" layoutX="35.0" layoutY="270.0" onAction="#clearButton" prefHeight="27.0" prefWidth="265.0" promptText="New Password" />
       <PasswordField fx:id="newPasswordAgain" layoutX="35.0" layoutY="317.0" onAction="#clearButton" prefHeight="27.0" prefWidth="265.0" promptText="New Password Again" />
+      <Button fx:id="OKButton1" layoutX="35.0" layoutY="406.0" mnemonicParsing="false" onAction="#goBack" prefHeight="27.0" prefWidth="265.0" stylesheets="@../resource/Configure.css" text="Back" />
    </children>
 </AnchorPane>

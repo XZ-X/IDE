@@ -60,6 +60,10 @@ public class OpenFileController implements Initializable{
         });
     }
 
+    @FXML
+    void goHome() throws IOException {
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml"))));
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fileList.getChildren().clear();

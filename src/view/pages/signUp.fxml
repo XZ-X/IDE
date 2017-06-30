@@ -7,28 +7,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.SignUpController">
+<AnchorPane prefHeight="741.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.SignUpController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="606.0">
-         <children>
-             <TextField fx:id="username" layoutX="220.0" layoutY="115.0" onKeyReleased="#checkUsername" promptText="ID" />
-             <PasswordField fx:id="passwordText" layoutX="220.0" layoutY="160.0" onKeyReleased="#checkPassword" promptText="Password" />
-             <Button fx:id="goButton" layoutX="76.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#onGoClicked" prefHeight="27.0" prefWidth="455.0" text="Go" />
-            <ImageView fitHeight="74.0" fitWidth="259.0" layoutX="174.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resource/未标题-1.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="usernameCheckLabel" layoutX="433.0" layoutY="115.0" prefHeight="27.0" prefWidth="138.0" textFill="RED" />
-            <Label fx:id="passwordCheckLabel" alignment="TOP_LEFT" layoutX="433.0" layoutY="159.0" prefHeight="82.0" prefWidth="138.0" textFill="RED" />
-            <TextField fx:id="questionText" layoutX="76.0" layoutY="258.0" prefHeight="27.0" prefWidth="455.0" promptText="Input your security question here" />
-            <TextField fx:id="answerText" layoutX="76.0" layoutY="295.0" prefHeight="27.0" prefWidth="455.0" promptText="Answer goes here" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="76.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resource/brainFuckLogo.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
+      <Label fx:id="passwordCheckLabel" alignment="TOP_LEFT" layoutX="454.0" layoutY="412.0" prefHeight="82.0" prefWidth="138.0" textFill="RED" />
+       <PasswordField fx:id="passwordText" layoutX="143.0" layoutY="412.0" onKeyReleased="#checkPassword" prefHeight="27.0" prefWidth="311.0" promptText="Password" />
+      <TextField fx:id="questionText" layoutX="143.0" layoutY="486.0" prefHeight="27.0" prefWidth="311.0" promptText="Input your security question here" />
+      <ImageView fitHeight="47.0" fitWidth="311.0" layoutX="149.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/未标题-1.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="answerText" layoutX="143.0" layoutY="555.0" prefHeight="27.0" prefWidth="311.0" promptText="Answer goes here" />
+       <Button fx:id="goButton" defaultButton="true" layoutX="143.0" layoutY="623.0" mnemonicParsing="false" onMouseClicked="#onGoClicked" prefHeight="27.0" prefWidth="311.0" stylesheets="@../resource/Configure.css" text="Go" />
+      <ImageView fitHeight="263.0" fitWidth="284.0" layoutX="192.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/brainFuckLogo.png" />
+         </image>
+      </ImageView>
+       <TextField fx:id="username" layoutX="143.0" layoutY="352.0" onKeyReleased="#checkUsername" prefHeight="27.0" prefWidth="311.0" promptText="ID" />
+      <Label fx:id="usernameCheckLabel" layoutX="454.0" layoutY="352.0" prefHeight="27.0" prefWidth="138.0" textFill="RED" />
+      <Button fx:id="goButton1" layoutX="143.0" layoutY="667.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="311.0" stylesheets="@../resource/Configure.css" text="Back" />
    </children>
 </AnchorPane>

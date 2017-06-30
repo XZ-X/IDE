@@ -1,6 +1,7 @@
 package view.pages;
 
 import Data.Language;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -67,11 +68,12 @@ public class EditPageController implements Initializable {
         newName.setPrefHeight(filename.getPrefHeight());
         newName.setLayoutX(filename.getLayoutX());
         newName.setLayoutY(filename.getLayoutY());
+        panel.getChildren().remove(filename);
         for(Node node:panel.getChildren()) {
             node.setOnMouseClicked(event -> {
                 if (!(event.getSource() instanceof TextField)) {
                     try {
-                        fileName = filename.getText();
+                        fileName = newName.getText();
                         RemoteController.getFileServer().renameFile(newName.getText());
                         panel.getChildren().remove(newName);
                     } catch (RemoteException e) {
@@ -82,6 +84,7 @@ public class EditPageController implements Initializable {
                 filename.setText(fileName);
             });
         }
+        panel.getChildren().add(filename);
         panel.getChildren().add(newName);
         newName.requestFocus();
 
@@ -90,11 +93,23 @@ public class EditPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             File file=RemoteController.getFileServer().openFile(fileName);
+            switch (file.getName().split("\\.")[1]){
+                case "bf":
+                    language=Language.BF;
+                    break;
+                case "ook":
+                    language=Language.OOK;
+                    break;
+            }
             content.setText(FileTools.convertF2S(file));
             filename.setText(fileName);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    void openFile() throws IOException {
+        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("openFile.fxml"))));
     }
 
 }
