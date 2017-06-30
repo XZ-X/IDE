@@ -167,7 +167,6 @@ public class User implements Serializable,Runnable {
 
     public void logOut() {
         state = UserState.Normal;
-        //TODO:
     }
 
     public String changePassword(String answer, String newPasswd) {
