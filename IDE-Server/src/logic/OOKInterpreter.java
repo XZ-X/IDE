@@ -13,7 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The advance of OOP design pattern: I only take five minutes to finish this class after building a BF IDE.
+ * Thanks to the advance of OOP design pattern: I only take five minutes to finish this class after building a BF IDE.
+ * The main idea of this Interpreter is exactly the same with BFInterpreter.
  */
 public class OOKInterpreter implements Interpreter {
     private ArrayList<Command> commands=new ArrayList<>();
@@ -23,10 +24,17 @@ public class OOKInterpreter implements Interpreter {
     //to produce the jump command
     private ArrayList<MyInteger> jumpTable=new ArrayList<>();
     private IO io;
+    private void add(){
+        for(MyInteger integer:jumpTable){
+            integer.value+=1;
+        }
+    }
+
     public OOKInterpreter(IO io, MyFile file){
         this.io=io;
         interpret(file.open());
     }
+
     @Override
     public ArrayList<Command> interpret(File source) {
         String src= FileTools.convertF2S(source);
@@ -101,11 +109,5 @@ public class OOKInterpreter implements Interpreter {
     @Override
     public ArrayList<Command> getCommand() {
         return commands;
-    }
-
-    private void add(){
-        for(MyInteger integer:jumpTable){
-            integer.value+=1;
-        }
     }
 }

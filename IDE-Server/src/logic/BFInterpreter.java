@@ -12,19 +12,29 @@ import java.util.Scanner;
 
 /**
  * Created by xuxiangzhe on 2017/6/19.
+ * One of the core part of this project!
+ *
  */
 public class BFInterpreter implements Interpreter {
     private ArrayList<Command> commands=new ArrayList<>();
     private RuntimeStack stack=new RuntimeStack();
     private MyInteger pointer =new MyInteger(0);
     private MyInteger PC=new MyInteger(0);
+
     //to produce the jump command
     private ArrayList<MyInteger> jumpTable=new ArrayList<>();
     private IO io;
+    private void add(){
+        for(MyInteger integer:jumpTable){
+            integer.value+=1;
+        }
+    }
+
     public BFInterpreter(IO io, MyFile file){
         this.io=io;
         interpret(file.open());
     }
+
     @Override
     public ArrayList<Command> interpret(File source) {
         try {
@@ -36,11 +46,14 @@ public class BFInterpreter implements Interpreter {
                     temp = sourceScanner.next();
                 }
                 next=temp.charAt(0);
+
+                //this step is to guarantee the user's freedom of typing space:)
                 if(temp.length()!=1) {
                     temp = temp.substring(1);
                 }else {
                     temp="";
                 }
+
                 switch (next) {
                     case '>':
                         add();
@@ -68,6 +81,7 @@ public class BFInterpreter implements Interpreter {
                         break;
                     case '[': {
                         add();
+                        //the jump length of "BEQZ" is not specified until the BNEZ is found. So there exist a syntax check in the edit page on the client.
                         MyInteger x = new MyInteger(0);
                         jumpTable.add(0, x);
                         commands.add(new BEQZ(stack, pointer, x, PC));
@@ -106,12 +120,6 @@ public class BFInterpreter implements Interpreter {
     @Override
     public ArrayList<Command> getCommand() {
         return commands;
-    }
-
-    private void add(){
-        for(MyInteger integer:jumpTable){
-            integer.value+=1;
-        }
     }
 
 }

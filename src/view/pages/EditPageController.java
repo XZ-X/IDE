@@ -32,9 +32,11 @@ public class EditPageController implements Initializable {
     @FXML
     MenuItem save,back,run;
     @FXML
-    Label filename;
+    Label filename,wrongLabel;
     @FXML
     Button runButton;
+
+    private boolean isValid=false;
 
     @FXML
     void goHome() throws IOException {
@@ -47,18 +49,20 @@ public class EditPageController implements Initializable {
     }
     @FXML
     void onRunClicked() throws IOException {
-        onSaveClicked();
-        RemoteController.getIoProcessor().putIn(input.getText());
-        try {
-            RemoteController.getRuntimeServer().setCurrentFile(fileName);
-            RemoteController.getRuntimeServer().run();
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if(isValid) {
+            onSaveClicked();
+            RemoteController.getIoProcessor().putIn(input.getText());
+            try {
+                RemoteController.getRuntimeServer().setCurrentFile(fileName);
+                RemoteController.getRuntimeServer().run();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            ExecuteController.language = language;
+            ExecuteController.fileName = fileName;
+            ExecuteController.toExec = content.getText();
+            BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("execute.fxml"))));
         }
-        ExecuteController.language=language;
-        ExecuteController.fileName = fileName;
-        ExecuteController.toExec = content.getText();
-        BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("execute.fxml"))));
     }
 
     @FXML
@@ -112,4 +116,32 @@ public class EditPageController implements Initializable {
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("openFile.fxml"))));
     }
 
+    @FXML
+    private void syntaxCheck(){
+        switch (language){
+            case BF:
+                int numberOfBEQZ=content.getText().length()-content.getText().replaceAll("\\[","").length();
+                int numberOfBNEZ=content.getText().length()-content.getText().replaceAll("]","").length();
+                if(numberOfBEQZ!=numberOfBNEZ){
+                    wrongLabel.setText("Wrong([/])");
+                    isValid=false;
+                }else {
+                    isValid=true;
+                    wrongLabel.setText("");
+                }
+                break;
+            case OOK:
+                String temp=content.getText().replaceAll(" ","");
+                int numberOfOOKBEQZ=temp.length()-temp.replaceAll("[Oo]{2}[kK]([?])[Oo]{2}[kK]([!])","").length();
+                int numberOfOOKBNEZ=temp.replaceAll("[Oo]{2}[kK]([?])[Oo]{2}[kK]([!])","").length()-temp.replaceAll("[Oo]{2}[kK]([?])[Oo]{2}[kK]([!])","").replaceAll("[Oo]{2}[kK]([!])[Oo]{2}[kK]([?])","").length();
+                if(numberOfOOKBEQZ!=numberOfOOKBNEZ){
+                    wrongLabel.setText("Wrong(!?/?!)");
+                    isValid=false;
+                }else {
+                    isValid=true;
+                    wrongLabel.setText("");
+                }
+                break;
+        }
+    }
 }
