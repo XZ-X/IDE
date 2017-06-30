@@ -99,6 +99,7 @@ public class Processor implements Runnable,Callable<String[]>{
             } catch (InterruptedException e) {
                 return new String[]{GlobalConstant.DEBUG_WRONG_MESSAGE};
             } catch (ExecutionException e) {
+                e.printStackTrace();
                 return new String[]{GlobalConstant.DEBUG_WRONG_MESSAGE};
             } catch (TimeoutException e) {
                 return new String[]{GlobalConstant.DEBUG_TIME_OUT_MESSAGE};
@@ -108,14 +109,6 @@ public class Processor implements Runnable,Callable<String[]>{
         }
     }
 
-//    public String[] debugExec(){
-//        initial();
-//        while (!breakpoints.contains(PC.value) && PC.value < instructions.size()) {
-//            instructions.get(PC.value).exec();
-//            PC.value++;
-//        }
-//        return (((PC.value==instructions.size())?"finish":PC.value)+","+pointer.value+","+stack.toString()).replaceAll("[\\[\\]]","").split(",");
-//    }
     public  String[] debugNext(){
         if(PC.value<instructions.size()) {
             PCStack.push(PC.value);
@@ -149,6 +142,7 @@ public class Processor implements Runnable,Callable<String[]>{
             } catch (InterruptedException e) {
                 return new String[]{GlobalConstant.DEBUG_WRONG_MESSAGE};
             } catch (ExecutionException e) {
+                e.printStackTrace();
                 return new String[]{GlobalConstant.DEBUG_WRONG_MESSAGE};
             } catch (TimeoutException e) {
                 return new String[]{GlobalConstant.DEBUG_TIME_OUT_MESSAGE};
@@ -171,10 +165,6 @@ public class Processor implements Runnable,Callable<String[]>{
 
     public RuntimeStack getStack() {
         return stack;
-    }
-
-    public MyInteger getPC() {
-        return PC;
     }
 
     public MyInteger getPointer() {

@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.
+ * The ook/bf stack acts quite differently with the common java-stack;
+ * some methods remain unused here for potential modification.
  */
+@SuppressWarnings("unused")
 public class RuntimeStack {
     private ArrayList<Integer> stack=new ArrayList<>();
 
@@ -14,6 +17,14 @@ public class RuntimeStack {
         return tmp;
     }
 
+    public int peek(){
+        return stack.get(stack.size()-1);
+    }
+
+    public void push(int a){
+        stack.add(a);
+    }
+
     public int get(int n){
         while(stack.size()-1<n){
             stack.add(0);
@@ -21,12 +32,6 @@ public class RuntimeStack {
         return stack.get(n);
     }
 
-    public int get(){
-        return stack.get(stack.size()-1);
-    }
-    public void push(int a){
-        stack.add(a);
-    }
     public void add(int n,int a){
         if(stack.size()<=n){
             stack.add(n,a);
@@ -34,6 +39,7 @@ public class RuntimeStack {
             stack.set(n,a);
         }
     }
+
     public Integer replace(int n,int a){
         while(stack.size()-1<n){
             stack.add(0);
@@ -42,9 +48,11 @@ public class RuntimeStack {
         stack.add(n,a);
         return temp;
     }
+
     public Integer remove(int n){
         return stack.remove(n);
     }
+
     public void clear(){
         stack.clear();
     }

@@ -9,9 +9,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-/**
- * Created by xuxiangzhe on 2017/6/15.
- */
+
 public class SMain {
     public static void main(String[] args) {
         try {
@@ -22,11 +20,13 @@ public class SMain {
             } catch (AlreadyBoundException e) {
                 e.printStackTrace();
             } catch (MalformedURLException e) {
+                System.out.println();
                 e.printStackTrace();
             }
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+        //load user information before the server is turned off
         User.loadUsers();
         Thread save=new Thread(new User());
         save.start();
