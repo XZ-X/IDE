@@ -1,22 +1,25 @@
 package Data;
 
-import logic.Settings;
-import logic.remoteInterfaces.IO;
 
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Clock;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.temporal.TemporalUnit;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by xuxiangzhe on 2017/6/15.Class User
+ * Created by xuxiangzhe on 2017/6/15.
+ *
+ * This class is the model of "User" in this project.
+ * Each user has a list of MyFiles which provides easy implement of delete file, add file and access control.
+ *
+ * The user-class also have a thread to save user's information such as files passwords, etc.
+ * To make this server more efficient, the save thread will run every 10 seconds instead of run all the time.
+ * User's password and answer to the sec-question is encrypted by the MD5 algorithm.
+ *
  * compared with diagram: ++storeUsers() ++loadUsers()
- * Unfinished
  */
 public class User implements Serializable,Runnable {
     //All the effective users will appear in this list, which uses loadUser() and storeUser() to edit.
@@ -25,10 +28,9 @@ public class User implements Serializable,Runnable {
     private UserState state;
     //for concurrency
     private boolean isRun=true;
-    private transient Thread thread=new Thread(this);//***this thread is transient which means that it will be null after reading from a file.
+    private static transient Thread thread;//***this thread is transient which means that it will be null after reading from a file.
 
     //helper
-    public IO IOProcessor;
     static private Clock clock=Clock.systemUTC();
     private String time;
 
@@ -36,7 +38,6 @@ public class User implements Serializable,Runnable {
     public final String name;
     private String password;
     private Map<String, String> secureQuestions ;
-    private Settings settings ;
     private ArrayList<MyFile> files;
 
     //constructors
@@ -48,7 +49,6 @@ public class User implements Serializable,Runnable {
         files=new ArrayList<>();
         System.out.println("here!!!!");
         secureQuestions= new HashMap<>();
-        settings=new Settings();
     }
 
     //This constructor is used to build users when there're some problems in method 'logIn',such as unknownUser.
@@ -72,14 +72,8 @@ public class User implements Serializable,Runnable {
         return time;
     }
 
-
     public String getQuestions() {
         return new ArrayList<>(secureQuestions.keySet()).get(0);
-    }
-
-
-    public String getTime() {
-        return time;
     }
 
     public static User getUser(String userName){
