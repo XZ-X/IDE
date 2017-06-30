@@ -1,7 +1,7 @@
 package Data;
 
 /**
- * Created by xuxiangzhe on 2017/6/19.
+ * A terrible practice to pass the reference through different methods.
  */
 public class MyInteger  {
     public Integer value;

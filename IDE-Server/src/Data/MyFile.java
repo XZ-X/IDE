@@ -57,7 +57,7 @@ public class MyFile implements Serializable {
                 break;
         }
         versionCnt++;
-        getLast().createNewFile();
+        while(!getLast().createNewFile());
 
     }
 
@@ -68,7 +68,9 @@ public class MyFile implements Serializable {
         return history;
     }
 
-    public String getName(){return name;}
+    public String getName(){
+        return name;
+    }
 
     public Language getType() {
         return type;
@@ -77,6 +79,7 @@ public class MyFile implements Serializable {
 
     //function-supports
     public void rename(String name) {
+        //first, lookup the file with certain old-name, then copy its contents, then make a new file with new-name, then delete the old file.
         this.name = name;
         ArrayList<File> files=new ArrayList<>(history.keySet());
         for (File file : files) {
@@ -109,6 +112,7 @@ public class MyFile implements Serializable {
     }
 
     public void save(String contents) throws IOException {
+        //only different files will be stored
         if(!FileTools.isDifferent(contents,open())) {
             switch (type) {
                 case OOK:
@@ -152,9 +156,14 @@ public class MyFile implements Serializable {
     public void setVersionTo(String versionName){
         LinkedHashMap<File,String> newHistory=new LinkedHashMap<>();
         ArrayList<Map.Entry<File,String>> oldHistory=new ArrayList<>(history.entrySet());
-        oldHistory.sort(Comparator.comparing(Map.Entry::getKey));
-        for(Map.Entry<File,String> entry:oldHistory){
 
+        //why I sort the list first?
+        //Even though there won't be any difference here, taking the CPU-architecture( jump-predict) into consideration, the following branch can be
+        //optimized effectively provided a large amount of versions.
+        oldHistory.sort(Comparator.comparing(Map.Entry::getKey));
+
+        for(Map.Entry<File,String> entry:oldHistory){
+            //version name here will actually be "versionName+.bf/.ook"
             String[] name=entry.getKey().getName().split("\\.")[0].split(GlobalConstant.FILE_NAME_SEPARATOR);
             if(Integer.parseInt(name[name.length-1])<=Integer.parseInt(versionName)+1){
                 newHistory.put(entry.getKey(),entry.getValue());
