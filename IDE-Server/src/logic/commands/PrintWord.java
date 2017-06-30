@@ -6,9 +6,7 @@ import logic.RuntimeStack;
 
 import java.rmi.RemoteException;
 
-/**
- * Created by xuxiangzhe on 2017/6/15.
- */
+
 public class PrintWord implements Command {
     private RuntimeStack stack;
     private MyInteger pointer;

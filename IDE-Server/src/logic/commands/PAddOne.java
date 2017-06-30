@@ -3,10 +3,9 @@ package logic.commands;
 import Data.MyInteger;
 import logic.RuntimeStack;
 
-/**
- * Created by xuxiangzhe on 2017/6/15.
- */
+
 public class PAddOne implements Command {
+    @SuppressWarnings("unused")
     private RuntimeStack stack;
     private MyInteger pointer;
     public PAddOne(RuntimeStack stk,MyInteger p){

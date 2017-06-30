@@ -3,9 +3,6 @@ package logic.commands;
 import Data.MyInteger;
 import logic.RuntimeStack;
 
-/**
- * Created by xuxiangzhe on 2017/6/15.
- */
 public class SubOne implements Command {
     private RuntimeStack stack;
     private MyInteger pointer;
