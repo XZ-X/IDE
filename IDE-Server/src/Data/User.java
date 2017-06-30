@@ -22,7 +22,7 @@ public class User implements Serializable,Runnable {
     private UserState state;
     //for concurrency
     private boolean isRun=true;
-    private transient Thread thread=new Thread(this);
+    private transient Thread thread=new Thread(this);//TODO:transient
 
     //helper
     public IO IOProcessor;
@@ -69,19 +69,11 @@ public class User implements Serializable,Runnable {
         return time;
     }
 
-    public Settings getPreference() {
-        return settings;
-    }
 
     public String getQuestions() {
         return new ArrayList<>(secureQuestions.keySet()).get(0);
     }
 
-    public void setPreference(boolean isAutoSave, int autoSaveTime, int versionNumber) {
-        settings.autoSaveTime = autoSaveTime;
-        settings.isAutoSave = isAutoSave;
-        settings.versionNumber = versionNumber;
-    }
 
     public String getTime() {
         return time;
@@ -206,10 +198,11 @@ public class User implements Serializable,Runnable {
         files.add(file);
     }
 
-    public void deleteFile(String filename) throws InterruptedException {
+    public boolean deleteFile(String filename) throws InterruptedException {
         MyFile toDelete=null;
+        boolean ret=false;
         isRun=false;
-        if(thread.getState()== Thread.State.TERMINATED) {
+        if(thread==null||thread.getState()!=Thread.State.RUNNABLE) {
             for (MyFile file : files) {
                 if (file.getName().equals(filename)) {
                     toDelete=file;
@@ -217,11 +210,12 @@ public class User implements Serializable,Runnable {
             }
             if(toDelete!=null) {
                 files.remove(toDelete);
-                toDelete.delete();
+                ret=toDelete.delete();
             }
         }
         isRun=true;
         restart();
+        return ret;
     }
 
 
@@ -252,7 +246,7 @@ public class User implements Serializable,Runnable {
     }
 
     private void restart(){
-        if(thread.getState()== Thread.State.TERMINATED) {
+        if(thread==null||thread.getState()== Thread.State.TERMINATED) {
             thread = new Thread(this);
             thread.start();
         }

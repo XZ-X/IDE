@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.EditPageController">
+<AnchorPane fx:id="panel" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.EditPageController">
    <children>
       <MenuBar layoutY="23.0" prefHeight="20.0" prefWidth="600.0">
         <menus>
@@ -32,7 +32,7 @@
             </Menu>
         </menus>
       </MenuBar>
-      <Label fx:id="filename" alignment="CENTER" prefHeight="23.0" prefWidth="600.0" text="Label" textAlignment="CENTER" />
+      <Label fx:id="filename" alignment="CENTER" onMouseClicked="#onLabelClicked" prefHeight="23.0" prefWidth="600.0" text="Label" textAlignment="CENTER" />
       <TextArea fx:id="input" layoutX="-1.0" layoutY="303.0" prefHeight="99.0" prefWidth="487.0" promptText="Input" />
       <TextArea fx:id="content" layoutX="-1.0" layoutY="51.0" prefHeight="249.0" prefWidth="600.0" />
       <Button fx:id="runButton" layoutX="449.0" layoutY="316.0" mnemonicParsing="false" onAction="#onRunClicked" prefHeight="99.0" prefWidth="112.0" stylesheets="@../resource/Configure.css" text="Run" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">

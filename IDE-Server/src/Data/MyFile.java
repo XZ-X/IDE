@@ -16,7 +16,6 @@ public class MyFile implements Serializable {
     private String name;
     private Language type;
     private final User owner;
-    private Thread saveThread;
     private int versionCnt=0;
     private Clock clock=Clock.systemDefaultZone();
 
@@ -55,8 +54,27 @@ public class MyFile implements Serializable {
         return getLast();
     }
 
-    public void rename(String name){
-        this.name=name;
+    public void rename(String name) {
+        this.name = name;
+        for (File file : history.keySet()) {
+            System.out.println(file.getName());
+            File temp = new File(GlobalConstant.USER_FILES + name + GlobalConstant.FILE_NAME_SEPARATOR + file.getName().substring(file.getName().indexOf(GlobalConstant.FILE_NAME_SEPARATOR)));
+            String ori = FileTools.convertF2S(file);
+
+            try {
+                System.out.println(temp.createNewFile());
+                System.out.println(temp.getName());
+                BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+                System.out.println(ori);
+                writer.write(ori);
+                writer.flush();
+                writer.close();
+                file.delete();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            history.put(temp, history.remove(file));
+        }
     }
 
     public Language getType() {
@@ -94,10 +112,12 @@ public class MyFile implements Serializable {
             }
         }
     }
-    public void delete(){
+    public boolean delete(){
+        boolean ret=true;
         for(File file:history.keySet()){
-            file.delete();
+            ret=ret&&file.delete();
         }
+        return ret;
     }
 
     public void setVersionTo(String versionName){
@@ -115,11 +135,6 @@ public class MyFile implements Serializable {
         }
         history=newHistory;
 
-    }
-    private void validAutoSave(){
-        if(owner.getPreference().isAutoSave){
-            //TODO:
-        }
     }
 
     private File getLast(){

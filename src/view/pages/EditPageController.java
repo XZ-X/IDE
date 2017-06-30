@@ -4,8 +4,10 @@ import Data.Language;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import logic.remoteInterfaces.RemoteController;
 import clientUtilities.FileTools;
 import view.Begin.BFClient;
@@ -22,6 +24,8 @@ import java.util.ResourceBundle;
 public class EditPageController implements Initializable {
     static Language language;
     static String fileName;
+    @FXML
+    AnchorPane panel;
     @FXML
     TextArea content,input;
     @FXML
@@ -56,6 +60,32 @@ public class EditPageController implements Initializable {
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("execute.fxml"))));
     }
 
+    @FXML
+    void onLabelClicked(){
+        TextField newName=new TextField();
+        newName.setPrefWidth(filename.getPrefWidth());
+        newName.setPrefHeight(filename.getPrefHeight());
+        newName.setLayoutX(filename.getLayoutX());
+        newName.setLayoutY(filename.getLayoutY());
+        for(Node node:panel.getChildren()) {
+            node.setOnMouseClicked(event -> {
+                if (!(event.getSource() instanceof TextField)) {
+                    try {
+                        fileName = filename.getText();
+                        RemoteController.getFileServer().renameFile(newName.getText());
+                        panel.getChildren().remove(newName);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+                ((Node)event.getSource()).setOnMouseClicked(null);
+                filename.setText(fileName);
+            });
+        }
+        panel.getChildren().add(newName);
+        newName.requestFocus();
+
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
