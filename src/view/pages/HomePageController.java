@@ -27,7 +27,7 @@ public class HomePageController implements Initializable {
     @FXML
     TextField fileName;
     @FXML
-    Label welcomeLabel,fileLabel;
+    Label welcomeLabel,fileLabel,timeLabel;
 
     @FXML
     void createBFFile() throws IOException {
@@ -62,6 +62,12 @@ public class HomePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         welcomeLabel.setText("Welcome\n"+RemoteController.getUserName());
+        try {
+            System.out.println(RemoteController.getFileServer().getLastLogIn());
+            timeLabel.setText("Last login: "+RemoteController.getFileServer().getLastLogIn());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     void checkFileName(){

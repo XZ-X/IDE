@@ -4,21 +4,37 @@ import serverUtilities.FileTools;
 
 import java.io.*;
 import java.time.Clock;
+import java.time.ZoneOffset;
 import java.util.*;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.
+ * This class is the "file" model in this project. Every file contains a Hash Map of files and Strings indicting its edit time.
+ * This "file" class provides more support to version control and rename by encapsulating the "rename","getHistory" method by myself.
+ * Notice:
+ * - All the files will be stored in the same path specified in the "GlobalConstant" class(the USER_FILES entry).
+ * - All the files will be stored in the format "something+ separator+ something +....", in which the "separator" is specified in the class GlobalConstant
+ *  (the FILE_NAME_SEPARATOR entry)
+ * -
+ *
  * change history type to File instead of MyFile
  * --invalidAutoSave
  */
 public class MyFile implements Serializable {
+    //Attributes
     private LinkedHashMap<File,String> history;
     private String name;
     private Language type;
     private final User owner;
+    //helper
     private int versionCnt=0;
     private Clock clock=Clock.systemDefaultZone();
 
+
+
+
+
+    //constructor
     public MyFile(Language type,String name,User usr) throws IOException {
         history=new LinkedHashMap<>();
         this.type=type;
@@ -30,30 +46,36 @@ public class MyFile implements Serializable {
                         + GlobalConstant.FILE_NAME_SEPARATOR
                         + owner.name
                         + GlobalConstant.FILE_NAME_SEPARATOR
-                        + versionCnt + ".bf"),clock.instant().toString());
+                        + versionCnt + ".bf"),clock.instant().atOffset(ZoneOffset.ofHours(8)).toString());
                 break;
             case OOK:
                 history.put(new File(GlobalConstant.USER_FILES + name
                         + GlobalConstant.FILE_NAME_SEPARATOR
                         + owner.name
                         + GlobalConstant.FILE_NAME_SEPARATOR
-                        + versionCnt + ".ook"),clock.instant().toString());
+                        + versionCnt + ".ook"),clock.instant().atOffset(ZoneOffset.ofHours(8)).toString());
                 break;
         }
         versionCnt++;
         getLast().createNewFile();
 
     }
+
+
+
+    //getters and setters
     public Map<File,String> getHistory(){
         return history;
     }
 
     public String getName(){return name;}
 
-    public File open(){
-        return getLast();
+    public Language getType() {
+        return type;
     }
 
+
+    //function-supports
     public void rename(String name) {
         this.name = name;
         ArrayList<File> files=new ArrayList<>(history.keySet());
@@ -82,8 +104,8 @@ public class MyFile implements Serializable {
         }
     }
 
-    public Language getType() {
-        return type;
+    public File open(){
+        return getLast();
     }
 
     public void save(String contents) throws IOException {
@@ -94,14 +116,14 @@ public class MyFile implements Serializable {
                             + GlobalConstant.FILE_NAME_SEPARATOR
                             + owner.name
                             + GlobalConstant.FILE_NAME_SEPARATOR
-                            + versionCnt + ".ook"),clock.instant().toString());
+                            + versionCnt + ".ook"),clock.instant().atOffset(ZoneOffset.ofHours(8)).toString());
                     break;
                 case BF:
                     history.put(new File(GlobalConstant.USER_FILES + name
                             + GlobalConstant.FILE_NAME_SEPARATOR
                             + owner.name
                             + GlobalConstant.FILE_NAME_SEPARATOR
-                            + versionCnt + ".bf"),clock.instant().toString());
+                            + versionCnt + ".bf"),clock.instant().atOffset(ZoneOffset.ofHours(8)).toString());
                     break;
             }
             File toSave = getLast();
@@ -118,6 +140,7 @@ public class MyFile implements Serializable {
             }
         }
     }
+
     public boolean delete(){
         boolean ret=true;
         for(File file:history.keySet()){
@@ -143,6 +166,8 @@ public class MyFile implements Serializable {
 
     }
 
+
+    //utilities
     private File getLast(){
         ArrayList<Map.Entry<File,String>> entries=new ArrayList<>(history.entrySet());
         entries.sort(Comparator.comparing(Map.Entry::getValue));

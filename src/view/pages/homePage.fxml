@@ -42,8 +42,13 @@
                   <Font name="Comic Sans MS" size="25.0" />
                </font></Label>
             <Button fx:id="openButton" layoutX="100.0" layoutY="241.0" mnemonicParsing="false" onAction="#onOpenClicked" onMouseClicked="#createOOKFile" prefHeight="37.0" prefWidth="200.0" text="Open Existing File" />
-            <Button layoutX="233.0" layoutY="297.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+            <Button layoutX="237.0" layoutY="328.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
             <Label fx:id="fileLabel" layoutX="304.0" layoutY="127.0" prefHeight="27.0" prefWidth="67.0" textFill="RED" />
+            <Label fx:id="timeLabel" ellipsisString="" layoutX="100.0" layoutY="292.0" prefHeight="27.0" prefWidth="200.0">
+               <font>
+                  <Font name="Comic Sans MS" size="13.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

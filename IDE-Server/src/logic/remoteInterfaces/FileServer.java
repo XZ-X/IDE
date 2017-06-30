@@ -92,4 +92,9 @@ public class FileServer extends UnicastRemoteObject implements MyFileI {
         usr.getFile(fileInformation[0]).setVersionTo(fileInformation[fileInformation.length-1]);
         return false;
     }
+
+    @Override
+    public String getLastLogIn() throws RemoteException {
+        return usr.getLastLogin();
+    }
 }

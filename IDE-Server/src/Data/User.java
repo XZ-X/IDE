@@ -7,6 +7,9 @@ import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Clock;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.temporal.TemporalUnit;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +29,7 @@ public class User implements Serializable,Runnable {
 
     //helper
     public IO IOProcessor;
-    static private Clock clock=Clock.systemDefaultZone();
+    static private Clock clock=Clock.systemUTC();
     private String time;
 
     //attribute
@@ -160,13 +163,14 @@ public class User implements Serializable,Runnable {
             return new User(UserState.DuplicateLogIn);
         }else {
             user.state=UserState.LogIn;
-            user.time=clock.toString();
+//            user.time=clock.instant().toString();
             return user;
         }
     }
 
     public void logOut() {
         state = UserState.Normal;
+        time=clock.instant().atOffset(ZoneOffset.ofHours(8)).toString();
     }
 
     public String changePassword(String answer, String newPasswd) {

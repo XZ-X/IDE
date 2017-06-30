@@ -19,4 +19,5 @@ public interface MyFileI extends Remote{
     void renameFile(String newName) throws RemoteException;
     Map<File,String> checkVersions(String fileName) throws RemoteException;
     boolean recovery(String rawFilename) throws RemoteException;
+    String getLastLogIn() throws RemoteException;
 }

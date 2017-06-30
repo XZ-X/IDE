@@ -1,17 +1,15 @@
 package Data;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by xuxiangzhe on 2017/6/15.
+ * Some global constant which have an exactly the same copy on the client.
  */
 public class GlobalConstant {
     //file paths
+    @SuppressWarnings("all")
     public static final String USERS="userInformation";
-    public static final String FILES="fileInformation";
+    @SuppressWarnings("all")
     public static final String USER_FILES="IDE-Server/src/logic/files/";
 
     //file information
@@ -33,7 +31,6 @@ public class GlobalConstant {
     public static final String DEBUG_TIME_OUT_MESSAGE="TimeOut!";
     public static final String DEBUG_WRONG_MESSAGE="Wrong...";
     public static final String DEBUG_FINISH="finish";
-    public static final ArrayList<Character> bfKeyWords= new ArrayList<>(Arrays.asList(',','.','<','>','[',']','+','-'));
 
     //syntax check expressions
     public static final String OOK_SYNTAX="([Oo]{2}[kK]([?!.])[Oo]{2}[kK]([?!.]))";
