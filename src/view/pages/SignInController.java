@@ -16,12 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Created by xuxiangzhe on 2017/6/22.
- */
 public class SignInController implements Initializable {
-    private String signUp="Unknown User! Sign up now!";
-    private String normal="Start Coding";
     @FXML
     AnchorPane panel;
     @FXML
@@ -32,12 +27,15 @@ public class SignInController implements Initializable {
     PasswordField password;
 
     @FXML
+    //reset the notice to start coding after user typing new words
     void modified(){
+        String normal = "Start Coding";
         startButton.setText(normal);
     }
 
     @FXML
     void signIn() throws IOException {
+        String signUp = "Unknown User! Sign up now!";
         if(startButton.getText().equals(signUp)){
             BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("signUp.fxml"))));
         }else {
@@ -60,6 +58,7 @@ public class SignInController implements Initializable {
             }
         }
     }
+
     @FXML
     void aboutPassword() throws IOException {
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("authorizationPage.fxml"))));

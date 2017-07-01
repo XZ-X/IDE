@@ -3,9 +3,7 @@ package Data;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Created by xuxiangzhe on 2017/6/15.
- */
+ @SuppressWarnings("unused")
 public class GlobalConstant {
     //file paths
     public static final String USERS="userInformation";

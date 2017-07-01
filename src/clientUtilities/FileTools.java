@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Created by xuxiangzhe on 2017/6/23.
+ * Some file utilities
  */
 public class FileTools {
     public static String convertF2S(File file){

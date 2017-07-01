@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by xuxiangzhe on 2017/6/23.
+ * This is the home page of every user, from which you can go every where.
  */
 public class HomePageController implements Initializable {
     @FXML

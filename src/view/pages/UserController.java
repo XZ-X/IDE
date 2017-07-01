@@ -8,9 +8,6 @@ import view.Begin.BFClient;
 
 import java.io.IOException;
 
-/**
- * Created by xuxiangzhe on 2017/6/15.
- */
 public class UserController {
     @FXML
     Ellipse loginColor;

@@ -73,6 +73,9 @@ public class ExecuteController implements Initializable {
     }
 
     @FXML
+    //This method is nearly exactly the same as the following one,
+    //However, it's necessary to distinguish debug and continue for debug will always reset the "PC" to 0
+    //In another way, debug functions like "restart".
     void onDebugClicked() throws RemoteException {
         clear();
         for (int i : breakpoints) {
@@ -128,6 +131,8 @@ public class ExecuteController implements Initializable {
     }
 
     //utilities
+
+    //you can get a key of a map while their values are different integers
     private <K> K getKey(Map<K, Integer> map, int value) {
         for (Map.Entry<K, Integer> entry : map.entrySet()) {
             if (value == entry.getValue()) {
@@ -150,7 +155,9 @@ public class ExecuteController implements Initializable {
         if (!context[0].equals(GlobalConstant.DEBUG_FINISH)) {
             int PC = Integer.parseInt(context[0]);
             Button currentInstruction = getKey(contentsMap, PC);
-            currentInstruction.setStyle("-fx-background-color: firebrick;");
+            if(currentInstruction!=null) {
+                currentInstruction.setStyle("-fx-background-color: firebrick;");
+            }
         }
         Label temp;
         for (int i = 2; i < context.length; i++) {
@@ -166,7 +173,7 @@ public class ExecuteController implements Initializable {
             currentStack.setStyle(currentStack.getStyle()+"-fx-background-color: aquamarine;");
         }
     }
-
+    //add contents after the existing output
     private void appendRefreshOutput() {
         outputArea.setText(new String(RemoteController.getIoProcessor().getOutput()));
     }

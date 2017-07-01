@@ -1,15 +1,11 @@
 package view.Begin;
 
-/**
- * Created by xuxiangzhe on 2017/6/15.
- */
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import logic.CMain;
 import logic.remoteInterfaces.RemoteController;
 
 import java.io.IOException;
@@ -35,7 +31,7 @@ public class BFClient extends Application {
             }
             System.exit(0);
         });
-        CMain.main(null);
+        RemoteController.connect();
     }
 
 }

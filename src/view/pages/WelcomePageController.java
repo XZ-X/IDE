@@ -7,9 +7,7 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-/**
- * Created by xuxiangzhe on 2017/6/15.
- */
+
 public class WelcomePageController {
     @FXML
     void login() throws IOException {

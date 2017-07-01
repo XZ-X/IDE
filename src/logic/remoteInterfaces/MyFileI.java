@@ -7,9 +7,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Map;
 
-/**
- * Created by xuxiangzhe on 2017/6/15.
- */
+@SuppressWarnings("unused")
+
 public interface MyFileI extends Remote{
     boolean createFile(Language language, String filename) throws RemoteException;
     File[] lookupFile()throws RemoteException;

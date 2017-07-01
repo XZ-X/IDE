@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 /**
  * Created by xuxiangzhe on 2017/6/16.
+ * This class is a buffered IO processor which can send user's input of certain programme to the server
+ * Nevertheless, a user must guarantee that
  */
 public class IOProcessor extends UnicastRemoteObject implements IO {
     private char[] input;
@@ -28,6 +30,9 @@ public class IOProcessor extends UnicastRemoteObject implements IO {
             return new char[]{(char)0};
         }
     }
+    public char[] getAllInput(){
+        return (input.length==0)?new char[]{0}:input;
+    }
     public char[] clearOutput(){
         char[] ret=getOutput();
         output=new char[]{(char)0};
@@ -38,9 +43,8 @@ public class IOProcessor extends UnicastRemoteObject implements IO {
         input=null;
         return ret;
     }
-    public char[] getAllInput(){
-        return (input.length==0)?new char[]{0}:input;
-    }
+
+
 
     //Methods prepared for server
     @Override

@@ -1,10 +1,6 @@
 package logic.remoteInterfaces;
 
 import Data.GlobalConstant;
-import logic.remoteInterfaces.AccountI;
-import logic.remoteInterfaces.IOProcessor;
-import logic.remoteInterfaces.MyFileI;
-import logic.remoteInterfaces.RuntimeI;
 
 import java.net.MalformedURLException;
 import java.rmi.*;
@@ -51,13 +47,7 @@ public class RemoteController {
             Naming.bind("rmi://localhost:"+temp+"/ioProcessor",ioProcessor);
             accountServer.startIO();
 
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (AlreadyBoundException e) {
+        } catch (NotBoundException|MalformedURLException|RemoteException|AlreadyBoundException e) {
             e.printStackTrace();
         }
     }
@@ -71,11 +61,10 @@ public class RemoteController {
             try {
                 fileServer=(MyFileI)Naming.lookup("rmi://localhost:"+port+"/fileServer");
                 runtimeServer=(RuntimeI)Naming.lookup("rmi://localhost:"+port+"/runtimeServer");
-            } catch (NotBoundException e) {
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
+            } catch (NotBoundException|MalformedURLException e) {
                 e.printStackTrace();
             }
+
         }
 
         return ret;

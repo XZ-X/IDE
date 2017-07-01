@@ -18,6 +18,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+/**
+ * The page of open existing files
+ */
 
 
 public class OpenFileController implements Initializable{
@@ -27,7 +30,6 @@ public class OpenFileController implements Initializable{
     VBox fileList;
     private Map<Button,File> fileListMap=new LinkedHashMap<>();
     private File selectedFile;
-    private final String DEFAULT="-fx-background-color: #d8d6da ;",SELECTED="-fx-background-color: lightslategrey;";
 
     @FXML
     void onOpenClicked() throws IOException {

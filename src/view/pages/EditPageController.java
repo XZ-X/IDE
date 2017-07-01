@@ -1,7 +1,6 @@
 package view.pages;
 
 import Data.Language;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +20,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by xuxiangzhe on 2017/6/23.
+ * This page is the page user edits his file
  */
 public class EditPageController implements Initializable {
     static Language language;
@@ -30,7 +30,7 @@ public class EditPageController implements Initializable {
     @FXML
     TextArea content,input;
     @FXML
-    MenuItem save,back,run;
+    MenuItem save,run;
     @FXML
     Label filename,wrongLabel;
     @FXML
@@ -66,6 +66,7 @@ public class EditPageController implements Initializable {
     }
 
     @FXML
+    //renameFile
     void onLabelClicked(){
         TextField newName=new TextField();
         newName.setPrefWidth(filename.getPrefWidth());
@@ -93,6 +94,8 @@ public class EditPageController implements Initializable {
         newName.requestFocus();
 
     }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -111,6 +114,7 @@ public class EditPageController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
     void openFile() throws IOException {
         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("openFile.fxml"))));

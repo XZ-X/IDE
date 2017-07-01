@@ -3,7 +3,6 @@ package view.pages;
 import Data.GlobalConstant;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -12,15 +11,10 @@ import logic.remoteInterfaces.RemoteController;
 import view.Begin.BFClient;
 
 import java.io.IOException;
-import java.net.URL;
 import java.rmi.RemoteException;
-import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by xuxiangzhe on 2017/6/29.
- */
 public class AuthorizationPageController {
     private String username;
     private boolean isValid=false;
@@ -33,6 +27,7 @@ public class AuthorizationPageController {
 
 
     @FXML
+    //check users password and answer
     void onOKClicked() throws IOException {
         if(isValid) {
             if (username != null && newPassword.getText().equals(newPasswordAgain.getText())) {
@@ -61,6 +56,7 @@ public class AuthorizationPageController {
     }
 
     @FXML
+    //when user enter his ID, this method will fetch his security questions
     void setGetQuestionButtonClicked() throws RemoteException {
         username=IDText.getText();
         String ret= RemoteController.getAccountServer().forgetPassword(username);
