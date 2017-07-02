@@ -117,7 +117,7 @@ public class User implements Serializable,Runnable {
             }
         } catch (EOFException e) {
             //in fact, this is the normal case and is the only normal way to jump out of the dead-loop above.
-            e.printStackTrace();
+            System.out.println("Load users successfully!");
         } catch (IOException e) {
             e.printStackTrace();
             return false;

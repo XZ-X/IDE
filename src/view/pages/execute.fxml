@@ -10,16 +10,16 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../resource/Configure.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.pages.ExecuteController">
    <children>
-      <ScrollPane layoutY="68.0" prefHeight="142.0" prefWidth="613.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <ScrollPane layoutY="68.0" prefHeight="123.0" prefWidth="613.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <content>
             <FlowPane fx:id="contentPane" prefHeight="0.0" prefWidth="610.0" />
          </content>
       </ScrollPane>
       <TextArea fx:id="inputArea" layoutY="257.0" prefHeight="142.0" prefWidth="294.0" promptText="Input area" />
       <TextArea fx:id="outputArea" layoutX="299.0" layoutY="257.0" prefHeight="142.0" prefWidth="244.0" promptText="Output area" />
-      <ScrollPane layoutY="213.0" prefHeight="39.0" prefWidth="613.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <ScrollPane layoutY="194.0" prefHeight="59.0" prefWidth="613.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <content>
-            <HBox fx:id="stackPane" prefHeight="38.0" prefWidth="0.0" />
+            <HBox fx:id="stackPane" prefHeight="55.0" />
          </content>
       </ScrollPane>
       <MenuBar prefHeight="29.0" prefWidth="613.0">

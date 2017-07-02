@@ -42,6 +42,10 @@ public class AuthorizationPageController {
                     if (!ret.equals(GlobalConstant.SUCCESS)) {
                         OKButton.setText("Something wrong!");
                     } else {
+                        if(!RemoteController.login(username,newPassword.getText()).equals(GlobalConstant.SUCCESS)){
+                            RemoteController.getAccountServer().logOut(username);
+                            RemoteController.login(username,newPassword.getText()).equals(GlobalConstant.SUCCESS);
+                        }
                         BFClient.ps.setScene(new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml"))));
                     }
                 } else {
