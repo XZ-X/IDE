@@ -1,6 +1,8 @@
 package Data;
 
 
+import java.io.File;
+
 /**
  * Created by xuxiangzhe on 2017/6/15.
  * Some global constant which have an exactly the same copy on the client.
@@ -8,9 +10,10 @@ package Data;
 public class GlobalConstant {
     //file paths
     @SuppressWarnings("all")
+    public static final String SEPARATOR=File.pathSeparator;
     public static final String USERS="userInformation";
     @SuppressWarnings("all")
-    public static final String USER_FILES="IDE-Server/src/logic/files/";
+    public static final String USER_FILES="IDE-Server"+ SEPARATOR+"src"+SEPARATOR+"logic"+SEPARATOR+"files"+SEPARATOR;
 
     //file information
     public static final String FILE_NAME_SEPARATOR ="###";
